@@ -1,2 +1,6 @@
 # treasureTrove
-team 5 project
+Team 5 Members :
+=======================
+* Dimitris Nitsios
+* Dima AlTahir
+* Andreas Messios
