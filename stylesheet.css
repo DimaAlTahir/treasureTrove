@@ -1,8 +1,9 @@
-ol{
-    font-family:Oldtown, fantasy;
-}
 header{
     background-color: lightgray;
     color: darkgray;
     text-align: center;
+}
+
+ol{
+    font-family:Oldtown, fantasy;
 }
