@@ -5,3 +5,6 @@ Team 5 Members :
 * Dima AlTahir
 * Andreas Messios
 * Anna Parpi
+
+Twitter account:
+*View the Twitter account here --> https://twitter.com/Treasur37909589
