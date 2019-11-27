@@ -9,24 +9,18 @@ fetch("https://codecyprus.org/th/api/list")
 
         for (let i = 0; i < treasureHuntsArray.length; i++) {
             let listChallenge = document.createElement("li");
-            listChallenge.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=jimk&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>\n"
+            listChallenge.innerHTML = "<a id='linksChallenges' href='https://codecyprus.org/th/api/start?player=jimk&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                                                                 + "<ul>"
-                                                                + "<i>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</i>\n"
-                                                                + "<i>" + "<b>" + "Starts on: " + "</b>" + treasureHuntsArray[i].startsOn +  "</i>"  // TODO TIME CONVERSION
-                                                                +"</ul>";
+                                                                + "<li class='innerListChallenge'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
+                                                                + "<li class='innerListChallenge'>" + "<b>" + "Starts on: " + "</b>" + treasureHuntsArray[i].startsOn +  "</li>"  // TODO TIME CONVERSION
+                                                                + "<li class='innerListChallenge'>" + "<b>" + "Lasts: " + "</b>" + treasureHuntsArray[i].maxDuration + "</li>"  // TODO TIME CONVERSION
+                                                                + "</ul>";
 
             challengesElement.appendChild(listChallenge);
         }
     });
 
-function checkPasswordLength(password){
-    if (password.length > 16) {
-        document.getElementById("errorSpan").innerHTML = "Limit is 16 characters";
-    }
-    else {
-        document.getElementById("errorSpan").innerHTML = "";
-    }
-}
+
 
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {
