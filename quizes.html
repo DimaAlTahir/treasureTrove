@@ -11,6 +11,20 @@
 </head>
 <body>
 
+
+<h1> Enter name for Leaderboard:</h1>
+
+<div id="formID">
+<form action="javascript:getName()" >
+    <p>Username <input type="text" name="username" id="username" required /></p>
+    <input type="submit" value="Submit">
+</form>
+</div>
+
+<h2>All treasure Hunt Challenges</h2>
+
+<ul id="treasureHuntChallenges"></ul>
+
  <div class="container">
 
      <h3 id="question">
@@ -21,6 +35,8 @@
          <input class="answer" type="text" name="answer">
          <input type="submit" value="Submit">
       </div>
+   </div>
+
 
      <div id="controlbtns">
          <button id="skip">Skip</button>
