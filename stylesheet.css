@@ -1,11 +1,54 @@
 body{
-    background-color: lightgray;
+    background-color: #ECE7ED;
+    margin:0px;
+    justify-content: center;
 }
+
 
 header{
     color: palevioletred;
     text-align: center;
 }
+
+ol{
+    font-family:Lucidatypewriter, monospace;
+    bottom: 0;
+}
+
+h3{
+    font-family: Fixed, monospace;
+    margin-left: 100px;
+}
+
+.container{
+    background-color: white;
+    width:500px;
+    padding:10px;
+    margin: 0 auto;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 2px grey;
+}
+
+.controlbtns{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+h3{
+    text-align: left;
+}
+
+#answers{
+    display: grid;
+}
+
+.hide{
+    display: none;
+}
+
+
 
 ul {
     font-family:Lucidatypewriter, monospace;
