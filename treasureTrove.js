@@ -33,10 +33,16 @@ fetch("https://codecyprus.org/th/api/list")
 
         for (let i = 0; i < treasureHuntsArray.length; i++) {
             let listChallenge = document.createElement("li");
-            listChallenge.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=jimk&app=TreasureTroveApp&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>";
+            listChallenge.innerHTML = "<a href='https://codecyprus.org/th/api/start?player=jimk&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>\n"
+                                                                + "<ul>"
+                                                                + "<i>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</i>\n"
+                                                                + "<i>" + "<b>" + "Starts on: " + "</b>" + treasureHuntsArray[i].startsOn +  "</i>"  // TODO TIME CONVERSION
+                                                                +"</ul>";
+
             challengesElement.appendChild(listChallenge);
         }
     });
+
 
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {
