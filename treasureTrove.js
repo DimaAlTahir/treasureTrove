@@ -14,6 +14,14 @@ fetch("https://codecyprus.org/th/api/list")
         }
     });
 
+function checkPasswordLength(password){
+    if (password.length > 16) {
+        document.getElementById("errorSpan").innerHTML = "Limit is 16 characters";
+    }
+    else {
+        document.getElementById("errorSpan").innerHTML = "";
+    }
+}
 
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {
