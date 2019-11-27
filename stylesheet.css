@@ -7,13 +7,35 @@ header{
     text-align: center;
 }
 
-ol{
+ul {
     font-family:Lucidatypewriter, monospace;
     bottom: 0;
+    width: 100%;
 }
 
-h3{
+h2{
     font-family: Fixed, monospace;
-    margin-left: 100px;
+    text-align: center;
+}
+p{
+    text-align: center;
 }
 
+a{
+    border-left: 30px;
+    margin:0 auto;
+}
+
+
+a:link{
+    color:palevioletred;
+}
+a:hover{
+    color: hotpink;
+}
+a:active{
+    color:blue;
+}
+a:visited{
+    color:green;
+}
