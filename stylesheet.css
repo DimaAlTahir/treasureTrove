@@ -1,5 +1,5 @@
 body{
-    background-color: lightgray;
+    background-color: #f0f0f0;
 }
 
 header{
@@ -19,18 +19,20 @@ h3{
 
 .container{
     background-color: white;
-    width:500px;
+    width:370px;
     padding:10px;
-    margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0 0 5px 2px grey;
+    margin: 0 auto;
+    margin-top: 20%;
 }
 
-.controlbtns{
+button{
     display:flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    margin-top: 10px;
 }
 
 h3{
@@ -45,17 +47,35 @@ h3{
     display: none;
 }
 
-
+input{
+    margin-top: 5px;
+}
 
 ul {
     font-family:Lucidatypewriter, monospace;
     bottom: 0;
     width: 100%;
+    display:inline;
+    list-style-type: none;
 }
 
 h2{
     font-family: Fixed, monospace;
     text-align: center;
+
+}
+
+h1{
+    font-family: Fixed, monospace;
+    text-align: center;
+    color:palevioletred;
+    font-size: 75px;
+}
+
+h3{
+    font-family: Fixed, monospace;
+    text-align: center;
+    font-size: 20px;
 }
 p{
     text-align: center;
@@ -66,13 +86,10 @@ a{
     margin:0 auto;
 }
 
-h1{
-    color:palevioletred;
-    text-align: center;
-}
 form{
     text-align: center;
 }
+
 
 a:link{
     color:palevioletred;
@@ -86,3 +103,4 @@ a:active{
 a:visited{
     color: darkorchid;
 }
+
