@@ -3,16 +3,41 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="stylesheet.css">
     <title>Title</title>
     <script defer src="treasureTrove.js"></script>
-    <link rel="stylesheet" href="stylesheet.css">
+
 </head>
 <body>
 
 
-<header><h2>All treasure Hunt Challenges</h2></header>
+<h1> Enter name for Leaderboard:</h1>
+
+<form>
+    <input type="text" name="pname">
+    <input type="submit">
+</form>
+
+<h2>All treasure Hunt Challenges</h2>
 
 <ul id="treasureHuntChallenges"></ul>
+
+ <div class="container">
+     <h3 id="question">
+          Question here
+     </h3>
+
+     <div id="answers">
+         <input class="answer" type="text" name="answer">
+         <input type="submit" value="Submit">
+      </div>
+   </div>
+
+
+    <div id="controlbtns">
+        <button id="skip">Skip</button>
+    </div>
 
 
 </body>
