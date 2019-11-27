@@ -15,6 +15,7 @@ fetch("https://codecyprus.org/th/api/list")
     });
 
 
+
 // for(let i = 0; i < json.treasureHunts.length; i++) {
 //     let name = json.treasureHunts[i].name;
 //     let uuid = json.treasureHunts[i].uuid;
