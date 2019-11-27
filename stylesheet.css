@@ -26,6 +26,13 @@ a{
     margin:0 auto;
 }
 
+h1{
+    color:palevioletred;
+    text-align: center;
+}
+form{
+    text-align: center;
+}
 
 a:link{
     color:palevioletred;
