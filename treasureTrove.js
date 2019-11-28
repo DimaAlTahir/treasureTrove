@@ -25,6 +25,7 @@
 
 let elementPlayerNameForm = document.getElementById("playerNameForm");
 let challengesElement = document.getElementById("treasureHuntChallenges");
+let elementlistHunts = document.getElementById("listHunts");
 let playerName ="";
 
 function getName() {
@@ -33,6 +34,7 @@ function getName() {
     console.log(playerName);
     elementPlayerNameForm.style.display = "none";
     getApiList();
+    elementlistHunts.style.display = "block";
 }
 
 
