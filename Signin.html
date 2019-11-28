@@ -8,12 +8,14 @@
 </head>
 <body>
 
-<h1> Enter name for Leaderboard:</h1>
+<h1> Enter player name:</h1>
 
-<form>
-    Enter Player Name: <input type="text" name="pname">
-    <input type="submit">
-</form>
+<div id="formID">
+    <form action="javascript:getName()" >
+        <input type="text" name="username" id="username" required /><br>
+        <input class="controlbtns"  type="submit" value="Submit">
+    </form>
+</div>
 
 </body>
 </html>

@@ -11,38 +11,40 @@
 </head>
 <body>
 
-
-<h1> Enter name for Leaderboard:</h1>
-
-<div id="formID">
-<form action="javascript:getName()" >
-    <p>Username <input type="text" name="username" id="username" required /></p>
-    <input type="submit" value="Submit">
-</form>
-</div>
-
-<h2>All treasure Hunt Challenges</h2>
-
-<ul id="treasureHuntChallenges"></ul>
-
  <div class="container">
 
-     <h3 id="question">
+     <h2 id="question">
           Question here
-     </h3>
+     </h2>
 
-     <div id="answers">
+     <div id="quizAnswers">
          <input class="answer" type="text" name="answer">
-         <input type="submit" value="Submit">
+         <input class="controlbtns" type="submit" value="Submit">
       </div>
    </div>
 
-
-     <div id="controlbtns">
-         <button id="skip">Skip</button>
-     </div>
+     <form  action="javascript:skipQuestion()">
+         <input class="controlbtns"  id="skip" type="submit" value="Skip" />
+     </form>
 
    </div>
+
+<script>
+
+
+    function skipQuestion() {
+        fetch("https://codecyprus.org/th/api/question")
+            .then(response => response.json())
+            .then(jsonObject => {
+                let current = jsonObject.currentQuestionIndex;
+                for (let i = 0; i < treasureHuntsArray.length; i++) {
+                    if (numOfQuestions[i] === current) {
+                        continue;
+                    }
+                }
+            });
+    }
+</script>
 
 
 

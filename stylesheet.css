@@ -12,14 +12,14 @@ ol{
     bottom: 0;
 }
 
-h3{
+h3, h4{
     font-family: Fixed, monospace;
     margin-left: 100px;
 }
 
 .container{
     background-color: white;
-    width:370px;
+    width:350px;
     padding:10px;
     border-radius: 5px;
     box-shadow: 0 0 5px 2px grey;
@@ -35,8 +35,25 @@ button{
     margin-top: 10px;
 }
 
-h3{
-    text-align: left;
+.controlbtns {
+    background-color: palevioletred;
+    padding: .5em;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    margin-top: 20px;
+}
+
+.controlbtns:hover {
+    background-color: #d12855;
+    box-shadow: 0px 0px 1px #777;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding:20px;
 }
 
 #answers{
