@@ -112,15 +112,13 @@ a:link{
     color:palevioletred;
 }
 a:hover{
-    color: hotpink;
+    color: #d12855;
 }
-a:active{
-    color:blue;
-}
+
 a:visited{
     color: darkorchid;
 }
 
-#username{
+#playerNameForm{
 
 }

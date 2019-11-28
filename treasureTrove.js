@@ -21,15 +21,19 @@
 // function callNextQuestion(){
 //
 // }
-let visibilityOfForm = document.getElementById("formID");
+
+
+let elementPlayerNameForm = document.getElementById("playerNameForm");
+let challengesElement = document.getElementById("treasureHuntChallenges");
+let playerName ="";
+
 function getName() {
     let usernameTextbox = document.getElementById("username");
-    let username = usernameTextbox.value;
-    console.log(username);
-    visibilityOfForm.style.display = "none";
+    playerName = usernameTextbox.value;
+    console.log(playerName);
+    elementPlayerNameForm.style.display = "none";
+    getApiList();
 }
-let challengesElement = document.getElementById("treasureHuntChallenges");
-
 
 
 function getApiList(){
@@ -41,17 +45,25 @@ function getApiList(){
 
             for (let i = 0; i < treasureHuntsArray.length; i++) {
                 let listChallenge = document.createElement("li");
-                listChallenge.innerHTML = "<a id='linksChallenges' href='https://codecyprus.org/th/api/start?player='"+username+"&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
+                console.log(treasureHuntsArray[i].uuid);
+                listChallenge.innerHTML = "<a href='quizes.html?name=" + playerName + "&app=Team5" + "&" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                                                                     + "<ul>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + treasureHuntsArray[i].startsOn +  "</li>"  // TODO TIME CONVERSION
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Lasts: " + "</b>" + treasureHuntsArray[i].maxDuration + "</li>"  // TODO TIME CONVERSION
+                                                                    + "<li>"  + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
+                                                                    + "<li>"  + "Starts on: " + "</b>" + treasureHuntsArray[i].startsOn +  "</li>"  // TODO TIME CONVERSION
+                                                                    + "<li>"  + "Lasts: " + "</b>" + treasureHuntsArray[i].maxDuration + "</li>"  // TODO TIME CONVERSION
                                                                     + "</ul>";
 
                 challengesElement.appendChild(listChallenge);
+
             }
-        });}
-getApiList();
+        });
+}
+
+// function getApiStart(){
+//     fetch("https://codecyprus.org/th/api/list")
+//         .then(response => response.json())
+//         .then(jsonObject =>
+
 
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {

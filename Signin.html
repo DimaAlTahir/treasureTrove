@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="description" content="Team 5 Treasure hunt web app"/>
     <link rel="stylesheet" href="stylesheet.css">
+    <script defer src="treasureTrove.js"></script>
     <title>Signin</title>
 </head>
 <body>
 
 <h1> Enter player name:</h1>
 
-<div id="formID">
-    <form action="javascript:getName()" >
-        <input type="text" name="username" id="username" required /><br>
-        <input class="controlbtns"  type="submit" value="Submit">
+<div class="container" id="playerNameForm" style="display: block">
+    <form action="javascript:getName()">
+        <input type="text" name="username" id="username" required />
+        <input class="controlbtns" type="submit" value="Submit">
     </form>
+</div>
+
+<div class="container" id="list">
+    <h2>All treasure Hunt Challenges:</h2>
+
+    <ul id="treasureHuntChallenges"></ul>
 </div>
 
 </body>
