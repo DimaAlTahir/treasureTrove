@@ -46,18 +46,13 @@ function getApiList(){
             let treasureHuntsArray = jsonObject.treasureHunts;
 
             for (let i = 0; i < treasureHuntsArray.length; i++) {
-                let date = new Date(treasureHuntsArray[i].startsOn);
-                let convertedDate = date.toString();
-
-                date.setTime(date.getTime() + (treasureHuntsArray[i].maxDuration  * 24 * 60 * 60 * 1000));
-                let quizExpires =  date.toUTCString();
 
                 let listChallenge = document.createElement("li");
                 listChallenge.innerHTML = "<a id='linksChallenges' href='https://codecyprus.org/th/api/start?player='"+username+"&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                 + "<ul>"
                                                                     + "<li class='innerListChallenges'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + convertedDate +  "</li>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Lasts: " + "</b>" + quizExpires + "</li>"
+                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
+                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Lasts: " + "</b>" + convert2minutes(treasureHuntsArray[i].maxDuration )+ "</li>"
                                                                     + "</ul>";
 
                 challengesElement.appendChild(listChallenge);
@@ -66,6 +61,16 @@ function getApiList(){
         });
 }
 
+function convert2date(taken){
+    let date = new Date(taken);
+    let convertedDate = date.toString();
+    return convertedDate;
+}
+
+function convert2minutes(ms){
+    min = Math.floor((ms/1000/60) << 0);
+    return min+" mins";
+}
 // function getApiStart(){
 //     fetch("https://codecyprus.org/th/api/list")
 //         .then(response => response.json())
