@@ -21,15 +21,21 @@
 // function callNextQuestion(){
 //
 // }
-let visibilityOfForm = document.getElementById("formID");
+
+
+let elementPlayerNameForm = document.getElementById("playerNameForm");
+let challengesElement = document.getElementById("treasureHuntChallenges");
+let elementlistHunts = document.getElementById("listHunts");
+let playerName ="";
+
 function getName() {
     let usernameTextbox = document.getElementById("username");
-    let username = usernameTextbox.value;
-    console.log(username);
-    visibilityOfForm.style.display = "none";
+    playerName = usernameTextbox.value;
+    console.log(playerName);
+    elementPlayerNameForm.style.display = "none";
+    getApiList();
+    elementlistHunts.style.display = "block";
 }
-let challengesElement = document.getElementById("treasureHuntChallenges");
-
 
 
 function getApiList(){
@@ -38,6 +44,7 @@ function getApiList(){
         .then(jsonObject =>
         {
             let treasureHuntsArray = jsonObject.treasureHunts;
+
             for (let i = 0; i < treasureHuntsArray.length; i++) {
                 let date = new Date(treasureHuntsArray[i].startsOn);
                 let convertedDate = date.toString();
@@ -54,10 +61,16 @@ function getApiList(){
                                                                     + "</ul>";
 
                 challengesElement.appendChild(listChallenge);
+
             }
         });
 }
-getApiList();
+
+// function getApiStart(){
+//     fetch("https://codecyprus.org/th/api/list")
+//         .then(response => response.json())
+//         .then(jsonObject =>
+
 
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {
