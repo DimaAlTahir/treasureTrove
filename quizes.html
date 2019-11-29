@@ -37,6 +37,22 @@
 
 <script>
 
+    const params = new URLSearchParams(location.search);
+    let playerName = params.get("name");
+    let uuid = params.get("treasure-hunt-id");
+    console.log(uuid);
+
+    // function getStartApi() {
+    //     fetch("https://codecyprus.org/th/api/start?" + playerName + "&app=Team5" + uui
+    // }
+
+    // {
+    //     "session": "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA3JfiuQsM",
+    //     "numOfQuestions": 6,
+    //     "status": "OK"
+    // }
+
+
     //functions to find device location
     function getLocation() {
         if (navigator.geolocation) {
@@ -76,7 +92,6 @@
             document.getElementById(boolBtnT).style.display='none';
             document.getElementById(boolBtnF).style.display='none';
         }
-        
     }
 
     function answer(){
