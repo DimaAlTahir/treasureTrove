@@ -13,23 +13,31 @@
 
  <div class="container">
 
-     <h2 id="question">
-          Question here
-     </h2>
+     <div id="quizQuestionContainer">
+         <h2 id="question">
+             loading question...
+         </h2>
+     </div>
 
-     <div id="quizAnswers">
-         <input class="answer" type="text" name="answer">
-         <input class="controlbtns" type="submit" value="Submit">
+     <div id="textbox answers">
+         <input id="textBox" class="answer" type="text" name="answer">
+         <input id="submitBtn" class="controlbtns" type="submit" value="Submit">
       </div>
-   </div>
+
+     <div id="booleanContainer">
+         <button id="boolBtnT" class="controlbtns" value="True" onclick="javascript:trueAns()">True</button>
+         <button id="boolBtnF" class="controlbtns" value="False" onclick="javascript:falseAns()">False</button>
+     </div>
+
+ </div>
 
      <form  action="javascript:skipQuestion()">
          <input class="controlbtns"  id="skip" type="submit" value="Skip" />
      </form>
 
-
-
 <script>
+
+    //functions to find device location
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
@@ -38,11 +46,11 @@
             alert("Geolocation is not supported by your browser.");
         }
     }
-
     function showPosition(position) {
         alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
     }
 
+    //function to skip questions
     function skipQuestion() {
         fetch("https://codecyprus.org/th/api/question")
             .then(response => response.json())
@@ -55,6 +63,40 @@
                 }
             });
     }
+
+    function displayQuestionReply(){
+        document.getElementsById(question).innerHTML=json.questionText;
+        if (json.questionType==='BOOLEAN'){
+            document.getElementById(submitBtn).style.display='none';
+            document.getElementById(boolBtnT).style.display='grid';
+            document.getElementById(boolBtnF).style.display='grid';
+        }
+        else if (json.questionType==='TEXT'){
+            document.getElementById(submitBtn).style.display='grid';
+            document.getElementById(boolBtnT).style.display='none';
+            document.getElementById(boolBtnF).style.display='none';
+        }
+        
+    }
+
+    function answer(){
+        let a=document.getElementById("textBox").value;
+        loadAns(a);
+    }
+
+    function trueAns(){
+        loadAns('true');
+    }
+    function falseAns(){
+        loadAns('false');
+    }
+
+    function loadAns(a){
+        console.debug("submitted: "+a)
+        //todo send answer 2 server by api
+    }
+
+
 </script>
 
 
