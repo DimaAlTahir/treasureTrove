@@ -19,14 +19,32 @@
          </h2>
      </div>
 
-     <div id="textbox answers">
-         <input id="textBox" class="answer" type="text" name="answer">
-         <input id="submitBtn" class="controlbtns" type="submit" value="Submit">
+     <div class="answer" id="textboxAnswers">
+         <form action="javascript:answerText()">
+             <input id="textBox" class="answer" type="text" name="answer">
+             <input id="submitBtnText" class="controlbtns" type="submit" value="Submit">
+         </form>
       </div>
 
-     <div id="booleanContainer">
-         <button id="boolBtnT" class="controlbtns" value="True" onclick="javascript:trueAns()">True</button>
-         <button id="boolBtnF" class="controlbtns" value="False" onclick="javascript:falseAns()">False</button>
+     <div class="answer" id="numericContainer">
+         <form action="javascript:answerNum()">
+             <input id="number" class="answer" type="number" name="answer">
+             <input id="submitBtnNumeric" class="controlbtns" type="submit" value="Submit">
+         </form>
+     </div>
+
+     <div class="answer" id="intContainer">
+         <form action="javascript:answerInt()">
+             <input id="int" class="answer" type="inte" name="answer">
+             <input id="submitBtnInt" class="controlbtns" type="submit" value="Submit">
+         </form>
+     </div>
+
+     <div class="answer" id="booleanContainer">
+         <form action="">
+             <button id="boolBtnT" class="controlbtns" value="True" onclick="javascript:trueAns()">True</button>
+             <button id="boolBtnF" class="controlbtns" value="False" onclick="javascript:falseAns()">False</button>
+         </form>
      </div>
 
  </div>
@@ -64,6 +82,7 @@
             });
     }
 
+    //function that writes question then decides the way 2 answer
     function displayQuestionReply(){
         document.getElementsById(question).innerHTML=json.questionText;
         if (json.questionType==='BOOLEAN'){
@@ -76,11 +95,41 @@
             document.getElementById(boolBtnT).style.display='none';
             document.getElementById(boolBtnF).style.display='none';
         }
-        
+        else if (json.questionType==='INTEGER'){
+            document.getElementById(submitBtnInt).style.display='grid';
+            document.getElementById(submitBtn).style.display='none';
+            document.getElementById(boolBtnT).style.display='none';
+            document.getElementById(boolBtnF).style.display='none';
+        }
+        else if (json.questionType==='NUMERIC'){
+            document.getElementById(submitBtnNumeric).style.display='grid';
+            document.getElementById(submitBtnInt).style.display='none';
+            document.getElementById(submitBtn).style.display='none';
+            document.getElementById(boolBtnT).style.display='none';
+            document.getElementById(boolBtnF).style.display='none';
+        }
+        else{
+            document.getElementById(submitBtnNumeric).style.display='none';
+            document.getElementById(submitBtnInt).style.display='none';
+            document.getElementById(submitBtn).style.display='none';
+            document.getElementById(boolBtnT).style.display='none';
+            document.getElementById(boolBtnF).style.display='none';
+        }
+
     }
 
-    function answer(){
+    function answerText(){
         let a=document.getElementById("textBox").value;
+        loadAns(a);
+    }
+
+    function answerNum(){
+        let a=document.getElementById("number").value;
+        loadAns(a);
+    }
+
+    function answerInt(){
+        let a=document.getElementById("int").value;
         loadAns(a);
     }
 
