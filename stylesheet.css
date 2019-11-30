@@ -17,6 +17,10 @@ h3, h4{
     margin-left: 100px;
 }
 
+.answer{
+    display: none;
+}
+
 .container{
     background-color: white;
     width:350px;

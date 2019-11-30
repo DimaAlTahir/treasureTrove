@@ -1,10 +1,3 @@
-
-// startbtn.addEventListener('click', startQuiz)
-// nextbtn.addEventListener('click', ()=>{
-//     current++;
-//     callNextQuestion()
-// })
-//
 // function startQuiz(){
 //     startbtn.classList.add('hide')
 //     fetch("https://codecyprus.org/th/api/question?session=ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICAoMa0gQoM")
@@ -17,7 +10,7 @@
 //
 // }
 
-
+const API_LIST="https://codecyprus.org/th/api/list";
 let elementPlayerNameForm = document.getElementById("playerNameForm");
 let challengesElement = document.getElementById("treasureHuntChallenges");
 let elementlistHunts = document.getElementById("listHunts");
@@ -26,7 +19,6 @@ let playerName ="";
 function getName() {
     let usernameTextbox = document.getElementById("username");
     playerName = usernameTextbox.value;
-    console.log(playerName);
     elementPlayerNameForm.style.display = "none";
     getApiList();
     elementlistHunts.style.display = "block";
@@ -34,7 +26,7 @@ function getName() {
 
 
 function getApiList(){
-    fetch("https://codecyprus.org/th/api/list")
+    fetch(API_LIST)
         .then(response => response.json())
         .then(jsonObject =>
         {
@@ -43,7 +35,7 @@ function getApiList(){
             for (let i = 0; i < treasureHuntsArray.length; i++) {
 
                 let listChallenge = document.createElement("li");
-                listChallenge.innerHTML = "<a id='linksChallenges' href='quizes.html?player" + playerName + "&app=Team5&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
+                listChallenge.innerHTML = "<a onclick='startGame()' href='quizes.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                                                                     + "<ul>"
                                                                     + "<li class='innerListChallenges'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
                                                                     + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
@@ -51,10 +43,11 @@ function getApiList(){
                                                                     + "</ul>";
 
                 challengesElement.appendChild(listChallenge);
-
             }
         });
 }
+
+
 
 function convert2date(ms){
     let date = new Date(ms);
@@ -65,10 +58,7 @@ function convert2minutes(ms){
    let min = Math.floor((ms/1000/60) << 0);
     return min + " mins";
 }
-// function getApiStart(){
-//     fetch("https://codecyprus.org/th/api/list")
-//         .then(response => response.json())
-//         .then(jsonObject =>
+
 
 
 

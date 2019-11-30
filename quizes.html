@@ -3,10 +3,8 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width"/>
     <link rel="stylesheet" href="stylesheet.css">
     <title>Title</title>
-    <script defer src="treasureTrove.js"></script>
 
 </head>
 <body>
@@ -14,55 +12,134 @@
  <div class="container">
 
      <div id="quizQuestionContainer">
-         <h2 id="question">
-             loading question...
-         </h2>
+         <p id="question"></p>  <!--Leave it empty -->
      </div>
 
-     <div class="answer" id="textboxAnswers">
+     <div class="answer" id="textboxContainer">
          <form action="javascript:answerText()">
              <input id="textBox" class="answer" type="text" name="answer">
-             <input id="submitBtnText" class="controlbtns" type="submit" value="Submit">
+             <input id="buttonText" class="controlbtns" type="submit" value="Submit">
          </form>
       </div>
 
      <div class="answer" id="numericContainer">
          <form action="javascript:answerNum()">
              <input id="number" class="answer" type="number" name="answer">
-             <input id="submitBtnNumeric" class="controlbtns" type="submit" value="Submit">
+             <input id="buttonNumeric" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
 
      <div class="answer" id="intContainer">
          <form action="javascript:answerInt()">
-             <input id="int" class="answer" type="inte" name="answer">
-             <input id="submitBtnInt" class="controlbtns" type="submit" value="Submit">
+             <input id="int" class="answer" type="int" name="answer">
+             <input id="buttonInt" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
 
      <div class="answer" id="booleanContainer">
-         <form action="">
-             <button id="boolBtnT" class="controlbtns" value="True" onclick="javascript:trueAns()">True</button>
-             <button id="boolBtnF" class="controlbtns" value="False" onclick="javascript:falseAns()">False</button>
-         </form>
+             <button id="buttonTrue" class="controlbtns" value="True" onclick="trueAns()">True</button>
+             <button id="buttonFalse" class="controlbtns" value="False" onclick="falseAns()">False</button>
+     </div>
+
+     <div> class="answer" id="MCQContainer">
+         <button id="buttonA" class="controlbtns" value="A" >True </button>
+         <button id="buttonB" class="controlbtns" value="B" >False</button>
+         <button id="buttonC" class="controlbtns" value="C" >True </button>
+         <button id="buttonD" class="controlbtns" value="D" >False</button>
      </div>
 
  </div>
 
      <form  action="javascript:skipQuestion()">
-         <input class="controlbtns"  id="skip" type="submit" value="Skip" />
+         <input class="answer"  id="skip" type="submit" value="Skip" />
      </form>
 
 <script>
 
+    const API_QUESTIONS="https://codecyprus.org/th/api/question";
+    const API_START="https://codecyprus.org/th/api/start";
     const params = new URLSearchParams(location.search);
-    let playerName = params.get("name");
+    let playerName = params.get("player");
     let uuid = params.get("treasure-hunt-id");
-    console.log(uuid);
+    console.log("playerName:"+playerName);
+    console.log("uuid:"+uuid);
 
-    // function getStartApi() {
-    //     fetch("https://codecyprus.org/th/api/start?" + playerName + "&app=Team5" + uui
-    // }
+    startGame();
+
+    function startGame(){
+        document.getElementById("question").innerText="Loading....";
+        fetch(API_START + "?player="+playerName+"&app=TreasureTrove&treasure-hunt-id="+uuid)
+            .then(response => response.json())
+            .then(jsonObject =>
+            {
+                console.log(jsonObject.status);
+                if (jsonObject.status ==="ERROR"){
+                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+                }else if(jsonObject.status ==="OK"){
+                    saveCookie("sessionID",jsonObject.session,360);
+                    saveCookie("numOfQuestions",jsonObject.numOfQuestions,360);
+                    // console.log( getCookie("sessionID"));
+                    // console.log( getCookie("numOfQuestions"));
+                    getQuestions();
+                }
+
+            });
+    }
+
+    function getQuestions(){
+        fetch(API_QUESTIONS+"?session="+getCookie("sessionID"))
+            .then(response => response.json())
+            .then(jsonObject =>
+            {
+                console.log(jsonObject.status);
+                if (jsonObject.status ==="ERROR"){
+                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+                }else if(jsonObject.status ==="OK"){
+                    document.getElementById("question").innerHTML= "<p>"+ jsonObject.questionText +"</p>";
+                    switch (jsonObject.questionType) {
+                        case "INTEGER":
+                            document.getElementById("numericContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='block';
+                            document.getElementById("textboxContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='none';
+                            document.getElementById("MCQContainer").style.display='none';
+                            break;
+
+                        case "NUMERIC":
+                            document.getElementById("numericContainer").style.display='block';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("textboxContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='none';
+                            document.getElementById("MCQContainer").style.display='none';
+                            break;
+
+                        case "BOOLEAN":
+                            document.getElementById("numericContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='block';
+                            document.getElementById("MCQContainer").style.display='none';
+                            break;
+
+                        case "MCQContainer":
+                            document.getElementById("numericContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='none';
+                            document.getElementById("MCQContainer").style.display='block';
+                            break;
+
+                        case "TEXT":
+                            document.getElementById("numericContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='none';
+                            document.getElementById("MCQContainer").style.display='block';
+                    }
+                    getQuestions();
+                }
+            });
+    }
 
     // {
     //     "session": "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA3JfiuQsM",
@@ -84,6 +161,9 @@
         alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
     }
 
+
+
+
     //function to skip questions
     function skipQuestion() {
         fetch("https://codecyprus.org/th/api/question")
@@ -98,41 +178,46 @@
             });
     }
 
-    //function that writes question then decides the way 2 answer
-    function displayQuestionReply(){
-        document.getElementsById(question).innerHTML=json.questionText;
-        if (json.questionType==='BOOLEAN'){
-            document.getElementById(submitBtn).style.display='none';
-            document.getElementById(boolBtnT).style.display='grid';
-            document.getElementById(boolBtnF).style.display='grid';
-        }
-        else if (json.questionType==='TEXT'){
-            document.getElementById(submitBtn).style.display='grid';
-            document.getElementById(boolBtnT).style.display='none';
-            document.getElementById(boolBtnF).style.display='none';
-        }
-        else if (json.questionType==='INTEGER'){
-            document.getElementById(submitBtnInt).style.display='grid';
-            document.getElementById(submitBtn).style.display='none';
-            document.getElementById(boolBtnT).style.display='none';
-            document.getElementById(boolBtnF).style.display='none';
-        }
-        else if (json.questionType==='NUMERIC'){
-            document.getElementById(submitBtnNumeric).style.display='grid';
-            document.getElementById(submitBtnInt).style.display='none';
-            document.getElementById(submitBtn).style.display='none';
-            document.getElementById(boolBtnT).style.display='none';
-            document.getElementById(boolBtnF).style.display='none';
-        }
-        else{
-            document.getElementById(submitBtnNumeric).style.display='none';
-            document.getElementById(submitBtnInt).style.display='none';
-            document.getElementById(submitBtn).style.display='none';
-            document.getElementById(boolBtnT).style.display='none';
-            document.getElementById(boolBtnF).style.display='none';
-        }
 
-    }
+
+
+
+
+    //function that writes question then decides the way 2 answer
+    // function displayQuestionReply(){
+    //     document.getElementsById(question).innerHTML=json.questionText;
+    //     if (json.questionType==='BOOLEAN'){
+    //         document.getElementById(submitBtn).style.display='none';
+    //         document.getElementById(boolBtnT).style.display='grid';
+    //         document.getElementById(boolBtnF).style.display='grid';
+    //     }
+    //     else if (json.questionType ==='TEXT'){
+    //         document.getElementById(submitBtn).style.display='grid';
+    //         document.getElementById(boolBtnT).style.display='none';
+    //         document.getElementById(boolBtnF).style.display='none';
+    //     }
+    //     else if (json.questionType==='INTEGER'){
+    //         document.getElementById(submitBtnInt).style.display='grid';
+    //         document.getElementById(submitBtn).style.display='none';
+    //         document.getElementById(boolBtnT).style.display='none';
+    //         document.getElementById(boolBtnF).style.display='none';
+    //     }
+    //     else if (json.questionType==='NUMERIC'){
+    //         document.getElementById(submitBtnNumeric).style.display='grid';
+    //         document.getElementById(submitBtnInt).style.display='none';
+    //         document.getElementById(submitBtn).style.display='none';
+    //         document.getElementById(boolBtnT).style.display='none';
+    //         document.getElementById(boolBtnF).style.display='none';
+    //     }
+    //     else{
+    //         document.getElementById(submitBtnNumeric).style.display='none';
+    //         document.getElementById(submitBtnInt).style.display='none';
+    //         document.getElementById(submitBtn).style.display='none';
+    //         document.getElementById(boolBtnT).style.display='none';
+    //         document.getElementById(boolBtnF).style.display='none';
+    //     }
+    //
+    // }
 
     function answerText(){
         let a=document.getElementById("textBox").value;
@@ -161,7 +246,28 @@
         //todo send answer 2 server by api
     }
 
+    function saveCookie(cookieName, cookieValue, expireDays) {
+        let d = new Date();
+        d.setTime(d.getTime() + (expireDays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cookieName + "=" + cookieValue + ";" + expires;
+    }
 
+    function getCookie(cookieName) {
+        let name = cookieName + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 </script>
 
 
