@@ -12,7 +12,7 @@
  <div class="container">
 
      <div id="quizQuestionContainer">
-         <p id="question"></p>  <!--Leave it empty -->
+         <h4 id="question"></h4>  <!--Leave it empty -->
      </div>
 
      <div class="answer" id="textboxContainer">
@@ -25,7 +25,7 @@
      <div class="answer" id="numericContainer">
          <form action="javascript:answerNum()">
              <input id="number" class="answer" type="number" name="answer">
-             <input id="buttonNumeric" class="controlbtns" type="submit" value="Submit">
+             <input id="buttonNum" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
 
@@ -37,25 +37,33 @@
      </div>
 
      <div class="answer" id="booleanContainer">
-             <button id="buttonTrue" class="controlbtns" value="True" onclick="trueAns()">True</button>
-             <button id="buttonFalse" class="controlbtns" value="False" onclick="falseAns()">False</button>
+             <button id="buttonTrue" class="controlbtns" value="True" onclick="loadAnswer('True')">True</button>
+             <button id="buttonFalse" class="controlbtns" value="False" onclick="loadAnswer('False')">False</button>
      </div>
 
      <div class="answer" id="MCQContainer">
-         <button id="buttonA" class="controlbtns" value="A" >True </button>
-         <button id="buttonB" class="controlbtns" value="B" >False</button>
-         <button id="buttonC" class="controlbtns" value="C" >True </button>
-         <button id="buttonD" class="controlbtns" value="D" >False</button>
+         <button id="buttonA" class="controlbtns" value="A" onclick="loadAnswer('A')">A</button>
+         <button id="buttonB" class="controlbtns" value="B" onclick="loadAnswer('B')">B</button>
+         <button id="buttonC" class="controlbtns" value="C" onclick="loadAnswer('C')">C</button>
+         <button id="buttonD" class="controlbtns" value="D" onclick="loadAnswer('D')">D</button>
      </div>
 
  </div>
 
+
+ <div id="skipContainer">
      <form  action="javascript:skipQuestion()">
-         <input class="answer"  id="skip" type="submit" value="Skip" />
+         <input class="answer"  id="buttonSkip" type="submit" value="Skip" />
      </form>
+ </div>
+
+ <div id="messageContainer">
+        <h3 id="message"></h3>
+ </div>
 
 <script>
-
+    const API_LOCATION="https://codecyprus.org/th/api/location";
+    const API_ANSWER="https://codecyprus.org/th/api/answer";
     const API_QUESTIONS="https://codecyprus.org/th/api/question";
     const API_START="https://codecyprus.org/th/api/start";
     const params = new URLSearchParams(location.search);
@@ -86,16 +94,25 @@
             });
     }
 
+    // Function that loads the question and the correct way to answer it
     function getQuestions(){
         fetch(API_QUESTIONS+"?session="+getCookie("sessionID"))
             .then(response => response.json())
             .then(jsonObject =>
             {
-                console.log(jsonObject.status);
+                console.log("getQuestion status: "+jsonObject.status);
                 if (jsonObject.status ==="ERROR"){
                     document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 }else if(jsonObject.status ==="OK"){
                     document.getElementById("question").innerHTML= "<p>"+ jsonObject.questionText +"</p>";
+
+                    if (jsonObject.requiresLocation === true)
+                        sendLocation();
+
+                    if (jsonObject.canBeSkipped === true){
+                        document.getElementById("skipContainer").style.display='none';
+                    } else document.getElementById("skipContainer").style.display='block';
+
                     switch (jsonObject.questionType) {
                         case "INTEGER":
                             document.getElementById("numericContainer").style.display='none';
@@ -116,7 +133,7 @@
                         case "BOOLEAN":
                             document.getElementById("numericContainer").style.display='none';
                             document.getElementById("intContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("textboxContainer").style.display='none';
                             document.getElementById("booleanContainer").style.display='block';
                             document.getElementById("MCQContainer").style.display='none';
                             break;
@@ -124,7 +141,7 @@
                         case "MCQContainer":
                             document.getElementById("numericContainer").style.display='none';
                             document.getElementById("intContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
+                            document.getElementById("textboxContainer").style.display='none';
                             document.getElementById("booleanContainer").style.display='none';
                             document.getElementById("MCQContainer").style.display='block';
                             break;
@@ -132,14 +149,15 @@
                         case "TEXT":
                             document.getElementById("numericContainer").style.display='none';
                             document.getElementById("intContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='none';
-                            document.getElementById("MCQContainer").style.display='block';
+                            document.getElementById("textboxContainer").style.display='none';
+                            document.getElementById("booleanContainer").style.display='block';
+                            document.getElementById("MCQContainer").style.display='none';
                     }
-
                 }
             });
     }
+
+
 
     // {
     //     "session": "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA3JfiuQsM",
@@ -158,30 +176,32 @@
         }
     }
     function showPosition(position) {
-        alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
+        return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
     }
 
+    // function sentLocation() {
+    //     fetch(API_LOCATION + "?session=" + getCookie("sessionID") + getLocation())
+    //         .then(response => response.json())
+    //         .then(jsonObject => {
+    //
+    //         });
+    // }
 
 
 
     //function to skip questions
-    function skipQuestion() {
-        fetch("https://codecyprus.org/th/api/question")
-            .then(response => response.json())
-            .then(jsonObject => {
-                let current = jsonObject.currentQuestionIndex;
-                for (let i = 0; i < treasureHuntsArray.length; i++) {
-                    if (numOfQuestions[i] === current) {
-                        continue;
-                    }
-                }
-            });
-    }
-
-
-
-
-
+    // function skipQuestion() {
+    //     fetch("https://codecyprus.org/th/api/question")
+    //         .then(response => response.json())
+    //         .then(jsonObject => {
+    //             let current = jsonObject.currentQuestionIndex;
+    //             for (let i = 0; i < treasureHuntsArray.length; i++) {
+    //                 if (numOfQuestions[i] === current) {
+    //                     continue;
+    //                 }
+    //             }
+    //         });
+    // }
 
     //function that writes question then decides the way 2 answer
     // function displayQuestionReply(){
@@ -220,30 +240,45 @@
     // }
 
     function answerText(){
-        let a=document.getElementById("textBox").value;
-        loadAns(a);
+        let answer=document.getElementById("textBox").value;
+        loadAnswer(answer);
     }
 
     function answerNum(){
-        let a=document.getElementById("number").value;
-        loadAns(a);
+        let answer=document.getElementById("number").value;
+        loadAnswer(answer);
     }
 
     function answerInt(){
-        let a=document.getElementById("int").value;
-        loadAns(a);
+        let answer=document.getElementById("int").value;
+        loadAnswer(answer);
     }
 
-    function trueAns(){
-        loadAns('true');
-    }
-    function falseAns(){
-        loadAns('false');
-    }
+    // function trueAns(){
+    //     loadAnswer('true');
+    // }
+    // function falseAns(){
+    //     loadAnswer('false');
+    // }
 
-    function loadAns(a){
-        console.debug("submitted: "+a)
-        //todo send answer 2 server by api
+    function loadAnswer(answer){
+        console.debug("submitted: "+answer);
+        fetch(API_ANSWER + "?session=" + getCookie("sessionID") + "&answer=" + answer)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log("loadAnswer status: "+jsonObject.status);
+
+                if (jsonObject.status ==="ERROR"){
+                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+
+                } else if ((jsonObject.status ==="OK") && (jsonObject.correct === true)){
+                    document.getElementById("message").innerHTML= jsonObject.message + "you gained: " + jsonObject.scoreAdjustment + " points.";
+                } else if ((jsonObject.status ==="OK") && (jsonObject.correct === false)) {
+                    document.getElementById("message").innerHTML= jsonObject.message + "you lost: " + jsonObject.scoreAdjustment + " points.";
+
+
+                }
+            });
     }
 
     function saveCookie(cookieName, cookieValue, expireDays) {
