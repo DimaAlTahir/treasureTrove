@@ -17,7 +17,7 @@
 
      <div class="answer" id="textboxContainer">
          <form action="javascript:answerText()">
-             <input id="textBox" class="answer" type="text" name="answer">
+             <input id="textBox" class="answer" type="text" name="answer" >
              <input id="buttonText" class="controlbtns" type="submit" value="Submit">
          </form>
       </div>
@@ -62,6 +62,8 @@
  </div>
 
 <script>
+
+
     const API_LOCATION="https://codecyprus.org/th/api/location";
     const API_ANSWER="https://codecyprus.org/th/api/answer";
     const API_QUESTIONS="https://codecyprus.org/th/api/question";
@@ -72,7 +74,12 @@
     console.log("playerName:"+playerName);
     console.log("uuid:"+uuid);
 
-    startGame();
+
+    if (getCookie("gameSaved") === "true")
+    {
+        getQuestions();
+    } else startGame();
+
 
     function startGame(){
         document.getElementById("question").innerText="Loading....";
@@ -84,8 +91,9 @@
                 if (jsonObject.status ==="ERROR"){
                     document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 }else if(jsonObject.status ==="OK"){
-                    saveCookie("sessionID",jsonObject.session,360);
-                    saveCookie("numOfQuestions",jsonObject.numOfQuestions,360);
+                    saveCookie("sessionID",jsonObject.session, 0.5);
+                    //saveCookie("numOfQuestions",jsonObject.numOfQuestions, );
+                    saveCookie("gameSaved", "true", 0.5);
                     // console.log( getCookie("sessionID"));
                     // console.log( getCookie("numOfQuestions"));
                     getQuestions();
@@ -102,7 +110,7 @@
             {
                 console.log("getQuestion status: "+jsonObject.status);
                 if (jsonObject.status ==="ERROR"){
-                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Questions.html'> Click this Link to Sign again</a>";
                 }else if(jsonObject.status ==="OK"){
                     document.getElementById("question").innerHTML= "<p>"+ jsonObject.questionText +"</p>";
 
@@ -281,9 +289,9 @@
             });
     }
 
-    function saveCookie(cookieName, cookieValue, expireDays) {
+    function saveCookie(cookieName, cookieValue, expireHours) {
         let d = new Date();
-        d.setTime(d.getTime() + (expireDays*24*60*60*1000));
+        d.setTime(d.getTime() + (expireHours*60*60*1000));
         let expires = "expires="+ d.toUTCString();
         document.cookie = cookieName + "=" + cookieValue + ";" + expires;
     }

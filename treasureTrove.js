@@ -20,7 +20,6 @@ function getName() {
     let usernameTextbox = document.getElementById("username");
     playerName = usernameTextbox.value;
     elementPlayerNameForm.style.display = "none";
-    getApiList();
     elementlistHunts.style.display = "block";
 }
 
@@ -44,6 +43,7 @@ function getApiList(){
 
                 challengesElement.appendChild(listChallenge);
             }
+
         });
 }
 
@@ -58,7 +58,7 @@ function convert2minutes(ms){
    let min = Math.floor((ms/1000/60) << 0);
     return min + " mins";
 }
-
+getApiList();
 
 
 
