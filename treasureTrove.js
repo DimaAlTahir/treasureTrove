@@ -1,15 +1,3 @@
-// function startQuiz(){
-//     startbtn.classList.add('hide')
-//     fetch("https://codecyprus.org/th/api/question?session=ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICAoMa0gQoM")
-//         .then(response => response.json())
-//         .then(jsonObject =>{})
-//     callNextQuestion()
-// }
-//
-// function callNextQuestion(){
-//
-// }
-
 const API_LIST="https://codecyprus.org/th/api/list";
 let elementPlayerNameForm = document.getElementById("playerNameForm");
 let challengesElement = document.getElementById("treasureHuntChallenges");
@@ -20,6 +8,7 @@ function getName() {
     let usernameTextbox = document.getElementById("username");
     playerName = usernameTextbox.value;
     elementPlayerNameForm.style.display = "none";
+    getApiList();
     elementlistHunts.style.display = "block";
 }
 
@@ -34,7 +23,7 @@ function getApiList(){
             for (let i = 0; i < treasureHuntsArray.length; i++) {
 
                 let listChallenge = document.createElement("li");
-                listChallenge.innerHTML = "<a onclick='startGame()' href='quizes.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
+                listChallenge.innerHTML = "<a href='quizes.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                                                                     + "<ul>"
                                                                     + "<li class='innerListChallenges'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
                                                                     + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
@@ -58,9 +47,6 @@ function convert2minutes(ms){
    let min = Math.floor((ms/1000/60) << 0);
     return min + " mins";
 }
-getApiList();
-
-
 
 // for(let i = 0; i < json.treasureHunts.length; i++) {
 //     let name = json.treasureHunts[i].name;

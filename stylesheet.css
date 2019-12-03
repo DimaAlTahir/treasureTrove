@@ -14,12 +14,10 @@ ol{
 
 h3, h4{
     font-family: Fixed, monospace;
-    margin-left: 100px;
+    margin-left: 10px;
 }
 
-.answer{
-    display: none;
-}
+
 
 .container{
     background-color: white;

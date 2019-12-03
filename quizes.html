@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
-    <title>Title</title>
+    <title>TreasureTrove</title>
 
 </head>
 <body>
@@ -15,22 +15,25 @@
          <h4 id="question"></h4>  <!--Leave it empty -->
      </div>
 
-     <div class="answer" id="textboxContainer">
-         <form action="javascript:answerText()">
+    <div class="answer" id="textboxContainer">
+         <form action="javascript:answerText()" >
+             <label for="textBox"></label>
              <input id="textBox" class="answer" type="text" name="answer" >
              <input id="buttonText" class="controlbtns" type="submit" value="Submit">
          </form>
-      </div>
+     </div>
 
      <div class="answer" id="numericContainer">
-         <form action="javascript:answerNum()">
-             <input id="number" class="answer" type="number" name="answer">
+         <form action="javascript:answerNum()" >
+             <label for="number"></label>
+             <input id="number" class="answer" type="number" step="any" name="answer">
              <input id="buttonNum" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
 
      <div class="answer" id="intContainer">
-         <form action="javascript:answerInt()">
+         <form action="javascript:answerInt()" >
+             <label for="int"></label>
              <input id="int" class="answer" type="number" name="answer">
              <input id="buttonInt" class="controlbtns" type="submit" value="Submit">
          </form>
@@ -48,22 +51,26 @@
          <button id="buttonD" class="controlbtns" value="D" onclick="loadAnswer('D')">D</button>
      </div>
 
+
  </div>
 
-
- <div id="skipContainer">
+ <div  id="skipContainer" >
      <form  action="javascript:skipQuestion()">
          <input class="answer"  id="buttonSkip" type="submit" value="Skip" />
      </form>
  </div>
 
- <div id="messageContainer">
-        <h3 id="message"></h3>
+ <div  id="scoreContainer">
+     <h4 id="scoreDisplay"></h4>
+ </div>
+
+ <div  id="messageContainer">
+        <h4 id="message"></h4>
  </div>
 
 <script>
-
-
+    const API_SKIP="https://codecyprus.org/th/api/skip";
+    const API_SCORE="https://codecyprus.org/th/api/score";
     const API_LOCATION="https://codecyprus.org/th/api/location";
     const API_ANSWER="https://codecyprus.org/th/api/answer";
     const API_QUESTIONS="https://codecyprus.org/th/api/question";
@@ -71,18 +78,18 @@
     const params = new URLSearchParams(location.search);
     let playerName = params.get("player");
     let uuid = params.get("treasure-hunt-id");
-    console.log("playerName:"+playerName);
-    console.log("uuid:"+uuid);
 
-
-    if (getCookie("gameSaved") === "true")
-    {
+    if (getCookie("gameSaved") === "true") {
         getQuestions();
     } else startGame();
 
-
     function startGame(){
         document.getElementById("question").innerText="Loading....";
+        document.getElementById("numericContainer").style.display='none';
+        document.getElementById("intContainer").style.display='none';
+        document.getElementById("textboxContainer").style.display='none';
+        document.getElementById("booleanContainer").style.display='none';
+        document.getElementById("MCQContainer").style.display='none';
         fetch(API_START + "?player="+playerName+"&app=TreasureTrove&treasure-hunt-id="+uuid)
             .then(response => response.json())
             .then(jsonObject =>
@@ -91,9 +98,8 @@
                 if (jsonObject.status ==="ERROR"){
                     document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 }else if(jsonObject.status ==="OK"){
-                    saveCookie("sessionID",jsonObject.session, 0.5);
-                    //saveCookie("numOfQuestions",jsonObject.numOfQuestions, );
-                    saveCookie("gameSaved", "true", 0.5);
+                    saveCookie("sessionID",jsonObject.session, 0.51);
+                    saveCookie("gameSaved", "true", 0.51);
                     // console.log( getCookie("sessionID"));
                     // console.log( getCookie("numOfQuestions"));
                     getQuestions();
@@ -110,58 +116,68 @@
             {
                 console.log("getQuestion status: "+jsonObject.status);
                 if (jsonObject.status ==="ERROR"){
-                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Questions.html'> Click this Link to Sign again</a>";
+                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html.html'> Click this Link to Sign again</a>";
                 }else if(jsonObject.status ==="OK"){
                     document.getElementById("question").innerHTML= "<p>"+ jsonObject.questionText +"</p>";
-
-                    if (jsonObject.requiresLocation === true)
-                        sendLocation();
-
-                    if (jsonObject.canBeSkipped === true){
-                        document.getElementById("skipContainer").style.display='none';
-                    } else document.getElementById("skipContainer").style.display='block';
-
-                    switch (jsonObject.questionType) {
-                        case "INTEGER":
-                            document.getElementById("numericContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='block';
-                            document.getElementById("textboxContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='none';
-                            document.getElementById("MCQContainer").style.display='none';
-                            break;
-
-                        case "NUMERIC":
-                            document.getElementById("numericContainer").style.display='block';
-                            document.getElementById("intContainer").style.display='none';
-                            document.getElementById("textboxContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='none';
-                            document.getElementById("MCQContainer").style.display='none';
-                            break;
-
-                        case "BOOLEAN":
-                            document.getElementById("numericContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
-                            document.getElementById("textboxContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='block';
-                            document.getElementById("MCQContainer").style.display='none';
-                            break;
-
-                        case "MCQContainer":
-                            document.getElementById("numericContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
-                            document.getElementById("textboxContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='none';
-                            document.getElementById("MCQContainer").style.display='block';
-                            break;
-
-                        case "TEXT":
-                            document.getElementById("numericContainer").style.display='none';
-                            document.getElementById("intContainer").style.display='none';
-                            document.getElementById("textboxContainer").style.display='none';
-                            document.getElementById("booleanContainer").style.display='block';
-                            document.getElementById("MCQContainer").style.display='none';
-                    }
                 }
+
+                if (jsonObject.requiresLocation === true)
+                    sendLocation();
+
+                if (jsonObject.canBeSkipped === false){
+                    console.log("Cannot be skipped");
+                    document.getElementById("skipContainer").style.display='none';
+                } else{
+                    document.getElementById("skipContainer").style.display='block';
+                    console.log("Can be skipped");
+                }
+
+                switch (jsonObject.questionType) {
+                    case "INTEGER":
+                        console.log("INT=block");
+                        document.getElementById("numericContainer").style.display='none';
+                        document.getElementById("intContainer").style.display='block';
+                        document.getElementById("textboxContainer").style.display='none';
+                        document.getElementById("booleanContainer").style.display='none';
+                        document.getElementById("MCQContainer").style.display='none';
+                        break;
+
+                    case "NUMERIC":
+                        console.log("NUM=block");
+                        document.getElementById("numericContainer").style.display='block';
+                        document.getElementById("intContainer").style.display='none';
+                        document.getElementById("textboxContainer").style.display='none';
+                        document.getElementById("booleanContainer").style.display='none';
+                        document.getElementById("MCQContainer").style.display='none';
+                        break;
+
+                    case "BOOLEAN":
+                        console.log("BOOLEAN=block");
+                        document.getElementById("numericContainer").style.display='none';
+                        document.getElementById("intContainer").style.display='none';
+                        document.getElementById("textboxContainer").style.display='none';
+                        document.getElementById("booleanContainer").style.display='block';
+                        document.getElementById("MCQContainer").style.display='none';
+                        break;
+
+                    case "MCQ":
+                        console.log("MCQ=block");
+                        document.getElementById("numericContainer").style.display='none';
+                        document.getElementById("intContainer").style.display='none';
+                        document.getElementById("textboxContainer").style.display='none';
+                        document.getElementById("booleanContainer").style.display='none';
+                        document.getElementById("MCQContainer").style.display='block';
+                        break;
+
+                    case "TEXT":
+                        console.log("textbox=block");
+                        document.getElementById("numericContainer").style.display='none';
+                        document.getElementById("intContainer").style.display='none';
+                        document.getElementById("textboxContainer").style.display='block';
+                        document.getElementById("booleanContainer").style.display='none';
+                        document.getElementById("MCQContainer").style.display='none';
+                    }
+
             });
     }
 
@@ -177,7 +193,9 @@
     //functions to find device location
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(function(position) {
+                sendLocation(position.coords.latitude, position.coords.longitude);
+            });
         }
         else {
             alert("Geolocation is not supported by your browser.");
@@ -187,64 +205,12 @@
         return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
     }
 
-    // function sentLocation() {
-    //     fetch(API_LOCATION + "?session=" + getCookie("sessionID") + getLocation())
+    // function sendLocation() {
+    //      fetch(API_LOCATION + "?session=" + getCookie("sessionID") + getLocation())
     //         .then(response => response.json())
     //         .then(jsonObject => {
     //
     //         });
-    // }
-
-
-
-    //function to skip questions
-    // function skipQuestion() {
-    //     fetch("https://codecyprus.org/th/api/question")
-    //         .then(response => response.json())
-    //         .then(jsonObject => {
-    //             let current = jsonObject.currentQuestionIndex;
-    //             for (let i = 0; i < treasureHuntsArray.length; i++) {
-    //                 if (numOfQuestions[i] === current) {
-    //                     continue;
-    //                 }
-    //             }
-    //         });
-    // }
-
-    //function that writes question then decides the way 2 answer
-    // function displayQuestionReply(){
-    //     document.getElementsById(question).innerHTML=json.questionText;
-    //     if (json.questionType==='BOOLEAN'){
-    //         document.getElementById(submitBtn).style.display='none';
-    //         document.getElementById(boolBtnT).style.display='grid';
-    //         document.getElementById(boolBtnF).style.display='grid';
-    //     }
-    //     else if (json.questionType ==='TEXT'){
-    //         document.getElementById(submitBtn).style.display='grid';
-    //         document.getElementById(boolBtnT).style.display='none';
-    //         document.getElementById(boolBtnF).style.display='none';
-    //     }
-    //     else if (json.questionType==='INTEGER'){
-    //         document.getElementById(submitBtnInt).style.display='grid';
-    //         document.getElementById(submitBtn).style.display='none';
-    //         document.getElementById(boolBtnT).style.display='none';
-    //         document.getElementById(boolBtnF).style.display='none';
-    //     }
-    //     else if (json.questionType==='NUMERIC'){
-    //         document.getElementById(submitBtnNumeric).style.display='grid';
-    //         document.getElementById(submitBtnInt).style.display='none';
-    //         document.getElementById(submitBtn).style.display='none';
-    //         document.getElementById(boolBtnT).style.display='none';
-    //         document.getElementById(boolBtnF).style.display='none';
-    //     }
-    //     else{
-    //         document.getElementById(submitBtnNumeric).style.display='none';
-    //         document.getElementById(submitBtnInt).style.display='none';
-    //         document.getElementById(submitBtn).style.display='none';
-    //         document.getElementById(boolBtnT).style.display='none';
-    //         document.getElementById(boolBtnF).style.display='none';
-    //     }
-    //
     // }
 
     function answerText(){
@@ -262,14 +228,9 @@
         loadAnswer(answer);
     }
 
-    // function trueAns(){
-    //     loadAnswer('true');
-    // }
-    // function falseAns(){
-    //     loadAnswer('false');
-    // }
 
     function loadAnswer(answer){
+        document.getElementById("message").innerHTML="";
         console.debug("submitted: "+answer);
         fetch(API_ANSWER + "?session=" + getCookie("sessionID") + "&answer=" + answer)
             .then(response => response.json())
@@ -277,15 +238,53 @@
                 console.log("loadAnswer status: "+jsonObject.status);
 
                 if (jsonObject.status ==="ERROR"){
-                    document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+                    console.log("There was an error with the answer sent to the server")
+                    //document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
 
                 } else if ((jsonObject.status ==="OK") && (jsonObject.correct === true)){
-                    document.getElementById("message").innerHTML= jsonObject.message + "you gained: " + jsonObject.scoreAdjustment + " points.";
+                    document.getElementById("message").innerHTML= jsonObject.message + " You gained: " + jsonObject.scoreAdjustment + " points.";
                 } else if ((jsonObject.status ==="OK") && (jsonObject.correct === false)) {
-                    document.getElementById("message").innerHTML= jsonObject.message + "you lost: " + jsonObject.scoreAdjustment + " points.";
-
-
+                    document.getElementById("message").innerHTML= jsonObject.message + " You lost: " + jsonObject.scoreAdjustment + " points.";
                 }
+                getQuestions();
+            });
+    }
+
+    //function to skip questions
+    function skipQuestion() {
+        document.getElementById("message").innerHTML="";
+        fetch(API_SKIP + "?session=" + getCookie("sessionID"))
+            .then(response => response.json())
+            .then(jsonObject => {
+                if (jsonObject.status==="OK"){
+                    if (jsonObject.completed === false){
+                        document.getElementById("message").innerHTML="Question " + jsonObject.message + " You Lost : " + jsonObject.scoreAdjustment;
+                    }
+                }else if(jsonObject.status==="ERROR"){
+                    document.getElementById("message").innerHTML=jsonObject.errorMessages[0];
+                }
+                getQuestions();
+            });
+    }
+
+
+    // Funtcion to get the score
+    function getScore(){
+        document.getElementById("scoreContainer").style.display="none";
+        document.getElementById("scoreDisplay").innerHTML="";
+        fetch(API_SCORE + "?session=" + getCookie("sessionID"))
+            .then(response => response.json())
+            .then(jsonObject =>{
+                if (jsonObject.status==="OK")
+                     if ((jsonObject.completed ===false) && (jsonObject.finished===false))
+                        getQuestions();
+                     else if ((jsonObject.completed) === true && (jsonObject.finished===false)){
+                         document.getElementById("scoreDisplay").innerHTML= "You answered all the questions " + playerName +" and your score is : " + jsonObject.score +" Points";
+                         document.getElementById("scoreContainer").style.display="block";
+                     } else if ((jsonObject.completed) === false && (jsonObject.finished===true)){
+                         document.getElementById("scoreDisplay").innerHTML= "The time is up " + playerName +" and your score is : " + jsonObject.score +" Points";
+                         document.getElementById("scoreContainer").style.display="block";
+                     }
             });
     }
 
