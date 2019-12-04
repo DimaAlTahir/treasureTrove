@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="stylesheet.css">
     <title>TreasureTrove</title>
 </head>
-<body>
+<body onload="setInterval(getLocation, 45000);">
 
  <div class="container">
+
 
      <div id="leaderboardLinkContainer">
          <p id="leaderboardlink"></p>
@@ -21,7 +22,7 @@
     <div class="answer" id="textboxContainer">
          <form action="javascript:answerText()" >
              <label for="textBox"></label>
-             <input id="textBox" class="answer" type="text" name="answer" >
+             <input id="textBox" class="answer" type="text" name="answer" required>
              <input id="buttonText" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
@@ -29,7 +30,7 @@
      <div class="answer" id="numericContainer">
          <form action="javascript:answerNum()" >
              <label for="number"></label>
-             <input id="number" class="answer" type="number" step="any" name="answer">
+             <input id="number" class="answer" type="number" step="any" name="answer" required>
              <input id="buttonNum" class="controlbtns" type="submit" value="Submit">
          </form>
      </div>
@@ -106,7 +107,6 @@
                     saveCookie("sessionID",jsonObject.session, 0.51);
                     saveCookie("gameSaved", "true", 0.51);
                     // console.log( getCookie("sessionID"));
-                    // console.log( getCookie("numOfQuestions"));
                     getQuestions();
                 }
 
@@ -134,8 +134,8 @@
                     document.getElementById("question").innerHTML= "<p>"+ jsonObject.questionText +"</p>";
                 }
 
-                // if (jsonObject.requiresLocation === true)
-                //     sendLocation();
+                 if (jsonObject.requiresLocation === true)
+                     getLocation();
 
                 if (jsonObject.canBeSkipped === false){
                     document.getElementById("skipContainer").style.display='none';
@@ -143,7 +143,7 @@
                     document.getElementById("skipContainer").style.display='block';
                 }
 
-                if (jsonObject.completed===true){
+                if (jsonObject.completed ===true){
                     // todo end and create the link for the leader boards window.location.href="" delete the cookies
                 }
 
@@ -194,8 +194,7 @@
                         document.getElementById("MCQContainer").style.display='none';
                         break;
                     }
-
-
+                getScore();
             });
     }
 
@@ -208,12 +207,16 @@
     // }
 
 
+    // function showPosition(position) {
+    //     return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
+    // }
+
     //functions to find device location
     function getLocation() {
         console.log("getLocation...");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-               sendLocation(position.coords.latitude, position.coords.longitude);
+                sendLocation(position.coords.latitude, position.coords.longitude);
             });
         }
         else {
@@ -221,39 +224,23 @@
         }
     }
 
-    // function showPosition(position) {
-    //     return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
-    // }
-
-    // setTimeout(sendLocation, 31000)
-    const INTERVAL = 45000;
-    setInterval(getLocation, INTERVAL);
+    // const INTERVAL = 1000;
+    //
+    // document.getElementById("locationWatch").addEventListener("click", function() {
+    //     console.log("Enabling location interval...");
+    //     getLocation();
+    //     setInterval(getLocation, INTERVAL);
+    //     document.getElementById("locationWatch").style.display = "none";
+    // });
 
     function sendLocation(lat, lng) {
-         fetch(API_LOCATION + "?session=" + getCookie("sessionID") + "&latitude=" + lat + "&Longitude=" + lng)
+        console.debug("lat: " + lat + ", lng: " + lng);
+        fetch(API_LOCATION + "?session=" + getCookie("sessionID") + "&latitude=" + lat + "&longitude=" + lng)
             .then(response => response.json())
             .then(jsonObject => {
-                console.debug("/location -> " + jsonObject);
+                console.debug("/location -> " + JSON.stringify(jsonObject));
             });
     }
-
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(showPosition);
-    //     }
-    //     else {
-    //         alert("Geolocation is not supported by your browser.");
-    //     }
-    // }
-    //
-    // function showPosition(position) {
-    //     alert("Latitude: " + position.coords.latitude + ", Longitude: " + position.coords.longitude);
-    // }
-
-
-
-
-
 
     function answerText(){
         let answer=document.getElementById("textBox").value;
@@ -313,34 +300,25 @@
     // Funtcion to get the score
     function getScore(){
         document.getElementById("scoreContainer").style.display="none";
-        document.getElementById("scoreDisplay").innerHTML="";
         fetch(API_SCORE + "?session=" + getCookie("sessionID"))
             .then(response => response.json())
             .then(jsonObject =>{
                 if (jsonObject.status==="OK")
-                     if ((jsonObject.completed ===false) && (jsonObject.finished===false))
-                        getQuestions();
-                     else if ((jsonObject.completed) === true && (jsonObject.finished===false)){
-                         document.getElementById("scoreDisplay").innerHTML= "<h4>"+ "You answered all the questions " +
-                             playerName +" and your score is : " + jsonObject.score +" Points" + "</h4>";
-                         document.getElementById("scoreContainer").style.display="block";
-                         document.getElementById("numericContainer").style.display='none';
-                         document.getElementById("intContainer").style.display='none';
-                         document.getElementById("textboxContainer").style.display='none';
-                         document.getElementById("booleanContainer").style.display='none';
-                         document.getElementById("MCQContainer").style.display='none';
-                         document.getElementById("leaderboardLinkContainer").style.display='none';
-
-                     } else if ((jsonObject.completed) === false && (jsonObject.finished===true)){
-                         document.getElementById("scoreDisplay").innerHTML="<h4>"+ "The time is up " +
-                             playerName +" and your score is : " + jsonObject.score +" Points" + "</h4>";
-                         document.getElementById("scoreContainer").style.display="block";
-                         document.getElementById("numericContainer").style.display='none';
-                         document.getElementById("intContainer").style.display='none';
-                         document.getElementById("textboxContainer").style.display='none';
-                         document.getElementById("booleanContainer").style.display='none';
-                         document.getElementById("MCQContainer").style.display='none';
-                         document.getElementById("leaderboardLinkContainer").style.display='none';
+                     if ((jsonObject.completed ===false) && (jsonObject.finished===false)){
+                        document.getElementById("scoreDisplay").innerHTML= "Score is: " + jsonObject.score;
+                        document.getElementById("scoreContainer").style.display="block";
+                     // else if ((jsonObject.completed) === true && (jsonObject.finished===false)){
+                     //     document.getElementById("scoreDisplay").innerHTML= "<h4>"+ "You answered all the questions " +
+                     //         playerName +" and your score is : " + jsonObject.score +" Points" + "</h4>";
+                     //     document.getElementById("scoreContainer").style.display="block";
+                     //
+                     //
+                     // } else if ((jsonObject.completed) === false && (jsonObject.finished===true)){
+                     //     document.getElementById("scoreDisplay").innerHTML="<h4>"+ "The time is up " +
+                     //         playerName +" and your score is : " + jsonObject.score +" Points" + "</h4>";
+                     //     document.getElementById("scoreContainer").style.display="block";
+                     //
+                     // }
                      }
             });
     }
