@@ -185,12 +185,14 @@
                         break;
 
                     case "TEXT":
+                    default:
                         console.log("textbox=block");
                         document.getElementById("numericContainer").style.display='none';
                         document.getElementById("intContainer").style.display='none';
                         document.getElementById("textboxContainer").style.display='block';
                         document.getElementById("booleanContainer").style.display='none';
                         document.getElementById("MCQContainer").style.display='none';
+                        break;
                     }
 
 
@@ -208,29 +210,32 @@
 
     //functions to find device location
     function getLocation() {
+        console.log("getLocation...");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-               // sendLocation(position.coords.latitude, position.coords.longitude);
+               sendLocation(position.coords.latitude, position.coords.longitude);
             });
         }
         else {
             alert("Geolocation is not supported by your browser.");
         }
     }
-    function showPosition(position) {
-        return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
-    }
+
+    // function showPosition(position) {
+    //     return ("&latitude=" + position.coords.latitude + "&Longitude=" + position.coords.longitude);
+    // }
 
     // setTimeout(sendLocation, 31000)
-    // setInterval
+    const INTERVAL = 45000;
+    setInterval(getLocation, INTERVAL);
 
-    // function sendLocation() {
-    //      fetch(API_LOCATION + "?session=" + getCookie("sessionID") + )
-    //         .then(response => response.json())
-    //         .then(jsonObject => {
-    //
-    //         });
-    // }
+    function sendLocation(lat, lng) {
+         fetch(API_LOCATION + "?session=" + getCookie("sessionID") + "&latitude=" + lat + "&Longitude=" + lng)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.debug("/location -> " + jsonObject);
+            });
+    }
 
     // function getLocation() {
     //     if (navigator.geolocation) {
