@@ -8,7 +8,7 @@
 </head>
 <body>
 
- <div class="container">
+ <div class="container2" class="container">
 
      <div id="leaderboardLinkContainer">
          <p id="leaderboardlink"></p>
@@ -22,7 +22,9 @@
          <form action="javascript:answerText()" >
              <label for="textBox"></label>
              <input id="textBox" class="answer" type="text" name="answer" >
-             <input id="buttonText" class="controlbtns" type="submit" value="Submit">
+             <div class="btns">
+                 <input id="buttonText" class="controlbtns" type="submit" value="Submit">
+             </div>
          </form>
      </div>
 
@@ -30,7 +32,9 @@
          <form action="javascript:answerNum()" >
              <label for="number"></label>
              <input id="number" class="answer" type="number" step="any" name="answer">
-             <input id="buttonNum" class="controlbtns" type="submit" value="Submit">
+             <div class="btns">
+                 <input id="buttonNum" class="btns" class="controlbtns" type="submit" value="Submit">
+             </div>
          </form>
      </div>
 
@@ -38,16 +42,20 @@
          <form action="javascript:answerInt()" >
              <label for="int"></label>
              <input id="int" class="answer" type="number" name="answer">
-             <input id="buttonInt" class="controlbtns" type="submit" value="Submit">
+             <div class="btns">
+                 <input id="buttonInt" class="controlbtns" type="submit" value="Submit">
+             </div>
          </form>
      </div>
 
-     <div class="answer" id="booleanContainer">
-             <button id="buttonTrue" class="controlbtns" value="True" onclick="loadAnswer('True')">True</button>
+     <div class="answer" id="booleanContainer" class="btns">
+         <div class="btns">
+             <button id="buttonTrue"   class="controlbtns" value="True" onclick="loadAnswer('True')">True</button>
              <button id="buttonFalse" class="controlbtns" value="False" onclick="loadAnswer('False')">False</button>
+         </div>
      </div>
 
-     <div class="answer" id="MCQContainer">
+     <div class="answer" id="MCQContainer" class="btns">
          <button id="buttonA" class="controlbtns" value="A" onclick="loadAnswer('A')">A</button>
          <button id="buttonB" class="controlbtns" value="B" onclick="loadAnswer('B')">B</button>
          <button id="buttonC" class="controlbtns" value="C" onclick="loadAnswer('C')">C</button>
@@ -59,7 +67,7 @@
 
  <div  id="skipContainer" >
      <form  action="javascript:skipQuestion()">
-         <input class="answer"  id="buttonSkip" type="submit" value="Skip" />
+         <input class="controlbtns"  id="buttonSkip" type="submit" value="Skip" />
      </form>
  </div>
 
