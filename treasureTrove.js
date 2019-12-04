@@ -23,11 +23,11 @@ function getApiList(){
             for (let i = 0; i < treasureHuntsArray.length; i++) {
 
                 let listChallenge = document.createElement("li");
-                listChallenge.innerHTML = "<a href='app.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
+                listChallenge.innerHTML = "<a  href='app.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
                                                                     + "<ul>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
-                                                                    + "<li class='innerListChallenges'>" + "<b>" + "Lasts: " + "</b>" + convert2minutes(treasureHuntsArray[i].maxDuration )+ "</li>"
+                                                                    + "<li>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
+                                                                    + "<li>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
+                                                                    + "<li>" + "<b>" + "Lasts: " + "</b>" + convert2minutes(treasureHuntsArray[i].maxDuration )+ "</li>"
                                                                     + "</ul>";
 
                 challengesElement.appendChild(listChallenge);
