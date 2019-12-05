@@ -7,94 +7,174 @@
     <title>test</title>
 </head>
 
-<body>
 <h1>Testing Efforts</h1>
 
-<div class="container2" id="listHunts" >
+<div class="container2" id="listHunts" style="margin-bottom: 10px">
     <h2>All treasure Hunt Challenges:</h2>
     <p id="unit2"></p>
     <ul id="treasureHuntChallenges"></ul>
 </div>
 
-<br>
-
-<div class="container">
-    <h2>Unit test for the leader boards</h2>
-    <h3 id="endMessage">loading...</h3>
-    <p id="unit1"></p>
-    <ol id="leaderboard"></ol>
+<h2>User Acceptance Plan</h2>
+<div class="container" style="margin-bottom: 10px">
+    <ol>
+        <li> App testing will be done by Dima</li>
+        <li> What specific aspects will they test?</li>
+        <li> App testing will be done when app development is close to finishing. ie: when the leader board is implemented</li>
+        <li> number of test and its results will be recorded on testing page inside the User Acceptance table</li>
+        <li> defects and bugs will be recorded in comments column to be fixed in app</li>
+        <li> the person responsible for implementing a certain element will be alerted using group chat when a bug is found in their work</li>
+        <li> code will be retested once a bug is fixed</li>
+    </ol>
 </div>
 
+<h2>User Acceptance Test 1</h2>
+<table class="container" style="margin-bottom: 10px">
+    <tr>
+        <th>Aspects to test</th>
+        <th>Acceptance Requirements</th>
+        <th>Accept</th>
+        <th>Reject</th>
+        <th>Comments</th>
+    </tr>
+
+    <tr>
+        <td>Background display</td>
+        <td>displays fully on all pages on different devices</td>
+        <td>0</td>
+        <td>1</td>
+        <td>version1:displays only until length of content on page when used on phones</td>
+
+    </tr>
+
+    <tr>
+        <td>Submit Button</td>
+        <td>Submits given variable and moves the user to the next sequence</td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+    <tr>
+        <td>Player name sign in</td>
+        <td>
+            <li>user given names are saved then the user is directed to available challenges</li>
+            <li>user is prompted to change name if they enter name that has been used </li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Links to list</td>
+        <td>
+            <li>directs user to play a session</li>
+            <li>prompts user to go back to sign in page if their chosen challenge is unavailable</li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Question Counter</td>
+        <td>
+            shows user how many questions the finished and ho many are left to complete
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Score Counter</td>
+        <td>
+            adds and detracts the correct amounts according to user response to the questions
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Question Fetch API</td>
+        <td>
+            displays unanswered questions
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Location</td>
+        <td>
+            <li>user is asked to enable location when needed</li>
+            <li>location sensitive questions cannot be answered if location is incorrect or disabled</li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>QR Scanner</td>
+        <td>
+            <li>user can activate mechanism when needed by pressing a button</li>
+            <li>properly scans QR codes and returns the appropriate response</li>
+        </td>
+        <td>0</td>
+        <td>1</td>
+        <td>version1: yet to be implemented</td>
+    </tr>
+
+    <tr>
+        <td>Answering Mechanism</td>
+        <td>
+            <li>user answers are saved and compared to correct answers</li>
+            <li>correct answers adds to the user's score</li>
+            <li>incorrect answers detracts from the user's score</li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Skip Button</td>
+        <td>
+            <li>moves user to next question when pressed</li>
+            <li>detracts appropriate amount from the user's score</li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+
+    <tr>
+        <td>Redirecting Mechanism</td>
+        <td>
+            redirects user to the leader board page
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+    </tr>
+
+    <tr>
+        <td>Leader Board</td>
+        <td>
+            <li>displays loading message until the api is completely fetched</li>
+            <li>display user score with the scores of other players who finished before them</li>
+        </td>
+        <td>1</td>
+        <td>0</td>
+        <td>none</td>
+    </tr>
+</table>
+
 <script>
-    document.getElementById("unit1").onload = getLeaderboard();
-
-    document.getElementById("unit2").onload = getApiList();
-
-    function getApiList(){
-        fetch(API_LIST)
-            .then(response => response.json())
-            .then(jsonObject =>
-            {
-                let treasureHuntsArray = jsonObject.treasureHunts;
-
-                for (let i = 0; i < treasureHuntsArray.length; i++) {
-
-                    let listChallenge = document.createElement("li");
-                    listChallenge.innerHTML = "<a  href='app.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
-                        + "<ul>"
-                        + "<li>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
-                        + "<li>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
-                        + "<li>" + "<b>" + "Lasts: " + "</b>" + convert2minutes(treasureHuntsArray[i].maxDuration )+ "</li>"
-                        + "</ul>";
-
-                    challengesElement.appendChild(listChallenge);
-                }
-
-            });
-    }
-/*
-    //leaderboard
-    const API_LEADERBOARD = "https://codecyprus.org/th/api/leaderboard";
-    let leaderboardElement= document.getElementById("leaderboard");
-
-    function getLeaderboard(){
-        fetch(API_LEADERBOARD+"?session="+getCookie("sessionID")+"&sorted&limit=20")
-            .then(response => response.json())
-            .then(jsonObject =>
-            {
-                let leaderboardArry =jsonObject.leaderboard;
-                for (let i = 0; i < jsonObject.limit; i++) {
-                    document.getElementById("endMessage").style.display = "none";
-                    let listleaderboard = document.createElement("li");
-                    listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArry[i].player + "<br><b> Score: </b>" + leaderboardArry[i].score + "<br>" +
-                        "<b> Completed in: </b>" + convert2date(leaderboardArry[i].completionTime);
-                    leaderboardElement.appendChild(listleaderboard);
-
-                }
-            });
-    }
-
-    function convert2date(ms){
-        let date = new Date(ms);
-        return date.toString();
-    }
-
-    function getCookie(cookieName) {
-        let name = cookieName + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for (let i = 0; i < ca.length; i++) {
-            let c = ca[i];
-            while (c.charAt(0) === ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) === 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }// const params = new URLSearchParams(location.search);
-*/
 
 </script>
 
