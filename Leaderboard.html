@@ -3,12 +3,13 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheet.css">
     <title>Leaderboard</title>
 </head>
 
 <body onload="getLeaderboard();">
-<div>
-    <h3 id="endMessage"></h3>
+<div class="container">
+    <h3 id="endMessage">loading...</h3>
     <ol id="leaderboard"></ol>
 </div>
 
@@ -24,8 +25,10 @@
             {
                 let leaderboardArry =jsonObject.leaderboard;
                 for (let i = 0; i < jsonObject.limit; i++) {
+                    document.getElementById("endMessage").style.display = "none";
                     let listleaderboard = document.createElement("li");
-                    listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArry[i].player + "<b> Score: </b>" + leaderboardArry[i].score + "<b> Completed in: </b>" + convert2date(leaderboardArry[i].completionTime);
+                    listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArry[i].player + "<br><b> Score: </b>" + leaderboardArry[i].score + "<br>" +
+                        "<b> Completed in: </b>" + convert2date(leaderboardArry[i].completionTime);
                     leaderboardElement.appendChild(listleaderboard);
 
                 }

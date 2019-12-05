@@ -1,10 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheet.css">
     <title>test</title>
 </head>
+
 <body>
+<h1>Testing Efforts</h1>
+
+<div class="container2" id="listHunts" >
+    <h2>All treasure Hunt Challenges:</h2>
+    <p id="unit2"></p>
+    <ul id="treasureHuntChallenges"></ul>
+</div>
+
+<br>
+
+<div class="container">
+    <h2>Unit test for the leader boards</h2>
+    <h3 id="endMessage">loading...</h3>
+    <p id="unit1"></p>
+    <ol id="leaderboard"></ol>
+</div>
+
+<script>
+    document.getElementById("unit1").onload = getLeaderboard();
+
+    document.getElementById("unit2").onload = getApiList();
+
+    function getApiList(){
+        fetch(API_LIST)
+            .then(response => response.json())
+            .then(jsonObject =>
+            {
+                let treasureHuntsArray = jsonObject.treasureHunts;
+
+                for (let i = 0; i < treasureHuntsArray.length; i++) {
+
+                    let listChallenge = document.createElement("li");
+                    listChallenge.innerHTML = "<a  href='app.html?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + treasureHuntsArray[i].uuid + "'>" + treasureHuntsArray[i].name + "</a>"
+                        + "<ul>"
+                        + "<li>" + "<b>" + "Description: " + "</b>" + treasureHuntsArray[i].description  + "</li>"
+                        + "<li>" + "<b>" + "Starts on: " + "</b>" + convert2date(treasureHuntsArray[i].startsOn) +  "</li>"
+                        + "<li>" + "<b>" + "Lasts: " + "</b>" + convert2minutes(treasureHuntsArray[i].maxDuration )+ "</li>"
+                        + "</ul>";
+
+                    challengesElement.appendChild(listChallenge);
+                }
+
+            });
+    }
+/*
+    //leaderboard
+    const API_LEADERBOARD = "https://codecyprus.org/th/api/leaderboard";
+    let leaderboardElement= document.getElementById("leaderboard");
+
+    function getLeaderboard(){
+        fetch(API_LEADERBOARD+"?session="+getCookie("sessionID")+"&sorted&limit=20")
+            .then(response => response.json())
+            .then(jsonObject =>
+            {
+                let leaderboardArry =jsonObject.leaderboard;
+                for (let i = 0; i < jsonObject.limit; i++) {
+                    document.getElementById("endMessage").style.display = "none";
+                    let listleaderboard = document.createElement("li");
+                    listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArry[i].player + "<br><b> Score: </b>" + leaderboardArry[i].score + "<br>" +
+                        "<b> Completed in: </b>" + convert2date(leaderboardArry[i].completionTime);
+                    leaderboardElement.appendChild(listleaderboard);
+
+                }
+            });
+    }
+
+    function convert2date(ms){
+        let date = new Date(ms);
+        return date.toString();
+    }
+
+    function getCookie(cookieName) {
+        let name = cookieName + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }// const params = new URLSearchParams(location.search);
+*/
+
+</script>
 
 </body>
+
 </html>

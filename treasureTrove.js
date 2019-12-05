@@ -36,8 +36,6 @@ function getApiList(){
         });
 }
 
-
-
 function convert2date(ms){
     let date = new Date(ms);
     return date.toString();
