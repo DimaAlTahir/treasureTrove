@@ -4,23 +4,17 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
-    <script defer src="testing.js"></script>
+    <script defer src="testingleaderboard.js"></script>
     <title>test</title>
 </head>
 
 <body>
 <h2>Testing Efforts</h2>
 
-<!--<div class="container2" id="listHunts" >-->
-<!--    <h2>All treasure Hunt Challenges:</h2>-->
-<!--    <p id="unit2"></p>-->
-<!--    <ul id="treasureHuntChallenges"></ul>-->
-<!--</div>-->
-
 <br>
 
 <div id="numberTestContainer">
-    <h4>Select how many players should be shown and summarize their score</h4>
+    <h4>Select how many players should be shown or check the unsorted option</h4>
     <form action="javascript:getlimit()">
         <input id="limitImput" class="answer" type="number" step="any" placeholder="Enter a number" min="-1" max="50" required>
         <div class="btns">
@@ -32,11 +26,11 @@
 
 <div class="container" style="margin-top: 10px">
     <div>
-        <table id="test-score">
+        <table id="test-sorted">
             <tr>
-                <th>Score Expected</th>
-                <th>Score Computed</th>
-                <th>Passed Score</th>
+                <th>Sorted Expected</th>
+                <th>Sorted Computed</th>
+                <th>Sorting Passed </th>
             </tr>
         </table>
         <br>
@@ -44,7 +38,7 @@
             <tr>
                 <th>Player Quantity Expected</th>
                 <th>Player Quantity Computed</th>
-                <th>Passed Players</th>
+                <th>Passed </th>
             </tr>
         </table>
     </div>
@@ -53,10 +47,10 @@
 
 <h3 id="test"></h3>
 
-<div class="container" id="LeaderboardContainer" style="display: none">
-    <h4 id="endMessage">loading...</h4>
-    <ol id="leaderboard"></ol>
-</div>
+<!--<div class="container" id="LeaderboardContainer" style="display: none">-->
+<!--    <h4 id="endMessage">loading...</h4>-->
+<!--    <ol id="leaderboard"></ol>-->
+<!--</div>-->
 
 
 </body>
