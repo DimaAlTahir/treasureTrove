@@ -8,6 +8,15 @@
 </head>
 <body onload="setInterval(getLocation, 45000);">
 
+
+<div id="scoreContainer">
+    <h3 id="scoreDisplay"></h3>
+</div>
+
+<div id="messageContainer">
+    <h4 id="message"></h4>
+</div>
+
 <div class="container2" >
 
 
@@ -51,16 +60,16 @@
 
     <div class="answer" id="booleanContainer" >
         <div class="btns">
-            <button id="buttonTrue" class="controlbtns" value="True" onclick="loadAnswer('True')">True</button>
-            <button id="buttonFalse" class="controlbtns" value="False" onclick="loadAnswer('False')">False</button>
+            <button id="buttonTrue" class="tnfButtons" value="True" onclick="loadAnswer('True')">True</button>
+            <button id="buttonFalse" class="tnfButtons" value="False" onclick="loadAnswer('False')">False</button>
         </div>
     </div>
 
     <div id="MCQContainer" class="btns">
-        <button id="buttonA" class="controlbtns" value="A" onclick="loadAnswer('A')">A</button>
-        <button id="buttonB" class="controlbtns" value="B" onclick="loadAnswer('B')">B</button>
-        <button id="buttonC" class="controlbtns" value="C" onclick="loadAnswer('C')">C</button>
-        <button id="buttonD" class="controlbtns" value="D" onclick="loadAnswer('D')">D</button>
+        <button id="buttonA" class="mqsButtons" value="A" onclick="loadAnswer('A')">A</button>
+        <button id="buttonB" class="mqsButtons" value="B" onclick="loadAnswer('B')">B</button>
+        <button id="buttonC" class="mqsButtons" value="C" onclick="loadAnswer('C')">C</button>
+        <button id="buttonD" class="mqsButtons" value="D" onclick="loadAnswer('D')">D</button>
     </div>
 
 
@@ -72,13 +81,9 @@
     </form>
 </div>
 
-<div id="scoreContainer">
-    <h4 id="scoreDisplay"></h4>
-</div>
 
-<div id="messageContainer">
-    <h4 id="message"></h4>
-</div>
+
+
 
 
 <script>
@@ -150,8 +155,9 @@
                 }
 
                 if (jsonObject.completed === true) {
+                    document.getElementById("message").innerHTML="";
                     document.getElementById("question").innerHTML="Congratulations you finished the Game, you will shortly be redirected to Leaderboards";
-                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},5000);
+                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},7000);
                     setInterval("countDown()", 1000);
 
 
@@ -345,9 +351,9 @@
         return "";
     }
 
-    let current_count= 5;
+    let current_count= 7;
     function countDown() {
-        document.getElementById("questionProgress").innerHTML = "Count: " + current_count;
+        document.getElementById("questionProgress").innerHTML = "Redirecting in.. " + current_count;
         if ( current_count > 0 ) { current_count--; }
         else {
             clearInterval(countJob);

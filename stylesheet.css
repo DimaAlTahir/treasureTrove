@@ -26,6 +26,7 @@ h3{
     margin-left: 10px;
     text-align: center;
     color: #f02b5f;
+    font-size: 20px;
 
 }
 h4{
@@ -33,11 +34,14 @@ h4{
     margin-left: 10px;
     text-align: center;
     color:black;
+    font-size: 15px;
+
 }
 
 .container{
     background-color: white;
-    width:320px;
+    width:80%;
+    max-width: 300px;
     padding:10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.23);
@@ -49,13 +53,14 @@ h4{
 
 .container2{
     background-color: white;
-    width:320px;
+    width:90%;
+    max-width: 320px;
     padding:10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.23);
     margin-left: auto;
     margin-right: auto;
-    margin-top: 100px;
+    margin-top: 80px;
 }
 
 .btns{
@@ -63,13 +68,13 @@ h4{
     margin-right: 25%;
 }
 
-button{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    /*margin: 0 auto;*/
-    /*margin-top: 10px;*/
-}
+/*button{*/
+/*    display:flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    margin: 0 auto;*/
+/*    margin-top: 10px;*/
+/*}*/
 
 .controlbtns {
     background-color: #ff82ab;
@@ -85,13 +90,47 @@ button{
     display: inline-block;
 }
 
+#scoreContainer{
+    margin-top: 50px;
+    text-align: center;
+}
+#messageContainer{
+    text-align: center;
+}
+
+
+.mqsButtons{
+    background-color: #ff82ab;
+    padding: .5em;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    margin: 10px 10px 10px 25px;
+    display: inline-block;
+}
+
+.tnfButtons{
+    background-color: #ff82ab;
+    padding: .5em;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    display: inline-block;
+}
+
 .controlbtns:hover {
     background-color: #f02b5f;
     box-shadow: 0px 0px 1px #777;
 }
 
 input[type="text"], input[type="number"],input[type="integer"] {
-    width: 250px;
+    width: 80%;
+    max-width: 250px;
     padding:20px;
 }
 
@@ -126,11 +165,6 @@ h1{
     margin: 20px;
 }
 
-h3{
-    font-family: Fixed, monospace;
-    text-align: center;
-    font-size: 20px;
-}
 p{
     text-align: center;
     font-family:Lucidatypewriter, monospace;
@@ -147,7 +181,8 @@ form{
 }
 
 a{
-    font-size: 18px;
+    font-size: 19px;
+    text-align: center;
 }
 
 a:link{
