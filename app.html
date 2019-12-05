@@ -95,6 +95,7 @@
 
 
     function startGame() {
+        document.getElementById("skipContainer").style.display="none";
         document.getElementById("question").innerText = "Loading....";
         document.getElementById("numericContainer").style.display = 'none';
         document.getElementById("intContainer").style.display = 'none';
@@ -227,8 +228,6 @@
             alert("Geolocation is not supported by your browser.");
         }
     }
-
-
 
     // const INTERVAL = 1000;
     //
