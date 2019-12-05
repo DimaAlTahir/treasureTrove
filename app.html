@@ -95,6 +95,7 @@
 
 
     function startGame() {
+        document.getElementById("skipContainer").style.display="none";
         document.getElementById("question").innerText = "Loading....";
         document.getElementById("numericContainer").style.display = 'none';
         document.getElementById("intContainer").style.display = 'none';
@@ -106,12 +107,14 @@
             .then(jsonObject => {
                 console.log(jsonObject.status);
                 if (jsonObject.status === "ERROR") {
+                    document.getElementById("skipContainer").style.display="none";
                     document.getElementById("question").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 } else if (jsonObject.status === "OK") {
                     saveCookie("playerName", playerName, 0.51);
                     saveCookie("sessionID", jsonObject.session, 0.51);
                     saveCookie("gameSaved", "true", 0.51);
                     // console.log( getCookie("sessionID"));
+                    document.getElementById("skipContainer").style.display="block";
                     getQuestions();
                 }
             });
@@ -225,8 +228,6 @@
             alert("Geolocation is not supported by your browser.");
         }
     }
-
-
 
     // const INTERVAL = 1000;
     //
