@@ -19,7 +19,6 @@
 
 <div class="container2" >
 
-
     <div id="progressContainer">
         <h3 id="questionProgress"></h3>
     </div>
@@ -41,7 +40,7 @@
     <div class="answer" id="numericContainer">
         <form action="javascript:answerNum()">
             <label for="number"></label>
-            <input id="number" class="answer" type="number" step="any" name="answer" required>
+            <input id="number" class="answer" type="number" step="any" name="answer" placeholder="Enter a number" required>
             <div class="btns">
                 <input id="buttonNum" class="controlbtns" type="submit" value="Submit">
             </div>
@@ -51,7 +50,7 @@
     <div class="answer" id="intContainer">
         <form action="javascript:answerInt()">
             <label for="int"></label>
-            <input id="int" class="answer" type="number" name="answer">
+            <input id="int" class="answer" type="number" name="answer" placeholder="Enter a number" required>
             <div class="btns">
                 <input id="buttonInt" class="controlbtns" type="submit" value="Submit">
             </div>
@@ -115,9 +114,9 @@
                     document.getElementById("skipContainer").style.display="none";
                     document.getElementById("question").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 } else if (jsonObject.status === "OK") {
-                    saveCookie("playerName", playerName, 0.51);
-                    saveCookie("sessionID", jsonObject.session, 0.51);
-                    saveCookie("gameSaved", "true", 0.51);
+                    saveCookie("playerName", playerName, 1);
+                    saveCookie("sessionID", jsonObject.session, 1);
+                    saveCookie("gameSaved", "true", 1);
                     // console.log( getCookie("sessionID"));
                     document.getElementById("skipContainer").style.display="block";
                     getQuestions();
@@ -159,7 +158,6 @@
                     document.getElementById("question").innerHTML="Congratulations you finished the Game, you will shortly be redirected to Leaderboards";
                     setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},7000);
                     setInterval("countDown()", 1000);
-
 
                 } else {
                     document.getElementById("questionProgress").innerHTML="Current Question " + (jsonObject.currentQuestionIndex+1) + " / "+ jsonObject.numOfQuestions;
@@ -216,12 +214,6 @@
     }
 
 
-    // {
-    //     "session": "ag9nfmNvZGVjeXBydXNvcmdyFAsSB1Nlc3Npb24YgICA3JfiuQsM",
-    //     "numOfQuestions": 6,
-    //     "status": "OK"
-    // }
-
 
     //functions to find device location
     function getLocation() {
@@ -235,14 +227,6 @@
         }
     }
 
-    // const INTERVAL = 1000;
-    //
-    // document.getElementById("locationWatch").addEventListener("click", function() {
-    //     console.log("Enabling location interval...");
-    //     getLocation();
-    //     setInterval(getLocation, INTERVAL);
-    //     document.getElementById("locationWatch").style.display = "none";
-    // });
 
     function sendLocation(lat, lng) {
         console.debug("lat: " + lat + ", lng: " + lng);
@@ -262,15 +246,12 @@
     function answerNum() {
         let answer = document.getElementById("number").value;
         loadAnswer(answer);
-
     }
 
     function answerInt() {
         let answer = document.getElementById("int").value;
         loadAnswer(answer);
-
     }
-
 
     function loadAnswer(answer) {
         document.getElementById("number").value="";
@@ -322,9 +303,12 @@
             .then(jsonObject => {
                 if (jsonObject.status === "OK")
                     if ((jsonObject.completed === false) && (jsonObject.finished === false)) {
-                        document.getElementById("scoreDisplay").innerHTML = "Score is: " + jsonObject.score;
+                        document.getElementById("scoreDisplay").innerHTML = "Score is: " + jsonObject.score + " Points.";
                         document.getElementById("scoreContainer").style.display = "block";
-                    } else if(jsonObject.completed) document.getElementById("scoreDisplay").innerHTML = "The Game ended" + playerName + " and your Score is: " + jsonObject.score;
+                    } else if(jsonObject.completed) {
+                        document.getElementById("scoreDisplay").innerHTML = "The Game ended " + getCookie("playerName") + " and your Score is: " + jsonObject.score + " Points.";
+                        document.getElementById("scoreContainer").style.display = "block";
+                    }
             });
     }
 
@@ -360,7 +344,6 @@
             document.getElementById("questionProgress").innerHTML = "";
         }
     }
-
 
     if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
         getQuestions();
