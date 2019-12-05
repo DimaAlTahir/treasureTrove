@@ -11,10 +11,22 @@
 <body>
 
 <header>
-
-    <h1>Treasure Trove</h1>
-
+    <img class="shadowed" src="imgs/logo.png">
 </header>
+
+<svg height="0" url="imgs/logo.svg">
+    <filter id="drop-shadow">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+        <feOffset dx="12" dy="12" result="offsetblur"/>
+        <feFlood flood-color="rgba(0,0,0,0.23)"/>
+        <feComposite in2="offsetblur" operator="in"/>
+        <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</svg>
+
 
 
 <div class="container">

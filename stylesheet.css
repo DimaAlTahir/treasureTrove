@@ -1,10 +1,19 @@
 body{
-    background-color: #f0f0f0;
+    background-image:url("imgs/gradient.svg");
+    background-repeat:no-repeat;
+    background-size:cover;
 }
 
 header{
-    color: palevioletred;
+    color: #ff82ab;
     text-align: center;
+}
+
+.shadowed {
+    -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
+    filter: url(#drop-shadow);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
 }
 
 ol{
@@ -16,14 +25,14 @@ h3{
     font-family: Fixed, monospace;
     margin-left: 10px;
     text-align: center;
-    color: #d12855;
+    color: #f02b5f;
 
 }
 h4{
     font-family: Fixed, monospace;
     margin-left: 10px;
     text-align: center;
-    color:palevioletred;
+    color:black;
 }
 
 .container{
@@ -31,7 +40,8 @@ h4{
     width:320px;
     padding:10px;
     border-radius: 5px;
-    box-shadow: 0 0 5px 2px grey;
+    /*box-shadow: 0 0 5px 2px gery;*/
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.23);
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto;
@@ -43,7 +53,7 @@ h4{
     width:320px;
     padding:10px;
     border-radius: 5px;
-    box-shadow: 0 0 5px 2px grey;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.23);
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
@@ -63,7 +73,7 @@ button{
 }
 
 .controlbtns {
-    background-color: palevioletred;
+    background-color: #ff82ab;
     padding: .5em;
     border-radius: 5px;
     color: #fff;
@@ -77,7 +87,7 @@ button{
 }
 
 .controlbtns:hover {
-    background-color: #d12855;
+    background-color: #f02b5f;
     box-shadow: 0px 0px 1px #777;
 }
 
@@ -106,13 +116,13 @@ ul {
 h2{
     font-family: Fixed, monospace;
     text-align: center;
-    color: #d12855;
+    color: #f02b5f;
 }
 
 h1{
     font-family: Fixed, monospace;
     text-align: center;
-    color:palevioletred;
+    color:#ff82ab;
     font-size: 75px;
     margin: 20px;
 }
@@ -125,6 +135,7 @@ h3{
 p{
     text-align: center;
     font-family:Lucidatypewriter, monospace;
+    color:black;
 }
 
 a{
@@ -141,15 +152,15 @@ a{
 }
 
 a:link{
-    color:palevioletred;
+    color:#ff82ab;
 
 }
 a:hover{
-    color: #d12855;
+    color: #f02b5f;
 }
 
 a:visited{
-    color: darkorchid;
+    color: darkorange;
 }
 
 #playerNameForm{
