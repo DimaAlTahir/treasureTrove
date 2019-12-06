@@ -8,12 +8,13 @@
     <script defer src="treasureTrove.js"></script>
     <title>Sign In</title>
 </head>
-<body>
+<body onload="showRestart()">
 
 
 
 <div class="container2"   id="playerNameForm" style="display: block">
     <h2> Enter player name:</h2>
+    <h4 id="restart" style="display: none"> </h4>
     <form action="javascript:getName()">
         <input type="text" name="username" id="username" placeholder="Enter your name" required />
         <div class="btns">
@@ -27,6 +28,7 @@
 
     <ul id="treasureHuntChallenges"></ul>
 </div>
+
 
 </body>
 </html>
