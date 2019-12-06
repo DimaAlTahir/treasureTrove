@@ -39,7 +39,7 @@
                 for (let i = 0; i < jsonObject.limit; i++) {
                     let listleaderboard = document.createElement("li");
                     listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArray[i].player + "<br><b> Score: </b>" + leaderboardArray[i].score + "<br>" +
-                        "<b> Completed in: </b>" + convert2date(leaderboardArray[i].completionTime);
+                        "<b> Completed in: </b>" + convert2date(leaderboardArray[i].completionTime) +"<br>";
                     leaderboardElement.appendChild(listleaderboard);
 
                 }
@@ -70,10 +70,12 @@
                 }
             });
     }
+    options = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+        second: '2-digit' };
 
-    function convert2date(ms){
+    function convert2date(ms) {
         let date = new Date(ms);
-        return date.toString();
+        return date.toLocaleDateString(("en-UK", options));
     }
 
     function getCookie(cookieName) {
