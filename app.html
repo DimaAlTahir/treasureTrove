@@ -96,6 +96,8 @@
     const params = new URLSearchParams(location.search);
     let playerName = params.get("player");
     let uuid = params.get("treasure-hunt-id");
+    let lifeOfCookie = params.get("time");
+    let nameOfGame =params.get("nameOfGame");
 
 
     function startGame() {
@@ -114,15 +116,17 @@
                     document.getElementById("skipContainer").style.display="none";
                     document.getElementById("question").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
                 } else if (jsonObject.status === "OK") {
-                    saveCookie("playerName", playerName, 1);
-                    saveCookie("sessionID", jsonObject.session, 1);
-                    saveCookie("gameSaved", "true", 1);
-                    // console.log( getCookie("sessionID"));
+                    saveCookie("playerName", playerName, lifeOfCookie);
+                    saveCookie("sessionID", jsonObject.session, lifeOfCookie);
+                    saveCookie("gameSaved", "true", lifeOfCookie);
+                    saveCookie("nameOfGame", nameOfGame, lifeOfCookie);
+
                     document.getElementById("skipContainer").style.display="block";
                     getQuestions();
                 }
             });
     }
+
 
     // Function that loads the question and the correct way to answer it
     function getQuestions() {
@@ -155,9 +159,10 @@
 
                 if (jsonObject.completed === true) {
                     document.getElementById("message").innerHTML="";
-                    document.getElementById("question").innerHTML="Congratulations you finished the Game, you will shortly be redirected to Leaderboards";
-                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},7000);
-                    setInterval("countDown()", 1000);
+                    document.getElementById("questionProgress").innerHTML = "";
+                    document.getElementById("question").innerHTML="GAME ENDED";
+                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},1000);
+                    //setInterval("countDown()", 1000);
 
                 } else {
                     document.getElementById("questionProgress").innerHTML="Current Question " + (jsonObject.currentQuestionIndex+1) + " / "+ jsonObject.numOfQuestions;
@@ -265,13 +270,13 @@
                 console.log("loadAnswer status: " + jsonObject.status);
 
                 if (jsonObject.status === "ERROR") {
-                    console.log("There was an error with the answer sent to the server")
-                    //document.getElementById("question").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html'> Click this Link to Sign again</a>";
+                    console.log("There was an error with the answer sent to the server");
+                    document.getElementById("message").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?finished'> Click this Link to Sign again</a>";
 
                 } else if ((jsonObject.status === "OK") && (jsonObject.correct === true)) {
-                    document.getElementById("message").innerHTML = jsonObject.message + " You gained: " + jsonObject.scoreAdjustment + " points.";
+                    document.getElementById("message").innerHTML = jsonObject.message + " You gained " + jsonObject.scoreAdjustment + " points.";
                 } else if ((jsonObject.status === "OK") && (jsonObject.correct === false)) {
-                    document.getElementById("message").innerHTML = jsonObject.message + " You lost: " + jsonObject.scoreAdjustment + " points.";
+                    document.getElementById("message").innerHTML = jsonObject.message + " You lost " + jsonObject.scoreAdjustment + " points.";
                 }
                 getQuestions();
             });
@@ -306,7 +311,7 @@
                         document.getElementById("scoreDisplay").innerHTML = "Score is: " + jsonObject.score + " Points.";
                         document.getElementById("scoreContainer").style.display = "block";
                     } else if(jsonObject.completed) {
-                        document.getElementById("scoreDisplay").innerHTML = "The Game ended " + getCookie("playerName") + " and your Score is: " + jsonObject.score + " Points.";
+                        document.getElementById("scoreDisplay").innerHTML = ""; //+ getCookie("playerName") + " your Score is: " + jsonObject.score + " Points.";
                         document.getElementById("scoreContainer").style.display = "block";
                     }
             });
@@ -345,9 +350,15 @@
         }
     }
 
+
+
     if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
         getQuestions();
+        //continueGame();
     } else startGame();
+
+
+
 
 </script>
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script defer src="testingleaderboard.js"></script>
+    <title>test</title>
+</head>
+
+<body>
+<h2>Testing Efforts</h2>
+
+<br>
+
+<div id="numberTestContainer">
+    <h4>Select how many players should be shown or check the unsorted option</h4>
+    <form action="javascript:getlimit()">
+        <input id="limitImput" class="answer" type="number" step="any" placeholder="Enter a number" min="-1" max="50" required>
+        <div class="btns">
+            <input class="controlbtns" type="submit" value="Submit"/>
+        </div>
+    </form>
+    <br>
+    <div>
+        <button class="controlbtns" value="Check Unsorted" onclick="loadUnsorted('&sorted=false')"> </button>
+    </div>
+</div>
+
+
+<div class="container" style="font-size: 12px; margin-top: 10px">
+    <div>
+        <table id="test-sorted">
+            <tr>
+                <th>Sorted or Not</th>
+                <th>Sorted Expected</th>
+                <th>Sorted Computed</th>
+                <th>Sorting Passed </th>
+            </tr>
+        </table>
+        <br>
+        <table id="test-numNames">
+            <tr>
+                <th>Player Number</th>
+                <th>Player Quantity Expected</th>
+                <th>Player Quantity Computed</th>
+                <th>Passed </th>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container" id="LeadrContainer" style="display: none">
+        <h3 id="endMessage">loading...</h3>
+        <ol id="leaderboard"></ol>
+    </div>
+</div>
+
+<h3 id="test"></h3>
+
+<!--<div class="container" id="LeaderboardContainer" style="display: none">-->
+<!--    <h4 id="endMessage">loading...</h4>-->
+<!--    <ol id="leaderboard"></ol>-->
+<!--</div>-->
+
+
+</body>
+
+</html>
