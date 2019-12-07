@@ -13,24 +13,35 @@
 
 <br>
 
-<div id="numberTestContainer">
+<div id="numberTestContainer" class="container">
     <h3>Test the Leaderboard</h3>
     <form>
-        <h4>Check if you want the Leaderboards to be sorted: <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></h4>
+        <h4>Check if you want the Leaderboards to be <i>sorted</i>: <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></h4>
         <input id="limitImput" class="answer" type="number" step="any" placeholder="Enter number of players to be shown" min="-1" max="50" required>
         <br>
-        <h4 id="text" style="display: none">Leaderboards will be sorted</h4>
+        <h4 id="textLeaderboard" style="display: none">Leaderboards will be sorted</h4>
         <div class="btns">
-            <input class="controlbtns" type="submit" value="Submit" onclick="getlimit()"/>
+            <input class="controlbtns" type="reset" value="Submit" onclick="getlimit()"/>
         </div>
     </form>
     <br>
 
 </div>
+<br>
+<br>
 
-
-<div class="container" style="font-size: 12px; margin-top: 10px">
-    <h3 id="test"></h3>
+<div class="container" >
+    <h3>Test the Score</h3>
+    <form>
+        <h4>Check if you want the Game to be <i>completed</i>: <input class="controlbtns" type="checkbox" id="completedCheck"  onclick="checkBoxCompleted()"></h4>
+        <input id="valueImput" class="answer" type="number" step="any" placeholder="Enter the number of the score" min="-1" max="50" required>
+        <br>
+        <h4 id="textScore" style="display: none">Game will count as completed</h4>
+        <div class="btns">
+            <input class="controlbtns" type="reset" value="Submit" onclick="getValue()"/>
+        </div>
+    </form>
+    <br>
 </div>
 
 

@@ -1,30 +1,43 @@
 
 let leaderboardSize = document.getElementById("limitImput");
-let leaderboardElement= document.getElementById("leaderboard");
-let sorted;
+let scoreValue =document.getElementById("valueImput");
+let sorted="&nothing";
+let completed="&nothing";
 
 function checkBoxSorted() {
-    var checkBox = document.getElementById("sortedCheck");
-    var text = document.getElementById("text");
-    if (checkBox.checked === true){
+    let checkBoxSorted = document.getElementById("sortedCheck");
+    let textLeaderboard = document.getElementById("textLeaderboard");
+    if (checkBoxSorted.checked === true){
         sorted= "&sorted";
-        text.style.display = "block";
+        textLeaderboard.style.display = "block";
     } else {
-        sorted="";
-        text.style.display = "none";
+        sorted="&nothing";
+        textLeaderboard.style.display = "none";
+    }
+}
+function checkBoxCompleted() {
+    let checkBoxCompleted = document.getElementById("sortedCheck");
+    let textScore = document.getElementById("textScore");
+    if (checkBoxCompleted.checked === true){
+        completed = "&completed";
+        textScore.style.display = "block";
+    } else {
+        completed="&nothing";
+        textScore.style.display = "none";
     }
 }
 
 function getlimit() {
     limit = leaderboardSize.value;
     console.log("limit is: "+ limit);
-    setTimeout(function(){window.location.href = "Leaderboard.html?test" + sorted + "&size=" + limit;},100);
+    setTimeout(function(){window.location.href = "Leaderboard.html?testL" + sorted + "&size=" + limit;},800);
 
 }
 
 
+function getValue() {
+    value = scoreValue.value;
+    console.log("Value is: "+ scoreValue);
+    setTimeout(function(){window.location.href = "Leaderboard.html?testS" + completed + "&score=" + value;},800);
 
-
-
-
-// const params = new URLSearchParams(location.search);
+}

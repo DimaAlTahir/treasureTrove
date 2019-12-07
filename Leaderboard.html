@@ -6,31 +6,34 @@
     <link rel="stylesheet" href="stylesheet.css">
     <title>Leaderboard</title>
 </head>
-<body onload="checkIfTest();">
+<body onload="startChecking();">
 <h2>Leaderboards</h2>
 <div>
-    <form  action="index.html">
-        <input class="controlbtns" type="submit" value="Return Home" />
+    <form action="index.html">
+        <input class="controlbtns" type="submit" value="Return Home"/>
     </form>
 </div>
+<div id="testScore">
+    <div id="scoreContainer">
+        <h3 id="scoreDisplay"></h3>
+    </div>
 
-<div id="scoreContainer">
-    <h3 id="scoreDisplay"></h3>
+    <div id="priceContainer">
+        <h3 id="priceDisplay"></h3>
+    </div>
 </div>
 
-<div id="priceContainer">
-    <h3 id="priceDisplay"></h3>
-</div>
-
-<div class="container" >
-    <h3 id="endMessage">loading...</h3>
-    <table id="LeaderboardTable">
-        <tr>
-            <th><b>Name</b></th>
-            <th><b>Score</b></th>
-            <th><b>Time</b></th>
-        </tr>
-    </table>
+<div id="testLeader">
+    <div class="container">
+        <h3 id="endMessage">loading...</h3>
+        <table id="LeaderboardTable">
+            <tr>
+                <th><b>Name</b></th>
+                <th><b>Score</b></th>
+                <th><b>Time</b></th>
+            </tr>
+        </table>
+    </div>
 </div>
 
 
@@ -38,33 +41,31 @@
     const API_TEST_LEADERBOARD = "https://codecyprus.org/th/test-api/";
     const API_LEADERBOARD = "https://codecyprus.org/th/api/";
     const API_SCORE = "https://codecyprus.org/th/api/score";
-    let leaderboardElement= document.getElementById("LeaderboardTable");
+    let leaderboardElement = document.getElementById("LeaderboardTable");
     let html = "";
     const params = new URLSearchParams(location.search);
 
-
-
-
-    function getLeaderboard(url){
+    function getLeaderboard(url) {
         fetch(url)
             .then(response => response.json())
-            .then(jsonObject =>
-            {
+            .then(jsonObject => {
                 document.getElementById("endMessage").style.display = "none";
-                let leaderboardArray =jsonObject.leaderboard;
-                for (let i = 0; i < jsonObject.limit; i++) {
+                let leaderboardArray = jsonObject.leaderboard;
+                for (let i = 0; i < leaderboardArray.length; i++) {
                     html +=
-                                "<tr>\n" +
-                                "    <td>" + leaderboardArray[i].player + "</td>" +
-                                "    <td>" + leaderboardArray[i].score + "</td>" +
-                                "    <td>" + convert2date(leaderboardArray[i].completionTime) + "</td>" +
-                                "</tr>";
+                        "<tr>\n" +
+                        "    <td>" + leaderboardArray[i].player + "</td>" +
+                        "    <td>" + leaderboardArray[i].score + "</td>" +
+                        "    <td>" + convert2date(leaderboardArray[i].completionTime) + "</td>" +
+                        "</tr>";
                 }
-                leaderboardElement.innerHTML +=html;
+                leaderboardElement.innerHTML += html;
 
                 getScore();
                 if (jsonObject.hasPrize === true) {
-                   setTimeout(function(){document.getElementById("priceDisplay").innerHTML="Congratulations you won a price "}, 1000);
+                    setTimeout(function () {
+                        document.getElementById("priceDisplay").innerHTML = "Congratulations you won a price "
+                    }, 1000);
                 }
             });
     }
@@ -74,23 +75,28 @@
         fetch(API_SCORE + "?session=" + getCookie("sessionID"))
             .then(response => response.json())
             .then(jsonObject => {
-                if (jsonObject.status === "OK"){
+                if (jsonObject.status === "OK") {
                     console.log("status get score OK");
                     if ((jsonObject.completed === false) && (jsonObject.finished === false)) {
-                        document.getElementById("scoreDisplay").innerHTML = "Score is: " + jsonObject.score;
+                        let completed = "is not completed  ";
+                        document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
+                            + jsonObject.name + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
 
-                    } else if(jsonObject.completed) {
-                        document.getElementById("scoreDisplay").innerHTML = "The Game has ended " + "<span style='font-style: italic'>"
-                            + getCookie("playerName")+"</span>" + " and your Score is " + jsonObject.score +" Points. ";
+                    } else if (jsonObject.completed===true) {
+                        let completed = "is completed  ";
+                        document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
+                            + jsonObject.name + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
-
                     }
                 }
             });
     }
-    options = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
-        second: '2-digit' };
+
+    options = {
+        day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
+        second: '2-digit'
+    };
 
     function convert2date(ms) {
         let date = new Date(ms);
@@ -114,24 +120,61 @@
     }
 
 
-    function checkIfTest() {
-        if(isTest()) {
-            // recuires a size and a sorted variable
-            let bSorted =params.has("sorted");
-            let size = params.get("size");
-            let url = API_TEST_LEADERBOARD + "leaderboard?size=" + size + "&sorted=" + bSorted;
+    function isTestL() {
+        let url = new URL(window.location.href);
+        return url.searchParams.get("testL") != null;
+    }
+
+    function isTestS() {
+        let url = new URL(window.location.href);
+        return url.searchParams.get("testS") != null;
+    }
+
+    function checkIfTestScore() {
+        if (isTestS()) {
+            document.getElementById("testScore").style.display = "block";
+            document.getElementById("testLeader").style.display="none";
+
+            // recuires a size and a sorted variable for the test
+            let bCompleted = params.has("completed");
+            let score = params.get("score");
+            let url = API_TEST_SCORE + "leaderboard?score=" + score + "&completed=" + bCompleted;
             getLeaderboard(url);
         } else {
+            document.getElementById("testScore").style.display = "block";
+            document.getElementById("testLeader").style.display="block";
+
             // form the actual TH service url
+            document.getElementById("scoreContainer").style.display = "none";
             let session = getCookie("sessionID");
-            let url = API_LEADERBOARD + "leaderboard?sorted&session=" + session +"&sorted&limit=20"; // form url
+            let url = API_SCORE + "score?sorted&session=" + session + "&sorted&limit=20"; // form url
             getLeaderboard(url);
         }
     }
 
-    function isTest() {
-        let url = new URL(window.location.href);
-        return url.searchParams.get("test") != null;
+    function checkIfTestLeaderboard() {
+        if (isTestL()) {
+            document.getElementById("testScore").style.display = "none";
+            document.getElementById("testLeader").style.display="block";
+
+            // recuires a size and a sorted variable for the test
+            let bSorted = params.has("sorted");
+            let size = params.get("size");
+            let url = API_TEST_LEADERBOARD + "leaderboard?size=" + size + "&sorted=" + bSorted;
+            getLeaderboard(url);
+        } else {
+            document.getElementById("testScore").style.display = "block";
+            document.getElementById("testLeader").style.display="block";
+
+            // form the actual TH service url
+            let session = getCookie("sessionID");
+            let url = API_LEADERBOARD + "leaderboard?sorted&session=" + session + "&sorted&limit=20"; // form url
+            getLeaderboard(url);
+        }
+    }
+    function startChecking(){
+        checkIfTestLeaderboard();
+        checkIfTestScore();
     }
 
 
