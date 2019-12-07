@@ -38,9 +38,10 @@
 
 
 <script>
+    const API_TEST_SCORE="https://codecyprus.org/th/test-api/";
     const API_TEST_LEADERBOARD = "https://codecyprus.org/th/test-api/";
     const API_LEADERBOARD = "https://codecyprus.org/th/api/";
-    const API_SCORE = "https://codecyprus.org/th/api/score";
+    const API_SCORE = "https://codecyprus.org/th/api/score/";
     let leaderboardElement = document.getElementById("LeaderboardTable");
     let html = "";
     const params = new URLSearchParams(location.search);
@@ -61,7 +62,6 @@
                 }
                 leaderboardElement.innerHTML += html;
 
-                getScore();
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
                         document.getElementById("priceDisplay").innerHTML = "Congratulations you won a price "
@@ -70,9 +70,9 @@
             });
     }
 
-    function getScore() {
+    function getScore(url) {
         document.getElementById("scoreContainer").style.display = "none";
-        fetch(API_SCORE + "?session=" + getCookie("sessionID"))
+        fetch(url)
             .then(response => response.json())
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
@@ -139,15 +139,17 @@
             let bCompleted = params.has("completed");
             let score = params.get("score");
             let url = API_TEST_SCORE + "leaderboard?score=" + score + "&completed=" + bCompleted;
-            getLeaderboard(url);
+            setTimeout( getScore(url),2000);
+
         } else {
             document.getElementById("testScore").style.display = "block";
             document.getElementById("testLeader").style.display="block";
 
             // form the actual TH service url
             let session = getCookie("sessionID");
-            let url = API_SCORE + "score?sorted&session=" + session + "&sorted&limit=20"; // form url
-            getLeaderboard(url);
+            let url = API_SCORE + "score?&session=" + session; // form url
+            setTimeout( getScore(url),2000);
+
         }
     }
 
