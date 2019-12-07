@@ -4,7 +4,7 @@ body{
     background-size:400%;
 }
 
-@media screen and (max-height: 800px), (min-device-height: 500px) and (max-device-height: 2000px) {
+@media screen and (max-height: 900px), (min-device-height: 500px) and (max-device-height: 2000px) {
     body {
         background-repeat:repeat;
         background-size:cover;
