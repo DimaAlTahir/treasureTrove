@@ -79,7 +79,7 @@ function getCookie(cookieName) {
 
 function convert2date(ms){
     let date = new Date(ms);
-    return date.toLocaleDateString(("en-UK", options));
+    return date.toLocaleDateString((options));
 }
 
 function convert2minutes(ms){
