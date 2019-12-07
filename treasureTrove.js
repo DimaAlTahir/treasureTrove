@@ -16,8 +16,8 @@ function showRestart() {
 
 
 function continueGame() {
-    let result = confirm("There is an ongoing Game ( " + getCookie("nameOfGame" ) + " ) with that Playername! \nPressing Ok lets you continue the Game" +
-        " \nPressing Cancel will take you back to provide a new Playername and terminate the ongoing Game");
+    let result = confirm("There is an ongoing Game ( " + getCookie("nameOfGame" ) + " ) with that Playername! \nPress Ok to continue the Game" +
+        " \nPress Cancel to start a new game using a new Playername");
     if (result === true) {
         getApiList();
     } else {
