@@ -285,3 +285,8 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+
+input[type=checkbox] {
+    transform: scale(1.5);
+}
