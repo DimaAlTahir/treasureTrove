@@ -145,7 +145,6 @@
             document.getElementById("testLeader").style.display="block";
 
             // form the actual TH service url
-            document.getElementById("scoreContainer").style.display = "none";
             let session = getCookie("sessionID");
             let url = API_SCORE + "score?sorted&session=" + session + "&sorted&limit=20"; // form url
             getLeaderboard(url);
