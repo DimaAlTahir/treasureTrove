@@ -13,21 +13,28 @@
     <h3 id="scoreDisplay"></h3>
 </div>
 
+
 <div id="priceContainer">
     <h3 id="priceDisplay"></h3>
 </div>
 
 <div class="container" >
     <h3 id="endMessage">loading...</h3>
-    <ol id="leaderboard"></ol>
+    <table id="LeaderboardTable">
+        <tr>
+            <th><b>Name</b></th>
+            <th><b>Score</b></th>
+            <th><b>Time</b></th>
+        </tr>
+    </table>
 </div>
 
 
 <script>
     const API_LEADERBOARD = "https://codecyprus.org/th/api/leaderboard";
     const API_SCORE = "https://codecyprus.org/th/api/score";
-    let leaderboardElement= document.getElementById("leaderboard");
-
+    let leaderboardElement= document.getElementById("LeaderboardTable");
+    let html = "";
 
     function getLeaderboard(){
         fetch(API_LEADERBOARD+"?session="+getCookie("sessionID")+"&sorted&limit=20")
@@ -37,12 +44,15 @@
                 document.getElementById("endMessage").style.display = "none";
                 let leaderboardArray =jsonObject.leaderboard;
                 for (let i = 0; i < jsonObject.limit; i++) {
-                    let listleaderboard = document.createElement("li");
-                    listleaderboard.innerHTML = "<b>Name: </b>" + leaderboardArray[i].player + "<br><b> Score: </b>" + leaderboardArray[i].score + "<br>" +
-                        "<b> Completed in: </b>" + convert2date(leaderboardArray[i].completionTime) +"<br>";
-                    leaderboardElement.appendChild(listleaderboard);
-
+                    html +=
+                                "<tr>\n" +
+                                "    <td>" + leaderboardArray[i].player + "</td>" +
+                                "    <td>" + leaderboardArray[i].score + "</td>" +
+                                "    <td>" + convert2date(leaderboardArray[i].completionTime) + "</td>" +
+                                "</tr>";
                 }
+                leaderboardElement.innerHTML +=html;
+
                 getScore();
                 if (jsonObject.hasPrize === true) {
                    setTimeout(function(){document.getElementById("priceDisplay").innerHTML="Congratulations you won a price "}, 1000);
@@ -60,12 +70,11 @@
                     if ((jsonObject.completed === false) && (jsonObject.finished === false)) {
                         document.getElementById("scoreDisplay").innerHTML = "Score is: " + jsonObject.score;
                         document.getElementById("scoreContainer").style.display = "block";
-                        console.log("status completed false");
-                    } else if(jsonObject.completed) {
 
-                        document.getElementById("scoreDisplay").innerHTML = "Great job " + getCookie("playerName") + " your Score is: " + jsonObject.score +" Points. ";
+                    } else if(jsonObject.completed) {
+                        document.getElementById("scoreDisplay").innerHTML = "The Game has ended " + getCookie("playerName") + " and your Score is " + jsonObject.score +" Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
-                        console.log("status complete true");
+
                     }
                 }
             });
@@ -92,7 +101,7 @@
             }
         }
         return "";
-    }// const params = new URLSearchParams(location.search);
+    }
 
 
 </script>
