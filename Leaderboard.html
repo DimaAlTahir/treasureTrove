@@ -41,7 +41,7 @@
     const API_TEST_SCORE="https://codecyprus.org/th/test-api/";
     const API_TEST_LEADERBOARD = "https://codecyprus.org/th/test-api/";
     const API_LEADERBOARD = "https://codecyprus.org/th/api/";
-    const API_SCORE = "https://codecyprus.org/th/api/score/";
+    const API_SCORE = "https://codecyprus.org/th/api/";
     let leaderboardElement = document.getElementById("LeaderboardTable");
     let html = "";
     const params = new URLSearchParams(location.search);
@@ -80,13 +80,13 @@
                     if ((jsonObject.completed === false) && (jsonObject.finished === false)) {
                         let completed = "is not completed  ";
                         document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
-                            + jsonObject.name + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
+                            + jsonObject.player + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
 
                     } else if (jsonObject.completed===true) {
                         let completed = "is completed  ";
                         document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
-                            + jsonObject.name + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
+                            + jsonObject.player + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
                     }
                 }
@@ -137,8 +137,9 @@
 
             // recuires a size and a sorted variable for the test
             let bCompleted = params.has("completed");
+            console.log("Bcompleted is: " +bCompleted);
             let score = params.get("score");
-            let url = API_TEST_SCORE + "leaderboard?score=" + score + "&completed=" + bCompleted;
+            let url = API_TEST_SCORE + "score?score=" + score + "&completed=" + bCompleted;
             setTimeout( getScore(url),2000);
 
         } else {
