@@ -18,7 +18,8 @@ function checkBoxSorted() {
 function getlimit() {
     limit = leaderboardSize.value;
     console.log("limit is: "+ limit);
-    window.location.href = "Leaderboard.html?" + sorted +"&size=" + limit;
+    setTimeout(function(){window.location.href = "Leaderboard.html?test" + sorted + "&size=" + limit;},100);
+
 }
 
 
