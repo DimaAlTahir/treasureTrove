@@ -8,7 +8,7 @@ const params = new URLSearchParams(location.search);
 function showRestart() {
     if(params.has("restart")){
        document.getElementById("restart").innerHTML="If you want to Restart the: " +"<span style='font-style: italic'>"+ getCookie("nameOfGame")
-           +"</span>" + " Game,  provide a new Playername.<br> Otherwise provide the same Playername and press ok when prompt, to resume.";
+           +"</span>" + " Game,  provide a new Playername.";
        console.log(getCookie("nameOfGame"));
        document.getElementById("restart").style.display="block";
     }   else document.getElementById("restart").style.display="none";
@@ -17,10 +17,11 @@ function showRestart() {
 
 function continueGame() {
     let result = confirm("There is an ongoing Game ( " + getCookie("nameOfGame" ) + " ) with that Playername! \nPressing Ok lets you continue the Game" +
-        " \nPressing Cancel will take you back to provide a new Playername");
-    if (result ===true) {
+        " \nPressing Cancel will take you back to provide a new Playername and terminate the ongoing Game");
+    if (result === true) {
         getApiList();
     } else {
+        document.cookie = "gameSaved=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
         window.location.href="Signin.html?restart"
     }
 }
