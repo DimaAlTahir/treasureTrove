@@ -1,7 +1,14 @@
 body{
     background-image:url("imgs/gradient.svg");
     background-repeat:no-repeat;
-    background-size:cover;
+    background-size:400%;
+}
+
+@media screen and (max-height: 800px), (min-device-height: 500px) and (max-device-height: 2000px) {
+    body {
+        background-repeat:no-repeat;
+        background-size:cover;
+    }
 }
 
 header{
@@ -26,6 +33,9 @@ h4{
 
 }
 
+.highlight{
+    color: darkorange;
+}
 .shadowed {
     -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
     filter: url(#drop-shadow);
@@ -44,8 +54,6 @@ li{
 
 .container{
     background-color: white;
-    width:80%;
-    max-width: 300px;
     padding:10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.23);
@@ -164,7 +172,7 @@ h2{
 h1{
     font-family: Fixed, monospace;
     text-align: center;
-    color:#ff82ab;
+    color: darkorange;
     font-size: 75px;
     margin: 20px;
 }
@@ -178,6 +186,15 @@ p{
 a{
     border-left: 30px;
     margin:0 auto;
+    color:#ff82ab;
+}
+
+a:hover{
+    color: #f02b5f;
+}
+
+a:visited{
+    color: #f02b5f;
 }
 
 form{
@@ -187,18 +204,6 @@ form{
 a{
     font-size: 19px;
     text-align: center;
-}
-
-a:link{
-    color:#ff82ab;
-
-}
-a:hover{
-    color: #f02b5f;
-}
-
-a:visited{
-    color: darkorange;
 }
 
 .LinkChallenges{
