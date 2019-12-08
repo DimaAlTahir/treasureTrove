@@ -17,11 +17,10 @@
 <div class="nav">
     <button class="controlbtns2" type="reset" onclick="goToIndex()">Return Home</button>
     <button class="controlbtns2" type="reset" onclick="restartGame()">Restart</button>
-</div>
-<br>
 
     <!-- Trigger/Open The Modal -->
     <button class="controlbtns2" id="myBtn">Help</button>
+</div>
 
     <!-- The Modal -->
     <div id="myModal" class="modal">
@@ -36,7 +35,7 @@
     </div>
 
     <br>
-</div>
+
 
 <div class="container">
     <!-- This element will show the decoded result from the scanned QR Code as text -->
@@ -150,7 +149,7 @@
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = "none";
         }
     }
