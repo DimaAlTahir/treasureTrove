@@ -61,10 +61,19 @@ function switchCamera() {
 }
 let displayCam =document.getElementById("tgCamera");
 
+// hide/reveal the display of the camera
 function toggleCamera() {
     if (displayCam.style.display !== "block") {
         displayCam.style.display = "block";
     }else {
         displayCam.style.display = "none";
     }
+}
+
+function goToIndex() {
+    setTimeout(function(){window.location.href = "index.html";},500);
+}
+
+function restartGame() {
+    setTimeout(function(){window.location.href="Signin.html?restart";},500)
 }

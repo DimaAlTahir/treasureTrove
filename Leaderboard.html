@@ -9,14 +9,10 @@
 <body onload="startChecking();">
 <h2>Leaderboards</h2>
 <div class="nav">
-    <form action="index.html">
-        <input class="controlbtns" type="submit" value="Return Home"/>
-    </form>
-    <form  action="Signin.html">
-        <input class="controlbtns" type="submit" value="Play Again"/>
-    </form>
-    <br>
+    <button class="controlbtns2" type="reset" onclick="goToIndex()">Return Home</button>
+    <button class="controlbtns2" type="reset" onclick="restartGame()">Restart</button>
 </div>
+<br>
 <div id="testScore">
     <div id="scoreContainer">
         <h3 id="scoreDisplay"></h3>
@@ -182,7 +178,13 @@
         checkIfTestScore();
 
     }
+    function goToIndex() {
+        setTimeout(function(){window.location.href = "index.html";},500);
+    }
 
+    function restartGame() {
+        setTimeout(function(){window.location.href="Signin.html?restart";},500)
+    }
 
 
 </script>

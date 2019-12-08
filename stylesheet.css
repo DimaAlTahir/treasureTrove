@@ -109,17 +109,17 @@ li{
     padding: 3px;
     border-radius: 5px;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     border: none;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left:auto;
     margin-right:auto;
     display: inline-block;
 }
 
 #scoreContainer{
-    margin-top: 50px;
+    margin-top: 10px;
     text-align: center;
 }
 #messageContainer{
@@ -152,6 +152,11 @@ li{
 }
 
 .controlbtns:hover {
+    background-color: #f02b5f;
+    box-shadow: 0px 0px 1px #777;
+}
+
+.controlbtns2:hover {
     background-color: #f02b5f;
     box-shadow: 0px 0px 1px #777;
 }
@@ -314,3 +319,4 @@ tr:nth-child(even) {
 input[type=checkbox] {
     transform: scale(1.5);
 }
+

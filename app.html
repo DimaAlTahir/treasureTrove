@@ -14,15 +14,10 @@
     <video id="preview" width="320" height="240"></video>
 </div>
 <div class="nav">
-    <form action="index.html">
-        <input class="controlbtns" type="submit" value="Return Home"/>
-    </form>
-    <form  action="Signin.html">
-        <input class="controlbtns" type="submit" value="Play Again"/>
-    </form>
-    <br>
+    <button class="controlbtns2" type="reset" onclick="goToIndex()">Return Home</button>
+    <button class="controlbtns2" type="reset" onclick="restartGame()">Restart</button>
 </div>
-
+<br>
 <div class="container">
     <!-- This element will show the decoded result from the scanned QR Code as text -->
     <div class="noteontainer">
@@ -34,7 +29,7 @@
     </div>
 
     <div>
-        <img width="50px" height="50px" src="imgs/switch.png"vb>
+        <img width="50px" height="50px" src="imgs/switch.png">
         <button class="controlbtns2" id="switchCamera" onclick="switchCamera();">Switch camera</button>
     </div>
 </div>
@@ -370,19 +365,18 @@
         return "";
     }
 
-    let current_count= 7;
-    function countDown() {
-        document.getElementById("questionProgress").innerHTML = "Redirecting in.. " + current_count;
-        if ( current_count > 0 ) { current_count--; }
-        else {
-            clearInterval(countJob);
-            document.getElementById("questionProgress").innerHTML = "";
-        }
-    }
+    // let current_count= 7;
+    // function countDown() {
+    //     document.getElementById("questionProgress").innerHTML = "Redirecting in.. " + current_count;
+    //     if ( current_count > 0 ) { current_count--; }
+    //     else {
+    //         clearInterval(countJob);
+    //         document.getElementById("questionProgress").innerHTML = "";
+    //     }
+    // }
 
     if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
         getQuestions();
-
     } else startGame();
 
 </script>
