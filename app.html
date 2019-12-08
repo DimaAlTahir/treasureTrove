@@ -5,19 +5,25 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
     <title>TreasureTrove</title>
-    <script defer src="instascan.min.js"></script>
-    <script defer src="App.js"></script>
 </head>
-<body onload="setInterval(getLocation, 60000);">
-<div style="display: none; text-align: center" id="tgCamera">
-<!-- This is a video element which will show the preview of the camera -->
-<video id="preview" width="320" height="240"></video>
-</div>
-<!-- This element will show the decoded result from the scanned QR Code as text -->
-<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content"></div>
+<body onload="setInterval(getLocation, 45000);">
+<div id="navi" class="container">
+    <nav>
+        <a href="index.html.html">Home</a>
+        <a href="leaderboard.html">Leader Board</a>
 
-<button class="controlbtns" id="switchCamera" onclick="switchCamera();">Switch camera</button>
-<button class="controlbtns" id="hideCamera" onclick="toggleCamera();">Hide/Reveal Camera</button>
+        <a class="trigger_popup_fricc">Click here to show the popup</a>
+    </nav>
+</div>
+
+<div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">X</div>
+        <p>Add any HTML content<br /> <p>Enter player name and try to answer the questions.</p>
+        <p>Each correct answer is +10 points.<br> Each wrong answer is -3 points.<br> Each skipped questionText is -5 points.</p></p>
+    </div>
+</div>
 
 <div id="scoreContainer">
     <h3 id="scoreDisplay"></h3>
@@ -96,6 +102,18 @@
 
 
 <script>
+
+    $(window).load(function () {
+        $(".trigger_popup_fricc").click(function(){
+            $('.hover_bkgr_fricc').show();
+        });
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    });
 
     const API_SKIP = "https://codecyprus.org/th/api/skip";
     const API_SCORE = "https://codecyprus.org/th/api/score";
@@ -360,10 +378,15 @@
         }
     }
 
+
+
     if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
         getQuestions();
-
+        //continueGame();
     } else startGame();
+
+
+
 
 </script>
 
