@@ -297,11 +297,11 @@ table {
     td:nth-of-type(2):before { content: "Score"; }
     td:nth-of-type(3):before { content: "Time"; }
 
-    #UA td:nth-of-type(1):before { content: "Aspects to test"; }
-    #UA td:nth-of-type(2):before { content: "Requirements"; }
-    #UA td:nth-of-type(3):before { content: "Accept"; }
-    #UA td:nth-of-type(4):before { content: "Reject"; }
-    #UA td:nth-of-type(5):before { content: "Comments"; }
+    .UA td:nth-of-type(1):before { content: "Aspects to test"; }
+    .UA td:nth-of-type(2):before { content: "Requirements"; }
+    .UA td:nth-of-type(3):before { content: "Accept"; }
+    .UA td:nth-of-type(4):before { content: "Reject"; }
+    .UA td:nth-of-type(5):before { content: "Comments"; }
 
 }
 
