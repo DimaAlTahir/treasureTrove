@@ -73,18 +73,23 @@ li{
     margin-top: 70px;
 }
 
+.noteontainer{
+    background-color: darkorange;
+    padding:10px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    font-family:Lucidatypewriter, monospace;
+    color: white;
+    text-align: center;
+}
+
 .btns{
     margin-left: 25%;
     margin-right: 25%;
 }
-
-/*button{*/
-/*    display:flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    margin: 0 auto;*/
-/*    margin-top: 10px;*/
-/*}*/
 
 .controlbtns {
     background-color: #ff82ab;

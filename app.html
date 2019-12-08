@@ -13,11 +13,26 @@
     <!-- This is a video element which will show the preview of the camera -->
     <video id="preview" width="320" height="240"></video>
 </div>
-<!-- This element will show the decoded result from the scanned QR Code as text -->
-<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content"></div>
+<div class="nav">
+    <form action="index.html">
+        <input class="controlbtns" type="submit" value="Return Home"/>
+    </form>
+    <form  action="Signin.html">
+        <input class="controlbtns" type="submit" value="Play Again"/>
+    </form>
+    <br>
+</div>
 
-<button class="controlbtns" id="switchCamera" onclick="switchCamera();">Switch camera</button>
-<button class="controlbtns" id="hideCamera" onclick="toggleCamera();">Hide/Reveal Camera</button>
+<div class="container">
+    <!-- This element will show the decoded result from the scanned QR Code as text -->
+    <div class="noteontainer">
+        <h4 id="content">Scan Result</h4>
+    </div>
+    <form>
+        <button class="controlbtns" id="switchCamera" onclick="switchCamera();">Switch camera</button>
+        <button class="controlbtns" id="hideCamera" onclick="toggleCamera();">Hide/Reveal Camera</button>
+    </form>
+</div>
 
 <div id="scoreContainer">
     <h3 id="scoreDisplay"></h3>
