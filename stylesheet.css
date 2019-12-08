@@ -75,7 +75,6 @@ li{
 
 .noteontainer{
     background-color: darkorange;
-    padding:10px;
     border-radius: 5px;
     margin-left: auto;
     margin-right: auto;
@@ -94,6 +93,20 @@ li{
 .controlbtns {
     background-color: #ff82ab;
     padding: .5em;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    margin-top: 20px;
+    margin-left:auto;
+    margin-right:auto;
+    display: inline-block;
+}
+
+.controlbtns2{
+    background-color: #ff82ab;
+    padding: 3px;
     border-radius: 5px;
     color: #fff;
     font-size: 20px;
