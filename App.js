@@ -64,8 +64,8 @@ let displayCam =document.getElementById("tgCamera");
 
 function toggleCamera() {
     if (displayCam.style.display !== "block") {
-            displayCam.style.display = "block";
+        displayCam.style.display = "block";
     }else {
-            displayCam.style.display = "none";
+        displayCam.style.display = "none";
     }
 }
