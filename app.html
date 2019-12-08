@@ -19,25 +19,50 @@
     <button class="controlbtns2" type="reset" onclick="restartGame()">Restart</button>
 </div>
 <br>
+    <form action="index.html">
+        <input class="controlbtns3" type="submit" value="Return Home"/>
+    </form>
+    <form  action="Signin.html">
+        <input class="controlbtns3" type="submit" value="Play Again"/>
+    </form>
+
+    <!-- Trigger/Open The Modal -->
+    <button class="controlbtns2" id="myBtn">Help</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Enter your player name then try to answer the questions.
+                Each correct answer is +10 points. Each wrong answer is -3 points. Each skipped questionText is -5 points.</p>
+        </div>
+
+    </div>
+
+    <br>
+</div>
+
 <div class="container">
     <!-- This element will show the decoded result from the scanned QR Code as text -->
     <div class="noteontainer">
         <h4 id="content">Scan Result</h4>
     </div>
     <div>
-        <button class="controlbtns2" id="hideCamera" onclick="toggleCamera();"> <i class="fa fa-camera"></i>Show/Hide Camera</button>
+        <button class="controlbtns2" id="hideCamera" onclick="toggleCamera();"> <i class="fa fa-qrcode"></i>Show/Hide Scanner</button>
     </div>
 
     <div>
-        <button class="controlbtns2" id="switchCamera" onclick="switchCamera();"><i class="far fa-repeat-alt"></i>Switch camera</button>
+        <button class="controlbtns2" id="switchCamera" onclick="switchCamera();"><i class="fa fa-rotate-left"></i>Switch camera</button>
     </div>
 </div>
 
-<div id="messageContainer">
-    <h4 id="message"></h4>
-</div>
-
 <div class="container2" >
+
+    <div id="messageContainer">
+        <h4 id="message"></h4>
+    </div>
 
     <div id="scoreContainer">
         <h3 id="scoreDisplay"></h3>
@@ -110,6 +135,31 @@
 
 
 <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 
     const API_SKIP = "https://codecyprus.org/th/api/skip";
     const API_SCORE = "https://codecyprus.org/th/api/score";
