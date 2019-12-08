@@ -20,7 +20,7 @@ h3{
     font-family: Fixed, monospace;
     margin-left: 10px;
     text-align: center;
-    color: #f02b5f;
+    color: white;
     font-size: 20px;
 
 }
@@ -35,6 +35,7 @@ h4{
 
 .highlight{
     color: darkorange;
+    font-weight: bolder;
 }
 .shadowed {
     -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
@@ -163,15 +164,20 @@ ul {
 h2{
     font-family: Fixed, monospace;
     text-align: center;
-    color: #f02b5f;
+    color: #4f0619;
 }
 
 h1{
     font-family: Fixed, monospace;
     text-align: center;
-    color: darkorange;
+    color: white;
     font-size: 75px;
     margin: 20px;
+}
+
+h5{
+    font-family: Fixed, monospace;
+    text-align: center;
 }
 
 p{
