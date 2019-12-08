@@ -16,7 +16,7 @@ function checkBoxSorted() {
     }
 }
 function checkBoxCompleted() {
-    let checkBoxCompleted = document.getElementById("sortedCheck");
+    let checkBoxCompleted = document.getElementById("completedCheck");
     let textScore = document.getElementById("textScore");
     if (checkBoxCompleted.checked === true){
         completed = "&completed";

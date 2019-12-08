@@ -13,6 +13,7 @@
         <input class="controlbtns" type="submit" value="Return Home"/>
     </form>
 </div>
+<br>
 <div id="testScore">
     <div id="scoreContainer">
         <h3 id="scoreDisplay"></h3>
@@ -143,7 +144,6 @@
             setTimeout( getScore(url),2000);
 
         } else {
-            document.getElementById("testScore").style.display = "block";
             document.getElementById("testLeader").style.display="block";
 
             // form the actual TH service url
@@ -166,17 +166,18 @@
             getLeaderboard(url);
         } else {
             document.getElementById("testScore").style.display = "block";
-            document.getElementById("testLeader").style.display="block";
 
             // form the actual TH service url
             let session = getCookie("sessionID");
-            let url = API_LEADERBOARD + "leaderboard?sorted&session=" + session + "&sorted&limit=20"; // form url
+            let url = API_LEADERBOARD + "leaderboard?&session=" + session + "&sorted&limit=20"; // form url
             getLeaderboard(url);
         }
     }
+
     function startChecking(){
         checkIfTestLeaderboard();
         checkIfTestScore();
+
     }
 
 
