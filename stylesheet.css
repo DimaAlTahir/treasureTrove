@@ -104,6 +104,11 @@ li{
     display: inline-block;
 }
 
+.controlbtns:hover {
+    background-color: #f02b5f;
+    box-shadow: 0px 0px 1px #777;
+}
+
 .controlbtns2{
     background-color: #ff82ab;
     padding: 3px;
@@ -116,6 +121,11 @@ li{
     margin-left:auto;
     margin-right:auto;
     display: inline-block;
+}
+
+.controlbtns2:hover {
+    background-color: #f02b5f;
+    box-shadow: 0px 0px 1px #777;
 }
 
 #scoreContainer{
@@ -149,16 +159,6 @@ li{
     border: none;
     margin: 5px 5px 5px 5px;
     display: inline-block;
-}
-
-.controlbtns:hover {
-    background-color: #f02b5f;
-    box-shadow: 0px 0px 1px #777;
-}
-
-.controlbtns2:hover {
-    background-color: #f02b5f;
-    box-shadow: 0px 0px 1px #777;
 }
 
 input[type="text"], input[type="number"],input[type="integer"] {
