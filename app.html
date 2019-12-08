@@ -5,9 +5,19 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
     <title>TreasureTrove</title>
+    <script defer src="instascan.min.js"></script>
+    <script defer src="App.js"></script>
 </head>
-<body onload="setInterval(getLocation, 45000);">
+<body onload="setInterval(getLocation, 60000);">
+<div style="display: none; text-align: center" id="tgCamera">
+<!-- This is a video element which will show the preview of the camera -->
+<video id="preview" width="320" height="240"></video>
+</div>
+<!-- This element will show the decoded result from the scanned QR Code as text -->
+<div style="margin: 20px; padding: 20px; background-color: black; color: white; text-align: center;" id="content"></div>
 
+<button class="controlbtns" id="switchCamera" onclick="switchCamera();">Switch camera</button>
+<button class="controlbtns" id="hideCamera" onclick="toggleCamera();">Hide/Reveal Camera</button>
 
 <div id="scoreContainer">
     <h3 id="scoreDisplay"></h3>
