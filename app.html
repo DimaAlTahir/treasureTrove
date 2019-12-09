@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>TreasureTrove</title>
+    <title>Treasure Trove Game</title>
     <script defer src="instascan.min.js"></script>
     <script defer src="App.js"></script>
 </head>
@@ -15,13 +15,12 @@
     <video id="preview" width="320" height="240"></video>
 </div>
 <div class="nav">
-    <button class="controlbtns2" type="reset" onclick="goToIndex()">Return Home</button>
-    <button class="controlbtns2" type="reset" onclick="restartGame()">Restart</button>
+    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
+    <button class="controlbtns2" type="reset" onclick="restartGame()"><i class="fa fa-rotate-left"></i>Restart</button>
 
     <!-- Trigger/Open The Modal -->
-    <button class="controlbtns2" id="myBtn">Help</button>
+    <button class="controlbtns2" id="myBtn"><i class="fa fa-question-circle"></i>Help</button>
 </div>
-
 <!-- The Modal -->
 <div id="myModal" class="modal">
 
@@ -49,7 +48,7 @@
     </div>
 
     <div>
-        <button class="controlbtns2" id="switchCamera" onclick="switchCamera();"><i class="fa fa-rotate-left"></i>Switch camera</button>
+        <button class="controlbtns2" id="switchCamera" onclick="switchCamera();"><i class="fa fa-refresh"></i>Switch camera</button>
     </div>
 </div>
 
