@@ -10,10 +10,12 @@
     <script defer src="App.js"></script>
 </head>
 <body onload="setInterval(getLocation, 60000);">
+
 <div style="display: none; text-align: center" id="tgCamera">
     <!-- This is a video element which will show the preview of the camera -->
     <video id="preview" width="320" height="240"></video>
 </div>
+<br>
 <div class="nav">
     <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
     <button class="controlbtns2" type="reset" onclick="restartGame()"><i class="fa fa-rotate-left"></i>Restart</button>
@@ -410,15 +412,6 @@
         return "";
     }
 
-    // let current_count= 7;
-    // function countDown() {
-    //     document.getElementById("questionProgress").innerHTML = "Redirecting in.. " + current_count;
-    //     if ( current_count > 0 ) { current_count--; }
-    //     else {
-    //         clearInterval(countJob);
-    //         document.getElementById("questionProgress").innerHTML = "";
-    //     }
-    // }
 
     if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
         getQuestions();

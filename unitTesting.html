@@ -4,9 +4,8 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
-
     <script defer src="unitTesting.js" ></script>
-    <title>test</title>
+    <title>Unit Testing</title>
 </head>
 
 <body>
@@ -23,10 +22,14 @@
     <h3>Test the Leaderboard</h3>
     <form>
         <h4>Enter number of players to be displayed in leader board</h4>
-        <h5>Check if you want the Leaderboards to be <span  class="highlight">sorted</span>: <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></h5>
-        <input id="limitImput" class="answer" type="number" step="any" placeholder="number of players" min="-1" max="50" required>
+        <span class="checkBox">Check for <span  class="highlight">sorted</span> Leaderboard: <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></span><br>
+
+        <span class="checkBox">Check For <span  class="highlight">Prize</span>: <input class="controlbtns" type="checkbox" id="sortedHasPrice"  onclick="checkBoxHasPrice()"></span><br>
+        <br>
+        <input id="limitImput" class="answer" type="text" placeholder="number of players" required>
         <br>
         <h4 id="textLeaderboard" style="display: none">Leaderboards will be sorted</h4>
+        <h4 id="textLeaderboard2" style="display: none">There is a Prize</h4>
         <div class="btns">
             <input class="controlbtns" type="reset" value="Submit" onclick="getlimit()"/>
         </div>
@@ -37,21 +40,72 @@
 <br>
 <br>
 <div class="container">
-    <table class="UA" style="margin-bottom: 10px">
+    <div style="text-align: center">
+        <button class="controlbtns2" type="submit" onclick="hideLBTable()" >Hide/Reveal Testing Results <b><i>Leaderboards</i></b></button>
+    </div>
+    <table class="TLB" style="margin-bottom: 10px; margin-top: 2px; display: none" id="testTLB" >
         <tr>
-            <th>Input</th>
-            <th>Results</th>
+            <th>Input /(Sorted or not)</th>
+            <th>Result  </th>
             <th>Expected</th>
-            <th>Passed</th>
+            <th>Has Prize or not</th>
+            <th>Has Prize Result</th>
+            <th>Passed  </th>
             <th>Comments</th>
         </tr>
-
         <tr>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
-            <td>x</td>
+            <td>-10000 / true / false</td>
+            <td>42 / true / false</td>
+            <td>Error</td>
+            <td>true / false</td>
+            <td>true / false</td>
+            <td>NO  </td>
+            <td>The server is sending me wrong information I should expect an Error, Works both on Prize and Sorted</td>
+        </tr>
+        <tr>
+            <td>999999 / true / false</td>
+            <td>999999 / true / false</td>
+            <td>999999 / true / false</td>
+            <td> true / false </td>
+            <td> true / false </td>
+            <td>Yes  </td>
+            <td>Works on both Prize and Sorted</td>
+        </tr>
+        <tr>
+            <td>0 / true / false </td>
+            <td>0</td>
+            <td>0</td>
+            <td> true / false </td>
+            <td> true / false </td>
+            <td>YES</td>
+            <td>Works on Prize, Cannot confirm for Sorted</td>
+        </tr>
+        <tr>
+            <td>A  / true / false </td>
+            <td>42 / true / false </td>
+            <td>Error</td>
+            <td> true / false </td>
+            <td> true / false </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Works on both Prize and Sorted</td>
+        </tr>
+        <tr>
+            <td>#  / true  / false </td>
+            <td>42  / true  / false </td>
+            <td>Error  </td>
+            <td> true / false </td>
+            <td> true / false </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Works on both Prize and Sorted</td>
+        </tr>
+        <tr>
+            <td>3.2 / true / false </td>
+            <td>42  / true  / false </td>
+            <td>Error  </td>
+            <td> true / false </td>
+            <td> true / false </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Works on both Prize and Sorted</td>
         </tr>
     </table>
 </div>
@@ -61,15 +115,82 @@
     <h3>Test the Score</h3>
     <form>
         <h4>Enter the number of the score you want to be displayed:</h4>
-        <h5>Check if you want the Game to be <span class="highlight">completed</span>: <input class="controlbtns" type="checkbox" id="completedCheck"  onclick="checkBoxCompleted()"></h5>
-        <input id="valueImput" class="answer" type="number" step="any" placeholder="score" min="-1" max="50" required>
+        <span class="checkBox">Check if you want the Game to be <span class="highlight">completed</span>: <input class="controlbtns" type="checkbox" id="completedCheck"  onclick="checkBoxCompleted()"></span><br>
+        <br>
+        <input id="valueImput" class="answer" type="text" placeholder="score" required>
         <br>
         <h4 id="textScore" style="display: none">Game will count as completed</h4>
         <div class="btns">
             <input class="controlbtns" type="reset" value="Submit" onclick="getValue()"/>
         </div>
+
     </form>
     <br>
+</div>
+<br>
+<br>
+<div class="container">
+    <div style="text-align: center">
+        <button class="controlbtns2" type="submit" onclick="hideScore()" >Hide/Reveal Testing Results <b><i>Score</i></b></button>
+    </div>
+    <table class="TS" style="margin-bottom: 10px; margin-top: 2px; display: none" id="testTS" >
+        <tr>
+            <th>Input /(completed or not)</th>
+            <th>Result  </th>
+            <th>Expected</th>
+            <th>Passed  </th>
+            <th>Comments</th>
+        </tr>
+        <tr>
+            <td>-10000 / true / false</td>
+            <td>42     / true / false</td>
+            <td>-10000 / true / false</td>
+            <td>NO  </td>
+            <td>The server is sending me wrong information I should expect a negative score, Works on completed</td>
+        </tr>
+        <tr>
+            <td>9999999999 / true / false  </td>
+            <td>42         / true / false </td>
+            <td>9999999999 / true / false </td>
+            <td>NO  </td>
+            <td>It does not send higher than 999999999 values, Works on completed</td>
+        </tr>
+        <tr>
+            <td>0 / true / false </td>
+            <td>0 / true / false </td>
+            <td>0 / true / false </td>
+            <td>YES</td>
+            <td>Works on completed </td>
+        </tr>
+        <tr>
+            <td>100 / true / false </td>
+            <td>100 / true / false </td>
+            <td>100 / true / false </td>
+            <td>YES</td>
+            <td>Works on completed</td>
+        </tr>
+        <tr>
+            <td>A  / true / false </td>
+            <td>42 / true / false </td>
+            <td>Error  </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Works on completed</td>
+        </tr>
+        <tr>
+            <td>#  / true  / false </td>
+            <td>42 / false / false</td>
+            <td>Error  </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Does not work on completed</td>
+        </tr>
+        <tr>
+            <td>3.2 / true / false </td>
+            <td>42  / true / false </td>
+            <td>Error  </td>
+            <td>NO</td>
+            <td>The server is sending me wrong information I should expect an Error of some kind, Works on completed</td>
+        </tr>
+    </table>
 </div>
 
 

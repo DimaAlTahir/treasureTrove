@@ -59,6 +59,7 @@ function switchCamera() {
     //Start the new selected camera:
     scanner.start(camera);
 }
+
 let displayCam =document.getElementById("tgCamera");
 
 // hide/reveal the display of the camera
@@ -77,3 +78,11 @@ function goToIndex() {
 function restartGame() {
     setTimeout(function(){window.location.href="Signin.html?restart";},500)
 }
+// function urlify(text) {
+//     var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+//     //var urlRegex = /(https?:\/\/[^\s]+)/g;
+//     return text.replace(urlRegex, function(url,b,c) {
+//         var url2 = (c == 'www.') ?  'http://' +url : url;
+//         return '<a href="' +url2+ '" target="_blank">' + url + '</a>';
+//     })
+// }

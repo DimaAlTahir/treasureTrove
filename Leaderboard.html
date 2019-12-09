@@ -42,20 +42,19 @@
     <div id="scoreContainer">
         <h3 id="scoreDisplay"></h3>
     </div>
-
-    <div id="priceContainer">
-        <h3 id="priceDisplay"></h3>
-    </div>
 </div>
 
 <div id="testLeader">
     <div class="container">
         <h3 id="endMessage">loading...</h3>
-        <table id="LeaderboardTable">
+        <div id="priceContainer">
+            <h3 id="prizeDisplay"></h3>
+        </div>
+        <table class="LB" id="LeaderboardTable">
             <tr>
-                <th><b>Name</b></th>
+                <th><b>Name </b></th>
                 <th><b>Score</b></th>
-                <th><b>Time</b></th>
+                <th><b>Date </b></th>
             </tr>
         </table>
     </div>
@@ -115,8 +114,7 @@
 
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
-                        document.getElementById("priceDisplay").innerHTML = "Congratulations you won a price "
-                    }, 1000);
+                        document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
                 }
             });
     }
@@ -210,9 +208,10 @@
             document.getElementById("testLeader").style.display="block";
 
             // recuires a size and a sorted variable for the test
+            let bHasPrize =params.has("hasPrize");
             let bSorted = params.has("sorted");
             let size = params.get("size");
-            let url = API_TEST_LEADERBOARD + "leaderboard?size=" + size + "&sorted=" + bSorted;
+            let url = API_TEST_LEADERBOARD + "leaderboard?size=" + size + "&sorted=" + bSorted + "&hasPrize="+bHasPrize;
             getLeaderboard(url);
         } else {
             document.getElementById("testScore").style.display = "block";
