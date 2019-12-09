@@ -11,10 +11,7 @@
 </head>
 <body onload="setInterval(getLocation, 60000);">
 
-<div style="display: none; text-align: center" id="tgCamera">
-    <!-- This is a video element which will show the preview of the camera -->
-    <video id="preview" width="320" height="240"></video>
-</div>
+
 <br>
 <div class="nav">
     <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
@@ -22,6 +19,10 @@
 
     <!-- Trigger/Open The Modal -->
     <button class="controlbtns2" id="myBtn"><i class="fa fa-question-circle"></i>Help</button>
+</div>
+<div style="display: none; text-align: center" id="tgCamera">
+    <!-- This is a video element which will show the preview of the camera -->
+    <video id="preview" width="320" height="240"></video>
 </div>
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -133,6 +134,21 @@
 
 
 <script>
+    const TEST_API="https://codecyprus.org/th/test-api/";
+    const NORMAL_API ="https://codecyprus.org/th/api/";
+    const API_SKIP = "https://codecyprus.org/th/api/skip";
+    const API_SCORE = "https://codecyprus.org/th/api/score";
+    const API_LOCATION = "https://codecyprus.org/th/api/location";
+    const API_ANSWER = "https://codecyprus.org/th/api/answer";
+    const API_QUESTIONS = "https://codecyprus.org/th/api/question";
+    const API_START = "https://codecyprus.org/th/api/start";
+    const params = new URLSearchParams(location.search);
+    let playerName = params.get("player");
+    let uuid = params.get("treasure-hunt-id");
+    let lifeOfCookie = params.get("time");
+    let nameOfGame =params.get("nameOfGame");
+
+
     // Get the modal
     var modal = document.getElementById("myModal");
 
@@ -159,19 +175,6 @@
         }
     }
 
-    const API_SKIP = "https://codecyprus.org/th/api/skip";
-    const API_SCORE = "https://codecyprus.org/th/api/score";
-    const API_LOCATION = "https://codecyprus.org/th/api/location";
-    const API_ANSWER = "https://codecyprus.org/th/api/answer";
-    const API_QUESTIONS = "https://codecyprus.org/th/api/question";
-    const API_START = "https://codecyprus.org/th/api/start";
-    const params = new URLSearchParams(location.search);
-    let playerName = params.get("player");
-    let uuid = params.get("treasure-hunt-id");
-    let lifeOfCookie = params.get("time");
-    let nameOfGame =params.get("nameOfGame");
-
-
     function startGame() {
         document.getElementById("skipContainer").style.display="none";
         document.getElementById("question").innerText = "Loading....";
@@ -194,14 +197,14 @@
                     saveCookie("nameOfGame", nameOfGame, lifeOfCookie);
 
                     document.getElementById("skipContainer").style.display="block";
-                    getQuestions();
+                    getQuestions(NORMAL_API + "question?&session="+getCookie("sessionID"));
                 }
             });
     }
 
 
     // Function that loads the question and the correct way to answer it
-    function getQuestions() {
+    function getQuestions(url) {
         document.getElementById("question").innerText = "Loading....";
         document.getElementById("numericContainer").style.display = 'none';
         document.getElementById("intContainer").style.display = 'none';
@@ -210,7 +213,7 @@
         document.getElementById("MCQContainer").style.display = 'none';
         document.getElementById("questionProgress").innerHTML="";
 
-        fetch(API_QUESTIONS + "?session=" + getCookie("sessionID"))
+        fetch(url)
             .then(response => response.json())
             .then(jsonObject => {
                 console.log("getQuestion status: " + jsonObject.status);
@@ -350,7 +353,7 @@
                 } else if ((jsonObject.status === "OK") && (jsonObject.correct === false)) {
                     document.getElementById("message").innerHTML = jsonObject.message + " You lost " + jsonObject.scoreAdjustment + " points.";
                 }
-                getQuestions();
+                getQuestions(NORMAL_API + "question?&session="+getCookie("sessionID"));
             });
     }
 
@@ -367,7 +370,7 @@
                 } else if (jsonObject.status === "ERROR") {
                     document.getElementById("message").innerHTML = jsonObject.errorMessages[0];
                 }
-                getQuestions();
+                getQuestions(NORMAL_API + "question?&session="+getCookie("sessionID"));
             });
     }
 
@@ -412,9 +415,32 @@
         return "";
     }
 
+    function isTestQ() {
+        let url = new URL(window.location.href);
+        return url.searchParams.get("testQ") != null;
+    }
 
-    if ((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) {
-        getQuestions();
+    function checkIfTestQuestions() {
+        if (isTestQ()) {
+            // recuires a type, completed, geolocation, skip
+            let bCompleted = params.has("completed");
+            let bCanBeSkipped = params.has("can-be-skipped");
+            let bGeolocation = params.has("requires-location");
+            let type = params.get("question-type");
+            let url = TEST_API + "question?completed=" + bCompleted + "&question-type=" +
+                type + "&can-be-skipped=" + bCanBeSkipped + "&requires-location=" + bGeolocation;
+            setTimeout( getQuestions(url),50);
+
+        } else {
+            // form the actual TH service url
+            let session = getCookie("sessionID");
+            let url = NORMAL_API + "question?&session=" + session; // form url
+            setTimeout( getQuestions(url),50);
+        }
+    }
+
+    if (((getCookie("gameSaved") === "true") && (getCookie("playerName") === playerName)) || isTestQ()) {
+        checkIfTestQuestions();
     } else startGame();
 
 </script>

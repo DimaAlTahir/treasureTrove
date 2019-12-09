@@ -21,10 +21,14 @@
 <div id="numberTestContainer" class="container">
     <h3>Test the Leaderboard</h3>
     <form>
-        <h4>Enter number of players to be displayed in leader board</h4>
-        <span class="checkBox">Check for <span  class="highlight">sorted</span> Leaderboard: <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></span><br>
-
-        <span class="checkBox">Check For <span  class="highlight">Prize</span>: <input class="controlbtns" type="checkbox" id="sortedHasPrice"  onclick="checkBoxHasPrice()"></span><br>
+        <span class="checkBox">Check for <span  class="highlight">sorted</span> Leaderboard:
+            <input class="controlbtns" type="checkbox" id="sortedCheck"  onclick="checkBoxSorted()"></span>
+        <br>
+        <span class="checkBox">Check For <span  class="highlight">Prize</span>:
+            <input class="controlbtns" type="checkbox" id="HasPrice"  onclick="checkBoxHasPrice()"></span>
+        <br>
+        <br>
+        <span class="checkBox"><b>Enter number of players to be displayed in leaderboard:</b></span>
         <br>
         <input id="limitImput" class="answer" type="text" placeholder="number of players" required>
         <br>
@@ -114,8 +118,11 @@
 <div class="container" >
     <h3>Test the Score</h3>
     <form>
-        <h4>Enter the number of the score you want to be displayed:</h4>
-        <span class="checkBox">Check if you want the Game to be <span class="highlight">completed</span>: <input class="controlbtns" type="checkbox" id="completedCheck"  onclick="checkBoxCompleted()"></span><br>
+
+        <span class="checkBox">Check if you want the Game to be <span class="highlight">completed</span>:
+            <input class="controlbtns" type="checkbox" id="completedCheck"  onclick="checkBoxCompleted()"></span><br>
+        <br>
+        <span class="checkBox"><b>Enter the number of the score you want to be displayed:</b></span>
         <br>
         <input id="valueImput" class="answer" type="text" placeholder="score" required>
         <br>
@@ -192,8 +199,39 @@
         </tr>
     </table>
 </div>
-
-
+<br>
+<br>
+<div class="container" >
+    <h3>Test the Questions</h3>
+    <div style="text-align: center">
+        <span class="checkBox"> Select the type of the Question: </span>
+        <label for="questionType"></label><select id="questionType" class="controlbtns2">
+            <option>BOOLEAN</option>
+            <option>MCQ    </option>
+            <option>INTEGER</option>
+            <option>NUMERIC</option>
+            <option>TEXT   </option>
+        </select>
+        <br>
+        <span class="checkBox">Check if the Questions are <span class="highlight">completed</span>:
+            <input class="controlbtns" type="checkbox" id="completedQCheck"  onclick="checkBoxCompletedQuestions()"></span><br>
+        <br>
+        <span class="checkBox">Check if the Question requires <span class="highlight">Geolocation</span>:
+            <input class="controlbtns" type="checkbox" id="GeolocationCheck"  onclick="checkBoxGeolocation()"></span><br>
+        <br>
+        <span class="checkBox">Check if the Questions can be <span class="highlight">Skipped</span>:
+            <input class="controlbtns" type="checkbox" id="skipCheck"  onclick="checkBoxSkip()"></span><br>
+        <br>
+        <span class="checkBox" id="textQuestions" style="display: none"><b>Questions will count as completed</b></span>
+        <br>
+        <span class="checkBox" id="textGeolocation" style="display: none"><b>Question will count as requiring Geolocation</b></span>
+        <br>
+        <span class="checkBox" id="textSkip" style="display: none"><b>Question can be skipped</b></span>
+        </div>
+        <div class="btns" style="text-align: center">
+            <input class="controlbtns" type="reset" value="Submit" onclick="getQuestionParams()"/>
+        </div>
+</div>
 </body>
 
 </html>

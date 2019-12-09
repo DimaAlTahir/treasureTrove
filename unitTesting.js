@@ -2,21 +2,26 @@ let leaderboardSize = document.getElementById("limitImput");
 let scoreValue = document.getElementById("valueImput");
 let displayTLB = document.getElementById("testTLB");
 let displayTS = document.getElementById("testTS");
+let skip="&nothing";
+let geolocation="&nothing";
+let completedQuestions="&nothing";
 let sorted = "&nothing";
 let completed = "&nothing";
 let hasPrize ="&nothing";
+let elementQuestionType=document.getElementById("questionType");
+
 
 function checkBoxHasPrice(){
-    let checkBoxHasPrice =document.getElementById("sortedHasPrice");
-    let textLeaderboard = document.getElementById("textLeaderboard2");
+    let checkBoxHasPrice =document.getElementById("HasPrice");
+    let textPrize = document.getElementById("textLeaderboard2");
     if (checkBoxHasPrice.checked === true) {
         hasPrize = "&hasPrize";
         console.log(hasPrize);
-        textLeaderboard.style.display = "block";
+        textPrize.style.display = "block";
     } else {
         hasPrize = "&nothing";
         console.log(hasPrize);
-        textLeaderboard.style.display = "none";
+        textPrize.style.display = "none";
     }
 }
 
@@ -44,9 +49,44 @@ function checkBoxCompleted() {
     }
 }
 
+function checkBoxGeolocation() {
+    let checkBoxGeolocation = document.getElementById("GeolocationCheck");
+    let textGeolocation = document.getElementById("textGeolocation");
+    if (checkBoxGeolocation.checked === true) {
+        geolocation = "&requires-location";
+        textGeolocation.style.display = "block";
+    } else {
+        geolocation = "&nothing";
+        textGeolocation.style.display = "none";
+    }
+}
+
+function checkBoxSkip() {
+    let checkBoxSkip = document.getElementById("skipCheck");
+    let textSkip = document.getElementById("textSkip");
+    if (checkBoxSkip.checked === true) {
+        skip = "&can-be-skipped";
+        textSkip.style.display = "block";
+    } else {
+        skip = "&nothing";
+        textSkip.style.display = "none";
+    }
+}
+
+function checkBoxCompletedQuestions() {
+    let checkBoxCompletedQuestions = document.getElementById("completedQCheck");
+    let textQuestions = document.getElementById("textQuestions");
+    if (checkBoxCompletedQuestions.checked === true) {
+        completedQuestions = "&completed";
+        textQuestions.style.display = "block";
+    } else {
+        completedQuestions = "&nothing";
+        textQuestions.style.display = "none";
+    }
+}
+
 function getlimit() {
-    limit = leaderboardSize.value;
-    console.log("limit is: " + limit);
+    let limit = leaderboardSize.value;
     setTimeout(function () {
         window.location.href = "Leaderboard.html?testL" + sorted + hasPrize + "&size=" + limit;
     }, 500);
@@ -54,10 +94,21 @@ function getlimit() {
 
 
 function getValue() {
-    value = scoreValue.value;
-    console.log("Value is: " + scoreValue);
+    let value = scoreValue.value;
     setTimeout(function () {
         window.location.href = "Leaderboard.html?testS" + completed + "&score=" + value;
+    }, 500);
+}
+
+
+function getType() {
+    let type = elementQuestionType.value;
+    console.log("Type is: " + scoreValue);
+    return type;
+}
+function getQuestionParams(){
+    setTimeout(function () {
+        window.location.href="App.html?testQ" + completedQuestions + skip + geolocation  +"&question-type="+ getType();
     }, 500);
 }
 
@@ -89,3 +140,4 @@ function hideScore(){
         displayTS.style.display = "none";
     }
 }
+
