@@ -88,3 +88,11 @@ function convert2minutes(ms){
 }
 options = { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
     second: '2-digit' };
+
+function goToIndex() {
+    setTimeout(function(){window.location.href = "index.html";},500);
+}
+
+function restartGame() {
+    setTimeout(function(){window.location.href="Signin.html?restart";},500)
+}
