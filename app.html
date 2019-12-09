@@ -64,15 +64,15 @@
     </div>
 
     <div id="scoreContainer">
-        <h3 id="scoreDisplay"></h3>
+        <h4 id="scoreDisplay"></h4>
     </div>
 
     <div id="progressContainer">
-        <h3 id="questionProgress"></h3>
+        <h4 id="questionProgress"></h4>
     </div>
 
     <div id="quizQuestionContainer">
-        <h4 id="question"></h4>  <!--Leave it empty -->
+        <h3 id="question"></h3>  <!--Leave it empty -->
     </div>
 
     <div class="answer" id="textboxContainer">
@@ -140,7 +140,6 @@
     const API_SCORE = "https://codecyprus.org/th/api/score";
     const API_LOCATION = "https://codecyprus.org/th/api/location";
     const API_ANSWER = "https://codecyprus.org/th/api/answer";
-    const API_QUESTIONS = "https://codecyprus.org/th/api/question";
     const API_START = "https://codecyprus.org/th/api/start";
     const params = new URLSearchParams(location.search);
     let playerName = params.get("player");
@@ -235,8 +234,8 @@
                 if (jsonObject.completed === true) {
                     document.getElementById("message").innerHTML="";
                     document.getElementById("questionProgress").innerHTML = "";
-                    document.getElementById("question").innerHTML="GAME ENDED";
-                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},1000);
+                    document.getElementById("question").innerHTML="GAME FINISHED";
+                    setTimeout(function(){window.location.href = "Leaderboard.html?session=" + getCookie("sessionId") + "&sorted&limit=20";},500);
                     //setInterval("countDown()", 1000);
 
                 } else {
