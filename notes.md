@@ -54,7 +54,7 @@ to help teammates or to improve on any aspect they find they are better at)
 6th meeting (Nov. 27th) & 7th meeting (Nov. 28th):
   create the question skip and time conversion Functionalities. 
   * Dimitris Nitsios -> create error messages and error prevention functionalities
-   as well as geolocation functionality.
+   as well as geolocation functionality. create continue and restart game functionalies.
   * Dima AlTahir: adjusted styling for added functionalities and previously added elements
    to comply with heuristic assessments requirements.
   
@@ -62,8 +62,6 @@ to help teammates or to improve on any aspect they find they are better at)
   * Dima AlTahir: added leader board html and styling. added navigation and help buttons and modal.
   recorded results of acceptance testing and added acceptance test page. added heuristic assesment 
   to acceptence test page.
-  * Dimitris Nitsios -> create the java script relating to fetching the leader board api. worked on 
-  unit testing. 
-  create continue and restart game functionalies.
+  * Dimitris Nitsios -> create the java script relating to fetching the leader board api. created unit testing for Score leaderboard and questions and record the results in tables.
   *  Andreas Messios -> tested app according to acceptance requirement.
   * Anna Parpi -> Added QR scanner functionality.
