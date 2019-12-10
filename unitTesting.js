@@ -17,11 +17,9 @@ function checkBoxHasPrice(){
     let textPrize = document.getElementById("textLeaderboard2");
     if (checkBoxHasPrice.checked === true) {
         hasPrize = "&hasPrize";
-        console.log(hasPrize);
         textPrize.style.display = "block";
     } else {
         hasPrize = "&nothing";
-        console.log(hasPrize);
         textPrize.style.display = "none";
     }
 }
@@ -68,11 +66,9 @@ function checkBoxSkip() {
     if (checkBoxSkip.checked === true) {
         skip = "&can-be-skipped";
         textSkip.style.display = "block";
-        Console.log(textSkip);
     } else {
         skip = "&nothing";
         textSkip.style.display = "none";
-        Console.log(textSkip);
     }
 }
 
@@ -105,10 +101,9 @@ function getValue() {
 
 
 function getType() {
-    let type = elementQuestionType.value;
-    console.log("Type is: " + scoreValue);
-    return type;
+    return elementQuestionType.value;
 }
+
 function getQuestionParams(){
     setTimeout(function () {
         window.location.href="app.html?testQ" + completedQuestions + skip + geolocation  +"&question-type="+ getType();
