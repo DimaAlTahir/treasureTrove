@@ -11,18 +11,14 @@ https://twitter.com/Treasur37909589
 Treasure Trove App landing page: 
 https://dimaaltahir.github.io/treasureTrove/
 
-A “notes.html” or “notes.md” page where you log your 
-progress in the project. Ideally you will have weekly 
-(or more frequent) entries, explaining what you worked on since 
-the previous meeting, and short descriptions of what individual members worked on.
+Team meetings purpose is to decide the responsibilities of 
+each member for the week. In total team 5 had 10 meetings.
 
-* Extensive and detailed
-evidence of great
-teamwork, with notes
-of multiple team
-meetings (e.g. 8+)
+* Note: as we progressed through the assignment Anna Parpi
+was not able to properly access Webstorm and her contribution 
+was pushed by Dimitris Nitsios.
 
-Team Meetings:
+Team Meetings Details: <br>
 1st meeting (Oct.23rd): Assigned roles to each team member 
 (each member can contribute outside of their assigned role 
 to help teammates or to improve on any aspect they find they are better at)

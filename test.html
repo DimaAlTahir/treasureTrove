@@ -4,22 +4,44 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="testing.js"></script>
+    <script defer src="treasureTrove.js"></script>
     <title>test</title>
 </head>
 
 <body id="long">
+<div class="nav">
+    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Home</button>
+    <button class="controlbtns2" type="reset" id="myBtn" onclick="goToUnitTesting()">Unit Testing</button>
+</div>
+<br>
 <h2>Testing and Evaluation Efforts</h2>
 
-<h2>Nielsen’s 10 Heuristics Compliance Assessment</h2>
+<div class="container">
+    <h3>Contents:</h3>
+    <form id="anchor" style="margin-bottom: 60px">
+        <button class="controlbtns"><a href="#heuristics">Heuristics Assessment</a></button>
+        <button class="controlbtns"><a href="#plan">User Acceptance Test Plan</a></button>
+        <button class="controlbtns"><a href="#ua1">1st User Acceptance Test</a></button>
+        <button class="controlbtns"><a href="#ua2">2nd User Acceptance Test</a></button>
+    </form>
+    <button onclick="topFunction()" id="top" class="controlbtns" title="Go to top"><i class="fa fa-arrow-up"></i></button>
+</div>
+
+<h2 id="heuristics">Nielsen’s Heuristics Compliance Assessment</h2>
 <div class="container">
     <ol type="1">
         <li style="font-weight:bold">Visibility of system status</li>
             <ol type="A">
-                <li>Messages indicating user whereabouts are available throughout all app pages.</li>
+                <li>Headings indicating the page the user is currently on are available throughout all app pages.</li>
+                <li>Navigation buttons to help the user navigate throughout thr app are available throughout all app pages.</li>
                 <li>Messages indicating user score and progress are available where needed.</li>
-                <li>Loading messages are available where needed.</li>
-                <li>Messages indicating courses of action available for user exist throughout all pages.</li>
+                <li>Loading messages are available where needed. ex: leader board table, available challenges list</li>
+                <li>
+                    Messages indicating courses of action available for user exist throughout all pages. ex: when restarting
+                    a game a message is displayed telling the user to input a new player name to properly start a new game.
+                </li>
                 <li>Buttons change color when they are being pressed.</li>
                 <li>Links change color once they have been used.</li>
             </ol>
@@ -27,7 +49,11 @@
         <li style="font-weight:bold"> Match between system and the real world</li>
         <ol type="A">
             <li>Everyday language used to communicate messages to user; avoided using technical language.</li>
-            <li>Icons used to indicate usage of camera in QR scanner display.</li>
+            <li>
+                Icons used to indicate usage of each button.
+                ex: Button that directs user to the landing page (the main page of the app) has a home icon,
+                button that uses the QR scanner has a QR icon.
+            </li>
         </ol>
 
         <li style="font-weight:bold"> User control and freedom</li>
@@ -86,10 +112,11 @@
     </ol>
 </div>
 
-<h2>User Acceptance Test Plan</h2>
+<h2 id="plan">User Acceptance Test Plan</h2>
 <div class="container">
     <ol>
-        <li>The app will be tested by <span class="highlight">Antreas Messios</span> and reported by <span style="color: darkorange">Dima AlTahir</span> </li>
+        <li>The app will be tested primarily by <span class="highlight">Antreas Messios</span>and family members of the team members.</li>
+        <li>Test results will be documented and reported by <span class="highlight">Dima AlTahir</span> </li>
         <li><span class="highlight">Every aspect implemented in the app</span>, from index page to leader board will be tested</li>
         <li>Testing will start when app is close to being finished. <span class="highlight">ie: when the leader board API is implemented</span> </li>
         <li>The results will be recorded on <span class="highlight">the User Acceptance test page</span> linked on the landing page of the app</li>
@@ -99,7 +126,7 @@
     </ol>
 </div>
 
-<h2 >User Acceptance Test 1 </h2>
+<h2 id="ua1">User Acceptance Test 1 </h2>
 <div class="container">
     <table class="UA" style="margin-bottom: 10px">
         <tr>
@@ -253,7 +280,7 @@
     </table>
 </div>
 
-<h2 >User Acceptance Test 2 </h2>
+<h2 id="ua2">User Acceptance Test 2 </h2>
 <div class="container">
     <table class="UA" style="margin-bottom: 10px">
         <tr>
@@ -404,6 +431,34 @@
         </tr>
     </table>
 </div>
+
+<script>
+    mybutton = document.getElementById("top");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+
+    function goToUnitTesting() {
+        setTimeout(function () {
+            window.location.href = "unitTesting.html";
+        }, 500);
+    }
+
+</script>
 
 </body>
 

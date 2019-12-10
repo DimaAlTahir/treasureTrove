@@ -12,26 +12,25 @@
 <body onload="showRestart()">
 
 <div class="nav">
-    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
+    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Home</button>
     <button class="controlbtns2" type="reset" onclick="restartGame()"><i class="fa fa-rotate-left"></i>Restart</button>
 
     <!-- Trigger/Open The Modal -->
     <button class="controlbtns2" id="myBtn"><i class="fa fa-question-circle"></i>Help</button>
-</div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
 
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Enter your player name then try to answer the questions.</p>
-        <ul class="highlight">
-            <li>Each correct answer is +10 points.</li>
-            <li> Each wrong answer is -3 points. </li>
-            <li>Each skipped questionText is -5 points.</li>
-        </ul>
-        <p>At the end of the game you will be redirected to the leader board to view your score.</p>
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Enter your player name then try to answer the questions.</p>
+            <ul class="highlight">
+                <li>Each correct answer is +10 points.</li>
+                <li> Each wrong answer is -3 points. </li>
+                <li>Each skipped questionText is -5 points.</li>
+            </ul>
+            <p>At the end of the game you will be redirected to the leader board to view your score.</p>
+        </div>
     </div>
 </div>
 
