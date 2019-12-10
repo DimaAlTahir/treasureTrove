@@ -84,45 +84,19 @@ a:visited{
     text-decoration: none;
 }
 
-
-.dropdown:hover .controlbtns{
-    background-color: #f02b5f;
-    color:whitesmoke;
-}
-
-.dropdown:hover .dropdown-content{
-    background-color: whitesmoke;
-    color:#f02b5f;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: whitesmoke;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.23);
-    margin-left:auto;
+#anchor{
     margin-right:auto;
+    margin-left:auto;
 }
 
-.dropdown-content a{
-    font-family: Lucidatypewriter, monospace;
-    font-size: 19px;
-    text-align: center;
-    color: #ff82ab;
+#anchor a{
+    color:white;
     text-decoration: none;
-    display: block;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-    background-color: #f02b5f;
-    color:whitesmoke;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
+#anchor a:hover{
+    color:white;
+    text-decoration: none;
 }
 
 form{

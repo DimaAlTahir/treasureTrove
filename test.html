@@ -4,26 +4,25 @@
     <meta name="viewport" content="width=device-width"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script defer src="testing.js"></script>
-    <script defer src="treasureTrove.js" ></script>
+    <script defer src="treasureTrove.js"></script>
     <title>test</title>
 </head>
 
 <body id="long">
-<h2>Testing and Evaluation Efforts</h2>
 <div class="nav">
-    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
+    <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Home</button>
 </div>
+<br>
+<h2>Testing and Evaluation Efforts</h2>
 
 <div class="dropdown">
-    <form>
-        <button id="dropbtn" class="controlbtns">Go to</button>
-        <div class="dropdown-content">
-            <a href="#heuristics">Heuristics Compliance Assessment</a>
-            <a href="#plan">User Acceptance Test Plan</a>
-            <a href="#ua1">1st User Acceptance Test</a>
-            <a href="#ua2">2nd User Acceptance Test</a>
-        </div>
+    <form id="anchor">
+        <button class="controlbtns"><a href="#heuristics">Heuristics Assessment</a></button>
+        <button class="controlbtns"><a href="#plan">User Acceptance Test Plan</a></button>
+        <button class="controlbtns"><a href="#ua1">1st User Acceptance Test</a></button>
+        <button class="controlbtns"><a href="#ua2">2nd User Acceptance Test</a></button>
     </form>
 </div>
 
@@ -113,7 +112,7 @@
 <h2 id="plan">User Acceptance Test Plan</h2>
 <div class="container">
     <ol>
-        <li>The app will be tested by <span class="highlight">Antreas Messios</span> and reported by <span style="color: darkorange">Dima AlTahir</span> </li>
+        <li>The app will be tested by <span class="highlight">Antreas Messios</span> and reported by <span class="highlight">Dima AlTahir</span> </li>
         <li><span class="highlight">Every aspect implemented in the app</span>, from index page to leader board will be tested</li>
         <li>Testing will start when app is close to being finished. <span class="highlight">ie: when the leader board API is implemented</span> </li>
         <li>The results will be recorded on <span class="highlight">the User Acceptance test page</span> linked on the landing page of the app</li>
