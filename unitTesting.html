@@ -12,7 +12,7 @@
 <body>
 <div class="nav">
     <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Return Home</button>
-    <button class="controlbtns2" type="reset" id="myBtn" onclick="goToUAT()">User Acceptance Tests</button>
+    <button class="controlbtns2" type="reset" onclick="goToUAT()" style="float: right">User Acceptance Tests</button>
 </div>
 <br>
 <h2>Unit Testing Efforts</h2>
@@ -233,6 +233,78 @@
             <input class="controlbtns" type="reset" value="Submit" onclick="getQuestionParams()"/>
         </div>
 </div>
+<br>
+<br>
+<div class="container">
+    <div style="text-align: center">
+        <button class="controlbtns2" type="submit" onclick="hideQuestions()" >Hide/Reveal Testing Results <b><i>Questions</i></b></button>
+    </div>
+
+    <table class="TQ" style="margin-bottom: 10px; margin-top: 2px; display: none" id="testTQ" >
+        <tr>
+            <th>Input   </th>
+            <th>Result  </th>
+            <th>Expected</th>
+            <th>Passed  </th>
+            <th>Comments</th>
+        </tr>
+        <tr>
+            <td>MCQ </td>
+            <td>MCQ </td>
+            <td>MCQ </td>
+            <td>YES</td>
+            <td>Works on both: Can be skipped and on Geolocation</td>
+        </tr>
+        <tr>
+            <td>BOOLEAN </td>
+            <td>BOOLEAN </td>
+            <td>BOOLEAN  </td>
+            <td>YES</td>
+            <td>Works on both: Can be skipped and on Geolocation</td>
+        </tr>
+        <tr>
+            <td>INTEGER</td>
+            <td>INTEGER</td>
+            <td>INTEGER</td>
+            <td>YES</td>
+            <td>Works on both: Can be skipped and on Geolocation</td>
+        </tr>
+        <tr>
+            <td>NUMERIC</td>
+            <td>NUMERIC</td>
+            <td>NUMERIC</td>
+            <td>YES</td>
+            <td>Works on both: Can be skipped and on Geolocation</td>
+        </tr>
+        <tr>
+            <td>TEXT</td>
+            <td>TEXT</td>
+            <td>TEXT</td>
+            <td>YES</td>
+            <td>Works on both: Can be skipped and on Geolocation</td>
+        </tr>
+        <tr>
+            <td>Completed</td>
+            <td>Completed</td>
+            <td>Completed</td>
+            <td>YES</td>
+            <td>Works on all types of Questions that is to not display questions but display the: GAME FINISHED and redirect to Leaderboards</td>
+        </tr>
+
+    </table>
+</div>
+<br>
+<div class="container">
+    <h3><i>Unit Testing</i>(white box testing)</h3>
+    <p>I used Unit Testing to verify if my internal coding and infrastructure meets the specifications. I accomplished it by testing the flow of inputs and output of 3 components of the Application</p>
+    <p><b>For the leaderboard</b> i used various inputs like negative numbers, positive numbers, characters, symbols, and numbers with fractional parts with the options completed or not</p>
+    <p><b>For the score</b> i also used various inputs like negative numbers, positive numbers, characters, symbols, and numbers with fractional parts with the options Has prize and Sorted</p>
+    <p><b>For the questions</b> i was testing each type of Questions with the options Geolocation and skip. Lastly i tested whether or not the option
+        completed would indeed work on all of the types and redirect the user to the leaderboard</p>
+    <p>Examples of these tests that represent each type of input were recoded on tables. Based on my results i would say
+        that my application meets the requirements even though the server was sending unexpected information</p>
+</div>
+
 </body>
 
 </html>

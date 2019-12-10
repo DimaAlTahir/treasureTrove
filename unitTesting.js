@@ -2,6 +2,7 @@ let leaderboardSize = document.getElementById("limitImput");
 let scoreValue = document.getElementById("valueImput");
 let displayTLB = document.getElementById("testTLB");
 let displayTS = document.getElementById("testTS");
+let displayTQ =document.getElementById("testTQ");
 let skip="&nothing";
 let geolocation="&nothing";
 let completedQuestions="&nothing";
@@ -67,9 +68,11 @@ function checkBoxSkip() {
     if (checkBoxSkip.checked === true) {
         skip = "&can-be-skipped";
         textSkip.style.display = "block";
+        Console.log(textSkip);
     } else {
         skip = "&nothing";
         textSkip.style.display = "none";
+        Console.log(textSkip);
     }
 }
 
@@ -108,7 +111,7 @@ function getType() {
 }
 function getQuestionParams(){
     setTimeout(function () {
-        window.location.href="App.html?testQ" + completedQuestions + skip + geolocation  +"&question-type="+ getType();
+        window.location.href="app.html?testQ" + completedQuestions + skip + geolocation  +"&question-type="+ getType();
     }, 500);
 }
 
@@ -141,3 +144,10 @@ function hideScore(){
     }
 }
 
+function hideQuestions(){
+    if (displayTQ.style.display !== "block") {
+        displayTQ.style.display = "block";
+    } else {
+        displayTQ.style.display = "none";
+    }
+}

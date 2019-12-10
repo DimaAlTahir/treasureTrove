@@ -223,7 +223,7 @@ li{
     padding: 3px;
     border-radius: 5px;
     color: #fff;
-    font-size: 20px;
+    font-size: 18px;
     text-decoration: none;
     border: none;
     margin-top: 10px;
@@ -231,6 +231,7 @@ li{
     clear: both;
     position: relative;
     cursor: pointer;
+    float: right;
 }
 
 #scoreContainer{
@@ -418,6 +419,13 @@ table {
     .TLB td:nth-of-type(5):before { content: "Has Price Result"; }
     .TLB td:nth-of-type(6):before { content: "Passed"; }
     .TLB td:nth-of-type(7):before { content: "Comments"; }
+
+    .TQ td:nth-of-type(1):before { content: "Input"; }
+    .TQ td:nth-of-type(2):before { content: "Result"; }
+    .TQ td:nth-of-type(3):before { content: "Expected"; }
+    .TQ td:nth-of-type(4):before { content: "Passed"; }
+    .TQ td:nth-of-type(5):before { content: "Comments"; }
+
 }
 
 td, th {
@@ -435,10 +443,7 @@ input[type=checkbox] {
     transform: scale(1.5);
 }
 
-#myBtn{
-    float: right;
-    cursor: pointer;
-}
+
 .checkBox{
     font-family: Fixed, monospace;
     text-align: center;
