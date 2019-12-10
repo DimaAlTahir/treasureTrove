@@ -38,7 +38,7 @@ to help teammates or to improve on any aspect they find they are better at)
  * Dima AlTahir: work on developing the built HTML and google analytics for the landing page.
   build app html page and the CSS to fit the rest of the pages. 
  * Dimitris Nitsios -> create the java script relating to fetching the list and parameters 
- as well as the start api.
+ as well as the start api. created the functionality to save and get cookies.
  * Andreas Messios -> create app twitter account.
  * Anna Parpi -> build sign in html page.
  
