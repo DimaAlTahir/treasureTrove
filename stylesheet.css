@@ -110,6 +110,46 @@ form{
     text-align: center;
 }
 
+#boxes{
+    margin:5%;
+}
+
+.vid {
+    width: 520px;
+    height: 420px;
+    float: left;
+    clear: both;
+}
+
+@media screen and (max-width: 400px), (min-device-width: 200px) and (max-device-width: 1024px) {
+    .vid {
+        width: 140px;
+        height: 245px;
+        float: left;
+        clear: both;
+    }
+
+    .invite {
+        margin-left: 20%;
+        margin-top: 10%;
+    }
+
+    #leftbox {
+        width: 100%;
+        height: 280px;
+    }
+
+    #rightbox {
+        width: 100%;
+        height: 280px;
+        margin-bottom: 10%;
+    }
+}
+
+.twitter-timeline{
+    width:100%;
+}
+
 ol{
     font-family:Lucidatypewriter, monospace;
     bottom: 0;
