@@ -17,7 +17,10 @@ each member for the week. In total team 5 had 10 meetings.
 Code of interest: 
 * Copy button/function that allows user to copy QR scan result
 into answer input, done by Dimitris Nitsios.
+* life span of cookies lasts for the duration of the game only, done by Dimitris Nitsios.
 * CSS styling of tables that changes depending on the size of the device screen, 
+done by Dima Altahir.
+* Button/function that scrolls to the top of the page in user acceptance test, 
 done by Dima Altahir.
 
 
@@ -34,7 +37,8 @@ to help teammates or to improve on any aspect they find they are better at)
  assignment to include new member. 
  * Dima AlTahir: work on developing the built HTML and google analytics for the landing page.
   build app html page and the CSS to fit the rest of the pages. 
- * Dimitris Nitsios -> create the java script relating to fetching the list and parameters.
+ * Dimitris Nitsios -> create the java script relating to fetching the list and parameters 
+ as well as the start api.
  * Andreas Messios -> create app twitter account.
  * Anna Parpi -> build sign in html page.
  
