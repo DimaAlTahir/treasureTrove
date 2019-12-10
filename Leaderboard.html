@@ -45,7 +45,7 @@
     </div>
 </div>
 </div>
-
+<br>
 <div id="testLeader">
     <div class="container">
         <h3 id="endMessage">loading...</h3>
@@ -98,6 +98,7 @@
     let html = "";
     const params = new URLSearchParams(location.search);
 
+
     function getLeaderboard(url) {
         fetch(url)
             .then(response => response.json())
@@ -114,15 +115,28 @@
                 }
                 leaderboardElement.innerHTML += html;
 
-                let name = getCookie("playerName");
-                let index = jsonObject.leaderboard.map(jsonObject=> jsonObject.player).indexOf(name);
-                console.log("Rank is "+ (index+1));
-                let elementRank=document.getElementById("rankDisplay");
-                elementRank.innerHTML=" your Rank is " + (index+1);
-
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
                         document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
+                }
+            });
+    }
+
+    function getRank(){
+        fetch(API_LEADERBOARD + "leaderboard?&session=" + getCookie("sessionID") + "&sorted&limit=1000")
+            .then(response => response.json())
+            .then(jsonObject => {
+                let name = getCookie("playerName");
+                let index = jsonObject.leaderboard.map(jsonObject => jsonObject.player).indexOf(name);
+
+                if (index > 0) {
+                    console.log("Rank is " + (index + 1));
+                    let elementRank = document.getElementById("rankDisplay");
+                    elementRank.innerHTML = " your Rank is " + (index + 1);
+                    document.getElementById("scoreContainer").style.display = "block";
+                } else {
+                    elementRank.innerHTML = " your Rank is more than 1000 ";
+                    document.getElementById("scoreContainer").style.display = "block";
                 }
             });
     }
@@ -145,20 +159,10 @@
                         let completed = "is completed  ";
                         document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
                             + jsonObject.player + "</span>"+ "<span id='rankDisplay'></span>" + " and your Score is " + jsonObject.score + " Points. ";
-                        document.getElementById("scoreContainer").style.display = "block";
+                        getRank();
                     }
                 }
             });
-    }
-
-
-    function findRank(array, attr, value) {
-        for(var i = 0; i < array.length; i += 1) {
-            if(array[i][attr] === value) {
-                return i;
-            }
-        }
-        return -1;
     }
 
 
@@ -239,7 +243,7 @@
 
             // form the actual TH service url
             let session = getCookie("sessionID");
-            let url = API_LEADERBOARD + "leaderboard?&session=" + session + "&sorted&limit=1000"; // form url
+            let url = API_LEADERBOARD + "leaderboard?&session=" + session + "&sorted&limit=50"; // form url
             getLeaderboard(url);
         }
     }
