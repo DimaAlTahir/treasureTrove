@@ -44,7 +44,12 @@
             <h3 id="scoreDisplay"></h3>
         </div>
     </div>
+    <div>
+        <h4 id="errorScore"></h4>
+    </div>
 </div>
+<br>
+
 <br>
 <div id="testLeader">
     <div class="container">
@@ -59,9 +64,11 @@
                 <th><b>Date </b></th>
             </tr>
         </table>
+    <div>
+        <h4 id="errorLeader"></h4>
+    </div>
     </div>
 </div>
-
 
 <script>
     // Get the modal
@@ -91,25 +98,29 @@
     let leaderboardElement = document.getElementById("LeaderboardTable");
     let html = "";
     const params = new URLSearchParams(location.search);
+
     function getLeaderboard(url) {
         fetch(url)
             .then(response => response.json())
             .then(jsonObject => {
-                document.getElementById("endMessage").style.display = "none";
-                let leaderboardArray = jsonObject.leaderboard;
-                for (let i = 0; i < leaderboardArray.length; i++) {
-                    html +=
-                        "<tr>\n" +
-                        "    <td>" + leaderboardArray[i].player + "</td>" +
-                        "    <td>" + leaderboardArray[i].score + "</td>" +
-                        "    <td>" + convert2date(leaderboardArray[i].completionTime) + "</td>" +
-                        "</tr>";
-                }
-                leaderboardElement.innerHTML += html;
-                if (jsonObject.hasPrize === true) {
-                    setTimeout(function () {
-                        document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
-                }
+                if (jsonObject.status==="OK"){
+                    document.getElementById("endMessage").style.display = "none";
+                    let leaderboardArray = jsonObject.leaderboard;
+                    for (let i = 0; i < leaderboardArray.length; i++) {
+                        html +=
+                            "<tr>\n" +
+                            "    <td>" + leaderboardArray[i].player + "</td>" +
+                            "    <td>" + leaderboardArray[i].score + "</td>" +
+                            "    <td>" + convert2date(leaderboardArray[i].completionTime) + "</td>" +
+                            "</tr>";
+                    }
+                    leaderboardElement.innerHTML += html;
+                    if (jsonObject.hasPrize === true) {
+                        setTimeout(function () {
+                            document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
+                    }
+                } else document.getElementById("errorLeader").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?restart'> Click this Link to Start again</a>";
+
             });
     }
     function getRank(){
@@ -147,7 +158,7 @@
                             + jsonObject.player + "</span>"+ "<span id='rankDisplay'></span>" + " and your Score is " + jsonObject.score + " Points. ";
                         getRank();
                     }
-                }
+                } else document.getElementById("errorScore").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?restart'> Click this Link to Start again</a>";
             });
     }
     options = {
