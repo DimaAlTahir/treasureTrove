@@ -185,7 +185,7 @@
         fetch(API_START + "?player=" + playerName + "&app=TreasureTrove&treasure-hunt-id=" + uuid)
             .then(response => response.json())
             .then(jsonObject => {
-                console.log(jsonObject.status);
+
                 if (jsonObject.status === "ERROR") {
                     document.getElementById("skipContainer").style.display="none";
                     document.getElementById("question").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?restart'> Click this Link to Sign again</a>";
@@ -215,7 +215,6 @@
         fetch(url)
             .then(response => response.json())
             .then(jsonObject => {
-                console.log("getQuestion status: " + jsonObject.status);
                 if (jsonObject.status === "ERROR") {
                     document.getElementById("question").innerHTML = jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?restart'> Click this Link to Start again</a>";
                 } else if (jsonObject.status === "OK") {
@@ -242,7 +241,7 @@
                     document.getElementById("questionProgress").innerHTML="Current Question " + (jsonObject.currentQuestionIndex+1) + " / "+ jsonObject.numOfQuestions;
                     switch (jsonObject.questionType) {
                         case "INTEGER":
-                            console.log("INT=block");
+
                             document.getElementById("numericContainer").style.display = 'none';
                             document.getElementById("intContainer").style.display = 'block';
                             document.getElementById("textboxContainer").style.display = 'none';
@@ -251,7 +250,7 @@
                             break;
 
                         case "NUMERIC":
-                            console.log("NUM=block");
+
                             document.getElementById("numericContainer").style.display = 'block';
                             document.getElementById("intContainer").style.display = 'none';
                             document.getElementById("textboxContainer").style.display = 'none';
@@ -260,7 +259,7 @@
                             break;
 
                         case "BOOLEAN":
-                            console.log("BOOLEAN=block");
+
                             document.getElementById("numericContainer").style.display = 'none';
                             document.getElementById("intContainer").style.display = 'none';
                             document.getElementById("textboxContainer").style.display = 'none';
@@ -269,7 +268,7 @@
                             break;
 
                         case "MCQ":
-                            console.log("MCQ=block");
+
                             document.getElementById("numericContainer").style.display = 'none';
                             document.getElementById("intContainer").style.display = 'none';
                             document.getElementById("textboxContainer").style.display = 'none';
@@ -279,7 +278,7 @@
 
                         case "TEXT":
                         default:
-                            console.log("textbox=block");
+
                             document.getElementById("numericContainer").style.display = 'none';
                             document.getElementById("intContainer").style.display = 'none';
                             document.getElementById("textboxContainer").style.display = 'block';
@@ -308,7 +307,6 @@
 
 
     function sendLocation(lat, lng) {
-        console.debug("lat: " + lat + ", lng: " + lng);
         fetch(API_LOCATION + "?session=" + getCookie("sessionID") + "&latitude=" + lat + "&longitude=" + lng)
             .then(response => response.json())
             .then(jsonObject => {
@@ -337,14 +335,11 @@
         document.getElementById("textBox").value="";
         document.getElementById("int").value="";
         document.getElementById("message").innerHTML = "";
-        console.debug("submitted: " + answer);
         fetch(API_ANSWER + "?session=" + getCookie("sessionID") + "&answer=" + answer)
             .then(response => response.json())
             .then(jsonObject => {
-                console.log("loadAnswer status: " + jsonObject.status);
 
                 if (jsonObject.status === "ERROR") {
-                    console.log("There was an error with the answer sent to the server");
                     document.getElementById("message").innerHTML= jsonObject.errorMessages[0] + "<br>" + "<a href='Signin.html?restar'> Click this Link to Start again</a>";
 
                 } else if ((jsonObject.status === "OK") && (jsonObject.correct === true)) {

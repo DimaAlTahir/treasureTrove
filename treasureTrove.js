@@ -9,7 +9,6 @@ function showRestart() {
     if(params.has("restart")){
        document.getElementById("restart").innerHTML="If you want to Restart the: " +"<span style='font-style: italic'>"+ getCookie("nameOfGame")
            +"</span>" + " Game,  provide a new Playername.";
-       console.log(getCookie("nameOfGame"));
        document.getElementById("restart").style.display="block";
     }   else document.getElementById("restart").style.display="none";
 }
