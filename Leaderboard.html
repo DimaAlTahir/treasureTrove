@@ -38,10 +38,12 @@
 </div>
 
 <br>
+<div class="container2">
 <div id="testScore">
     <div id="scoreContainer">
         <h3 id="scoreDisplay"></h3>
     </div>
+</div>
 </div>
 
 <div id="testLeader">
@@ -113,8 +115,10 @@
                 leaderboardElement.innerHTML += html;
 
                 let name = getCookie("playerName");
-                const index = jsonObject.leaderboard.map(jsonObject=> jsonObject.player).indexOf(name);
-                console.log(index);
+                let index = jsonObject.leaderboard.map(jsonObject=> jsonObject.player).indexOf(name);
+                console.log("Rank is "+ (index+1));
+                let elementRank=document.getElementById("rankDisplay");
+                elementRank.innerHTML=" your Rank is " + (index+1);
 
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
@@ -140,7 +144,7 @@
                     } else if (jsonObject.completed===true) {
                         let completed = "is completed  ";
                         document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
-                            + jsonObject.player + "</span>" + " and your Score is " + jsonObject.score + " Points. ";
+                            + jsonObject.player + "</span>"+ "<span id='rankDisplay'></span>" + " and your Score is " + jsonObject.score + " Points. ";
                         document.getElementById("scoreContainer").style.display = "block";
                     }
                 }
@@ -235,7 +239,7 @@
 
             // form the actual TH service url
             let session = getCookie("sessionID");
-            let url = API_LEADERBOARD + "leaderboard?&session=" + session + "&sorted&limit=20"; // form url
+            let url = API_LEADERBOARD + "leaderboard?&session=" + session + "&sorted&limit=1000"; // form url
             getLeaderboard(url);
         }
     }
