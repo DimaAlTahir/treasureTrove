@@ -118,9 +118,9 @@ function goToIndex() {
     }, 500);
 }
 
-function goToUnitTesting() {
+function goToUAT() {
     setTimeout(function () {
-        window.location.href = "unitTesting.html";
+        window.location.href = "test.html";
     }, 500);
 }
 

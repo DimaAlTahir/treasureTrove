@@ -13,6 +13,7 @@
 <body id="long">
 <div class="nav">
     <button class="controlbtns2" type="reset" onclick="goToIndex()"><i class="fa fa-home"></i>Home</button>
+    <button class="controlbtns2" type="reset" id="myBtn" onclick="goToUnitTesting()">Unit Testing</button>
 </div>
 <br>
 <h2>Testing and Evaluation Efforts</h2>
@@ -450,6 +451,13 @@
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
+
+    function goToUnitTesting() {
+        setTimeout(function () {
+            window.location.href = "unitTesting.html";
+        }, 500);
+    }
+
 </script>
 
 </body>
