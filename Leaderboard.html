@@ -111,12 +111,11 @@
                         "</tr>";
                 }
                 leaderboardElement.innerHTML += html;
-                /*
+
                 let name = getCookie("playerName");
                 const index = jsonObject.leaderboard.map(jsonObject=> jsonObject.player).indexOf(name);
                 console.log(index);
-                console.log(jsonObject.leaderboard.indexOf('Test'));
-                */
+
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
                         document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
