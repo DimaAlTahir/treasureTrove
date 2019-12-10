@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script defer src="App.js"></script>
+
     <title>Leader board</title>
 </head>
 <body onload="startChecking();">
@@ -111,7 +111,12 @@
                         "</tr>";
                 }
                 leaderboardElement.innerHTML += html;
-
+                /*
+                let name = getCookie("playerName");
+                const index = jsonObject.leaderboard.map(jsonObject=> jsonObject.player).indexOf(name);
+                console.log(index);
+                console.log(jsonObject.leaderboard.indexOf('Test'));
+                */
                 if (jsonObject.hasPrize === true) {
                     setTimeout(function () {
                         document.getElementById("prizeDisplay").innerHTML = "Congratulations you won a Prize"}, 50);
@@ -126,6 +131,7 @@
             .then(jsonObject => {
                 if (jsonObject.status === "OK") {
                     console.log("status get score OK");
+
                     if ((jsonObject.completed === false) && (jsonObject.finished === false)) {
                         let completed = "is not completed  ";
                         document.getElementById("scoreDisplay").innerHTML = "The Game "+ completed + "<span style='font-style: italic'>"
@@ -141,6 +147,18 @@
                 }
             });
     }
+
+
+    function findRank(array, attr, value) {
+        for(var i = 0; i < array.length; i += 1) {
+            if(array[i][attr] === value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 
     options = {
         day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit',
