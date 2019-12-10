@@ -37,10 +37,97 @@ h4{
     color: darkorange;
     font-weight: bolder;
 }
+
 .shadowed {
     -webkit-filter: drop-shadow(12px 12px 25px rgba(0,0,0,0.5));
     filter: url(#drop-shadow);
     -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=12, OffY=12, Color='#444')";
+}
+
+
+h1{
+    font-family: Fixed, monospace;
+    text-align: center;
+    color: white;
+    font-size: 75px;
+    margin: 20px;
+}
+
+h5{
+    font-family: Fixed, monospace;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-family:Lucidatypewriter, monospace;
+    color:black;
+}
+
+a{
+    border-left: 30px;
+    margin:0 auto;
+    color:#ff82ab;
+    font-family:Lucidatypewriter, monospace;
+    font-size: 19px;
+    text-align: center;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #f02b5f;
+    text-decoration: none;
+}
+
+a:visited{
+    color: #f02b5f;
+    text-decoration: none;
+}
+
+
+.dropdown:hover .controlbtns{
+    background-color: #f02b5f;
+    color:whitesmoke;
+}
+
+.dropdown:hover .dropdown-content{
+    background-color: whitesmoke;
+    color:#f02b5f;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: whitesmoke;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.23);
+    z-index:0;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.dropdown-content a{
+    font-family: Lucidatypewriter, monospace;
+    font-size: 19px;
+    text-align: center;
+    color: #ff82ab;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f02b5f;
+    color:whitesmoke;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+form{
+    text-align: center;
 }
 
 ol{
@@ -88,9 +175,11 @@ li{
 .btns{
     margin-left: 25%;
     margin-right: 25%;
+    cursor: pointer;
 }
 
 .controlbtns {
+    cursor: pointer;
     background-color: #ff82ab;
     padding: .5em;
     border-radius: 5px;
@@ -110,6 +199,7 @@ li{
 }
 
 .controlbtns2{
+    cursor: pointer;
     background-color: #ff82ab;
     padding: 3px;
     border-radius: 5px;
@@ -129,6 +219,7 @@ li{
 }
 
 .controlbtns3{
+    cursor: pointer;
     background-color: #ff82ab;
     padding: 3px;
     border-radius: 5px;
@@ -159,6 +250,7 @@ li{
     top: 0;
     clear: both;
     position: relative;
+    cursor: pointer;
 }
 
 #scoreContainer{
@@ -168,7 +260,6 @@ li{
 #messageContainer{
     text-align: center;
 }
-
 
 .mqsButtons{
     background-color: #ff82ab;
@@ -208,7 +299,7 @@ input{
     margin-top: 5px;
 }
 
-ul {
+ul{
     font-family:Lucidatypewriter, monospace;
     bottom: 0;
     width: 100%;
@@ -221,48 +312,6 @@ h2{
     font-family: Fixed, monospace;
     text-align: center;
     color: #f02b5f;
-}
-
-h1{
-    font-family: Fixed, monospace;
-    text-align: center;
-    color: white;
-    font-size: 75px;
-    margin: 20px;
-}
-
-h5{
-    font-family: Fixed, monospace;
-    text-align: center;
-}
-
-p{
-    text-align: center;
-    font-family:Lucidatypewriter, monospace;
-    color:black;
-}
-
-a{
-    border-left: 30px;
-    margin:0 auto;
-    color:#ff82ab;
-}
-
-a:hover{
-    color: #f02b5f;
-}
-
-a:visited{
-    color: #f02b5f;
-}
-
-form{
-    text-align: center;
-}
-
-a{
-    font-size: 19px;
-    text-align: center;
 }
 
 .LinkChallenges{
@@ -410,6 +459,7 @@ input[type=checkbox] {
     position: absolute;
     top: 5px;
     right: 5px;
+    cursor: pointer;
 }
 .checkBox{
     font-family: Fixed, monospace;

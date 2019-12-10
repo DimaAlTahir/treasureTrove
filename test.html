@@ -11,15 +11,31 @@
 <body id="long">
 <h2>Testing and Evaluation Efforts</h2>
 
-<h2>Nielsen’s 10 Heuristics Compliance Assessment</h2>
+<div class="dropdown">
+    <form>
+        <button id="dropbtn" class="controlbtns">Go to</button>
+        <div class="dropdown-content">
+            <a href="#heuristics">Heuristics Compliance Assessment</a>
+            <a href="#plan">User Acceptance Test Plan</a>
+            <a href="#ua1">1st User Acceptance Test</a>
+            <a href="#ua2">2nd User Acceptance Test</a>
+        </div>
+    </form>
+</div>
+
+<h2 id="heuristics">Nielsen’s Heuristics Compliance Assessment</h2>
 <div class="container">
     <ol type="1">
         <li style="font-weight:bold">Visibility of system status</li>
             <ol type="A">
-                <li>Messages indicating user whereabouts are available throughout all app pages.</li>
+                <li>Headings indicating the page the user is currently on are available throughout all app pages.</li>
+                <li>Navigation buttons to help the user navigate throughout thr app are available throughout all app pages.</li>
                 <li>Messages indicating user score and progress are available where needed.</li>
-                <li>Loading messages are available where needed.</li>
-                <li>Messages indicating courses of action available for user exist throughout all pages.</li>
+                <li>Loading messages are available where needed. ex: leader board table, available challenges list</li>
+                <li>
+                    Messages indicating courses of action available for user exist throughout all pages. ex: when restarting
+                    a game a message is displayed telling the user to input a new player name to properly start a new game.
+                </li>
                 <li>Buttons change color when they are being pressed.</li>
                 <li>Links change color once they have been used.</li>
             </ol>
@@ -27,7 +43,11 @@
         <li style="font-weight:bold"> Match between system and the real world</li>
         <ol type="A">
             <li>Everyday language used to communicate messages to user; avoided using technical language.</li>
-            <li>Icons used to indicate usage of camera in QR scanner display.</li>
+            <li>
+                Icons used to indicate usage of each button.
+                ex: Button that directs user to the landing page (the main page of the app) has a home icon,
+                button that uses the QR scanner has a QR icon.
+            </li>
         </ol>
 
         <li style="font-weight:bold"> User control and freedom</li>
@@ -86,7 +106,7 @@
     </ol>
 </div>
 
-<h2>User Acceptance Test Plan</h2>
+<h2 id="plan">User Acceptance Test Plan</h2>
 <div class="container">
     <ol>
         <li>The app will be tested by <span class="highlight">Antreas Messios</span> and reported by <span style="color: darkorange">Dima AlTahir</span> </li>
@@ -99,7 +119,7 @@
     </ol>
 </div>
 
-<h2 >User Acceptance Test 1 </h2>
+<h2 id="ua1">User Acceptance Test 1 </h2>
 <div class="container">
     <table class="UA" style="margin-bottom: 10px">
         <tr>
@@ -253,7 +273,7 @@
     </table>
 </div>
 
-<h2 >User Acceptance Test 2 </h2>
+<h2 id="ua2">User Acceptance Test 2 </h2>
 <div class="container">
     <table class="UA" style="margin-bottom: 10px">
         <tr>
