@@ -71,7 +71,7 @@ a{
     font-family:Lucidatypewriter, monospace;
     font-size: 19px;
     text-align: center;
-    text-decoration: none;
+
 }
 
 a:hover{
@@ -81,7 +81,7 @@ a:hover{
 
 a:visited{
     color: #f02b5f;
-    text-decoration: none;
+
 }
 
 #anchor{
@@ -153,8 +153,8 @@ li{
 }
 
 .btns{
-    margin-left: 25%;
-    margin-right: 25%;
+    margin: auto;
+    width: max-content;
     cursor: pointer;
 }
 
@@ -436,9 +436,7 @@ input[type=checkbox] {
 }
 
 #myBtn{
-    position: absolute;
-    top: 5px;
-    right: 5px;
+    float: right;
     cursor: pointer;
 }
 .checkBox{
