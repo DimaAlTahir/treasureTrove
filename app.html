@@ -46,13 +46,17 @@
 <div class="container">
     <!-- This element will show the decoded result from the scanned QR Code as text -->
     <div class="noteontainer">
-        <h4 id="content">Scan Result</h4>
+        <span style="font-size: 18px" id="content">Scan Result</span>
     </div>
     <div>
         <button class="controlbtns2" id="hideCamera" onclick="toggleCamera();"> <i class="fa fa-qrcode"></i>Show/Hide Scanner</button>
     </div>
 
-    <div>
+    <div style="text-align: center">
+        <button class="controlbtns" id="copyQR" onclick="copyToClipboard()">Copy</button>
+    </div>
+
+    <div style="text-align: right">
         <button class="controlbtns2" id="switchCamera" onclick="switchCamera();"><i class="fa fa-refresh"></i>Switch camera</button>
     </div>
 </div>
@@ -389,6 +393,24 @@
                     }
             });
     }
+
+
+    function copyToClipboard() {
+        let range = document.createRange();
+        range.selectNode(document.getElementById("content"));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();// to deselect
+    }
+
+    // function copyQRValue() {
+    //   let copyText = document.getElementById("copyQR");
+    //     copyText.select();
+    //     copyText.setSelectionRange(0, 99999);
+    //     document.execCommand("copy");
+    //     Console.log(copyText.value);
+    // }
 
     function saveCookie(cookieName, cookieValue, expireHours) {
         let d = new Date();
